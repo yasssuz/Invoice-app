@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { Invoice } from './components/_Invoice'
+import { AppContext } from './contexts/_AppContext'
 
 const Main = styled.main`
   max-width: 73rem;
@@ -110,57 +111,8 @@ const InvoicesList = styled.section`
 `
 
 export default function Home() {
-  const invoices = [
-    {
-      id: 'RT3080',
-      receiver: 'Jensen Huang',
-      date: '19 Aug 2021',
-      amount: 1800.91,
-      status: 'Paid',
-    },
-    {
-      id: 'XM9141',
-      receiver: 'Alex Grim',
-      date: '20 Sep 2021',
-      amount: 556.01,
-      status: 'Pending',
-    },
-    {
-      id: 'RG0314',
-      receiver: 'John Marrison',
-      date: '01 Oct 2021',
-      amount: 14002.33,
-      status: 'Paid',
-    },
-    {
-      id: 'RT2080',
-      receiver: 'Alysa Werner',
-      date: '12 Oct 2021',
-      amount: 102.04,
-      status: 'Pending',
-    },
-    {
-      id: 'AA1449',
-      receiver: 'Mellisa Clarke',
-      date: '14 Oct 2021',
-      amount: 4032.33,
-      status: 'Pending',
-    },
-    {
-      id: 'Y9141',
-      receiver: 'Thomas Wayne',
-      date: '31 Oct 2021',
-      amount: 6155.91,
-      status: 'Pending',
-    },
-    {
-      id: 'FV2353',
-      receiver: 'Anita Wainright',
-      date: '12 Nov 2021',
-      amount: 3102.04,
-      status: 'Draft',
-    }
-  ]
+  const { invoices } = useContext(AppContext)
+  invoices.map(invoice => console.log(invoice))
   const [isEmpty, setIsEmpty] = useState(() => invoices.length == 0 ? true : false)
 
   return (
@@ -192,12 +144,12 @@ export default function Home() {
             <ul>
               {invoices.map(invoice => <Invoice
                 id={invoice.id}
-                receiver={invoice.receiver}
-                date={invoice.date}
-                amount={invoice.amount}
+                client={invoice.clientName}
+                creationDate={invoice.createdAt}
+                amount={invoice.total}
                 status={invoice.status}
                 key={invoice.id}
-              />)} {/* Component */}
+              />)}
             </ul>
           )}
         </InvoicesList>
