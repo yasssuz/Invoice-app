@@ -3,8 +3,8 @@ import styled from "styled-components"
 
 interface InvoiceProps {
   id: string
-  receiver: string
-  date: string
+  client: string
+  creationDate: string
   amount: number
   status: string
 }
@@ -171,18 +171,18 @@ export const Invoice: React.FC<InvoiceProps> = (props) => {
       <div className="mobile-version">
         <About>
           <Id><span>#</span>{props.id}</Id>
-          <Receiver>{props.receiver}</Receiver>
+          <Receiver>{props.client}</Receiver>
         </About>
         <Information>
           <div>
-            <Date>{props.date}</Date>
+            <Date>{props.creationDate}</Date>
             <Amount>$ {props.amount}</Amount>
           </div>
-          {props.status == "Paid" ? (
+          {props.status == "paid" ? (
             <StatusPaid>Paid</StatusPaid>
           ) : (
             <>
-              {props.status == "Pending" ? (
+              {props.status == "pending" ? (
                 <StatusPending>Pending</StatusPending>
               ) : (
                 <StatusDraft>Draft</StatusDraft>
@@ -194,17 +194,17 @@ export const Invoice: React.FC<InvoiceProps> = (props) => {
       <div className="desktop-version">
         <IdDate>
           <Id><span>#</span>{props.id}</Id>
-          <Date>{props.date}</Date>
+          <Date>{props.creationDate}</Date>
         </IdDate>
         <ReceiverAmount>
-          <Receiver>{props.receiver}</Receiver>
+          <Receiver>{props.client}</Receiver>
           <Amount>$ {props.amount}</Amount>
         </ReceiverAmount>
-        {props.status == "Paid" ? (
+        {props.status == "paid" ? (
           <StatusPaid>Paid</StatusPaid>
         ) : (
           <>
-            {props.status == "Pending" ? (
+            {props.status == "pending" ? (
               <StatusPending>Pending</StatusPending>
             ) : (
               <StatusDraft>Draft</StatusDraft>
