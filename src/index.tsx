@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { Sidebar } from './components/_Sidebar';
 import { createGlobalStyle } from 'styled-components'
+import { AppProvider } from './contexts/_AppContext';
 
 const GlobalStyle = createGlobalStyle`
   :root {
@@ -47,11 +48,11 @@ const GlobalStyle = createGlobalStyle`
 `
 
 ReactDOM.render(
-  <React.StrictMode>
+  <AppProvider>
     <GlobalStyle />
     <Sidebar />
     <App />
-  </React.StrictMode>,
+  </AppProvider>,
   document.getElementById('root')
 );
 
