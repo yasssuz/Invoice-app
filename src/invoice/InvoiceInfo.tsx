@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { MainCard } from '../components/invoiceInfo/_MainCard'
 import { Topbar } from '../components/invoiceInfo/_TopBar'
 
 const InfoContainer = styled.div`
-  margin: 10.4rem auto 0;
+  margin: 10.4rem auto 3rem;
   max-width: 75rem;
   padding: 0 24px;
   transition: padding 0.3s ease;
@@ -63,6 +64,8 @@ export default function InvoiceInfo({ match }: any) {
         </GoBack>
       </Link>
       <Topbar status="pending" /> {/*Component*/}
+      <MainCard
+        id={match.params.id} />
     </InfoContainer>
   )
 }
