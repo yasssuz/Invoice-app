@@ -114,6 +114,8 @@ export default function Home() {
   const { invoices } = useContext(AppContext)
   const [isEmpty, setIsEmpty] = useState(false)
 
+  setIsEmpty(false)
+
   invoices.map(invoice => console.log(invoice))
 
   return (
