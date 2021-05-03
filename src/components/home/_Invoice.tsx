@@ -177,11 +177,11 @@ export const Invoice: React.FC<InvoiceProps> = (props) => {
               <Date>{props.creationDate}</Date>
               <Amount>$ {props.amount}</Amount>
             </div>
-            {props.status == "paid" ? (
+            {props.status === "paid" ? (
               <StatusPaid>Paid</StatusPaid>
             ) : (
               <>
-                {props.status == "pending" ? (
+                {props.status === "pending" ? (
                   <StatusPending>Pending</StatusPending>
                 ) : (
                   <StatusDraft>Draft</StatusDraft>

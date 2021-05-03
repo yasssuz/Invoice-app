@@ -112,7 +112,7 @@ const InvoicesList = styled.section`
 
 export default function Home() {
   const { invoices } = useContext(AppContext)
-  const [isEmpty, setIsEmpty] = useState(() => invoices.length == 0 ? true : false)
+  const [isEmpty, setIsEmpty] = useState(() => invoices.length === 0 ? true : false)
 
   invoices.map(invoice => console.log(invoice))
 
