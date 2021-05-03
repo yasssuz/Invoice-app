@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const SidebarContainer = styled.aside`
@@ -133,11 +134,11 @@ export function Sidebar() {
 
   return (
     <SidebarContainer>
-      <LogoArea>
-          <a>
-            <img src="/assets/logo.svg" alt="invoicer logo" />
-          </a>
-      </LogoArea>
+      <Link to="/">
+        <LogoArea>
+          <img src="/assets/logo.svg" alt="invoicer logo" />
+        </LogoArea>
+      </Link>
       <InteractiveArea>
         {isLightModeActive ? (
           <img
