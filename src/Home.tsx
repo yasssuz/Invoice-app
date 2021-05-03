@@ -116,8 +116,6 @@ export default function Home() {
 
   setIsEmpty(false)
 
-  invoices.map(invoice => console.log(invoice))
-
   return (
     <Main>
       <InvoicesInteractions>
