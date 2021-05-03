@@ -1,7 +1,7 @@
-import { useContext, useState } from 'react'
+// import { useContext, useState } from 'react'
 import styled from 'styled-components'
-import { Invoice } from './components/home/_Invoice'
-import { AppContext } from './contexts/_AppContext'
+// import { Invoice } from './components/home/_Invoice'
+// import { AppContext } from './contexts/_AppContext'
 
 const Main = styled.main`
   max-width: 73rem;
