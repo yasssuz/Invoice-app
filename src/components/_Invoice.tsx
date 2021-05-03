@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 import styled from "styled-components"
 
 interface InvoiceProps {
@@ -15,10 +16,7 @@ const InvoiceContainer = styled.li`
   background: var(--color-light-black);
   transition: transform 0.2s ease;
   cursor: pointer;
-
-  & + & {
-    margin-top: 1.6rem;
-  }
+  margin-top: 1.6rem;
 
   &:hover {
     border: 1px solid var(--color-purple);
@@ -167,17 +165,40 @@ const ReceiverAmount = styled.div`
 
 export const Invoice: React.FC<InvoiceProps> = (props) => {
   return (
-    <InvoiceContainer>
-      <div className="mobile-version">
-        <About>
-          <Id><span>#</span>{props.id}</Id>
-          <Receiver>{props.client}</Receiver>
-        </About>
-        <Information>
-          <div>
+    <Link to={`/invoices/${props.id}`} style={{ textDecoration: 'none' }}>
+      <InvoiceContainer>
+        <div className="mobile-version">
+          <About>
+            <Id><span>#</span>{props.id}</Id>
+            <Receiver>{props.client}</Receiver>
+          </About>
+          <Information>
+            <div>
+              <Date>{props.creationDate}</Date>
+              <Amount>$ {props.amount}</Amount>
+            </div>
+            {props.status == "paid" ? (
+              <StatusPaid>Paid</StatusPaid>
+            ) : (
+              <>
+                {props.status == "pending" ? (
+                  <StatusPending>Pending</StatusPending>
+                ) : (
+                  <StatusDraft>Draft</StatusDraft>
+                )}
+              </>
+            )}
+          </Information>
+        </div>
+        <div className="desktop-version">
+          <IdDate>
+            <Id><span>#</span>{props.id}</Id>
             <Date>{props.creationDate}</Date>
+          </IdDate>
+          <ReceiverAmount>
+            <Receiver>{props.client}</Receiver>
             <Amount>$ {props.amount}</Amount>
-          </div>
+          </ReceiverAmount>
           {props.status == "paid" ? (
             <StatusPaid>Paid</StatusPaid>
           ) : (
@@ -189,30 +210,9 @@ export const Invoice: React.FC<InvoiceProps> = (props) => {
               )}
             </>
           )}
-        </Information>
-      </div>
-      <div className="desktop-version">
-        <IdDate>
-          <Id><span>#</span>{props.id}</Id>
-          <Date>{props.creationDate}</Date>
-        </IdDate>
-        <ReceiverAmount>
-          <Receiver>{props.client}</Receiver>
-          <Amount>$ {props.amount}</Amount>
-        </ReceiverAmount>
-        {props.status == "paid" ? (
-          <StatusPaid>Paid</StatusPaid>
-        ) : (
-          <>
-            {props.status == "pending" ? (
-              <StatusPending>Pending</StatusPending>
-            ) : (
-              <StatusDraft>Draft</StatusDraft>
-            )}
-          </>
-        )}
-        <img src="/assets/icon-arrow-right.svg" alt="icon arrow" />
-      </div>
-    </InvoiceContainer>
+          <img src="/assets/icon-arrow-right.svg" alt="icon arrow" />
+        </div>
+      </InvoiceContainer>
+    </Link>
   )
 }
