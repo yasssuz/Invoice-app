@@ -62,7 +62,7 @@ export default function InvoiceInfo({ match }: any) {
           <span>Go back</span>
         </GoBack>
       </Link>
-      <Topbar /> {/*Component*/}
+      <Topbar status="pending" /> {/*Component*/}
     </InfoContainer>
   )
 }
