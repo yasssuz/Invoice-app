@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import { Sidebar } from './components/_Sidebar';
+import App from './app';
 import { createGlobalStyle } from 'styled-components'
 import { AppProvider } from './contexts/_AppContext';
 
@@ -50,7 +49,6 @@ const GlobalStyle = createGlobalStyle`
 ReactDOM.render(
   <AppProvider>
     <GlobalStyle />
-    <Sidebar />
     <App />
   </AppProvider>,
   document.getElementById('root')
