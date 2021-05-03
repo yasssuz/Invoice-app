@@ -199,11 +199,11 @@ export const Invoice: React.FC<InvoiceProps> = (props) => {
             <Receiver>{props.client}</Receiver>
             <Amount>$ {props.amount}</Amount>
           </ReceiverAmount>
-          {props.status == "paid" ? (
+          {props.status === "paid" ? (
             <StatusPaid>Paid</StatusPaid>
           ) : (
             <>
-              {props.status == "pending" ? (
+              {props.status === "pending" ? (
                 <StatusPending>Pending</StatusPending>
               ) : (
                 <StatusDraft>Draft</StatusDraft>
