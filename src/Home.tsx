@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { Invoice } from './components/home/_Invoice'
 import { AppContext } from './contexts/_AppContext'
@@ -114,11 +114,9 @@ export default function Home() {
   const { invoices } = useContext(AppContext)
   const [isEmpty, setIsEmpty] = useState(false)
 
-  setIsEmpty(false)
-
   return (
     <Main>
-      <InvoicesInteractions>
+      {/* <InvoicesInteractions>
         <div>
           <Title>Invoices</Title>
           <Counter>7 Invoices</Counter>
@@ -147,7 +145,8 @@ export default function Home() {
             />)}
           </ul>
         )}
-      </InvoicesList>
+      </InvoicesList> */}
+      <h1>helooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo</h1>
     </Main>
   )
 }
