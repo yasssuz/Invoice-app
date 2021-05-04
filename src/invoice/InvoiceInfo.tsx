@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { MainCard } from '../components/invoiceInfo/_MainCard'
@@ -54,7 +53,9 @@ const GoBack = styled.div`
 `
 
 export default function InvoiceInfo({ match }: any) {
-  console.log(match)
+  const id = match.params.id
+  const data = JSON.parse(localStorage.getItem(id) as any)
+
   return (
     <InfoContainer>
       <Link to="/" style={{ textDecoration: 'none' }}>
@@ -63,9 +64,10 @@ export default function InvoiceInfo({ match }: any) {
           <span>Go back</span>
         </GoBack>
       </Link>
-      <Topbar status="pending" /> {/*Component*/}
+      <Topbar status={data.status} /> {/*Component*/}
       <MainCard
-        id={match.params.id} />
+        id={id}
+        data={data} />
     </InfoContainer>
   )
 }
