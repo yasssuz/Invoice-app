@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { Invoice } from './components/home/_Invoice'
 import { AppContext } from './contexts/_AppContext'
@@ -94,25 +94,25 @@ const AddInvoiceBtn = styled.button`
   }
 `
 
-// const InvoicesList = styled.section`
-//   margin-top: 3.2rem;
+const InvoicesList = styled.section`
+  margin-top: 3.2rem;
 
-//   @media screen and (min-width: 750px) {
-//     margin-top: 5.6rem;
-//   }
+  @media screen and (min-width: 750px) {
+    margin-top: 5.6rem;
+  }
 
-//   @media screen and (min-width: 1000px) {
-//     margin-top: 6.5rem;
-//   }
+  @media screen and (min-width: 1000px) {
+    margin-top: 6.5rem;
+  }
 
-//   ul {
-//     list-style: none;
-//   }
-// `
+  ul {
+    list-style: none;
+  }
+`
 
 export default function Home() {
   const { invoices } = useContext(AppContext)
-  // const [isEmpty, setIsEmpty] = useState(false)
+  const [isEmpty, setIsEmpty] = useState(false)
 
   return (
     <Main>
@@ -130,22 +130,22 @@ export default function Home() {
           </AddInvoiceBtn>
         </LeftArea>
       </InvoicesInteractions>
-      {/* <InvoicesList> */}
-      {/* {isEmpty ? (
+      <InvoicesList>
+        {isEmpty ? (
           <h1>its empty</h1>
-        ) : ( */}
-      <ul>
-        {invoices.map(invoice => <Invoice
-          id={invoice.id}
-          client={invoice.clientName}
-          creationDate={invoice.createdAt}
-          amount={invoice.total}
-          status={invoice.status}
-          key={invoice.id}
-        />)}
-      </ul>
-      {/* )} */}
-      {/* </InvoicesList> */}
+        ) : (
+          <ul>
+            {invoices.map(invoice => <Invoice
+              id={invoice.id}
+              client={invoice.clientName}
+              creationDate={invoice.createdAt}
+              amount={invoice.total}
+              status={invoice.status}
+              key={invoice.id}
+            />)}
+          </ul>
+        )}
+      </InvoicesList>
     </Main>
   )
 }
