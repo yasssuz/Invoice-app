@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 import { GrayBtn, RedBtn, PurpleBtn } from '../shared/_Buttons'
 import { StatusSwitcher } from '../shared/_Status'
@@ -79,7 +78,7 @@ export function Topbar({ status }: TopbarProps) {
     <TopBar>
       <Status>
         <span>Status</span>
-        <StatusSwitcher status={`${status}`} />  {/*Status button*/}
+        <StatusSwitcher status={status} />  {/*Status button*/}
       </Status>
       <Buttons>
         <GrayBtn>Edit</GrayBtn> {/*Component*/}
