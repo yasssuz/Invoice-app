@@ -114,7 +114,7 @@ export default function Home() {
   const { invoices } = useContext(AppContext)
   const [isEmpty, setIsEmpty] = useState(false)
 
-  function changeIEmpty() {
+  function changeIsEmpty() {
     setIsEmpty(false)
   }
 
@@ -122,7 +122,7 @@ export default function Home() {
     <Main>
       <InvoicesInteractions>
         <div>
-          <Title>Invoices</Title>
+          <Title onClick={changeIsEmpty}>Invoices</Title>
           <Counter>7 Invoices</Counter>
         </div>
         <LeftArea>
