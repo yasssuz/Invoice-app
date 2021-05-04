@@ -3,23 +3,25 @@ import styled from 'styled-components'
 
 interface MainCardProps {
   id: string
-  // description: string
-  // senderAddress: {
-  //   street: string
-  //   city: string
-  //   postCode: string
-  //   country: string
-  // }
-  // createdAt: string
-  // paymentDue: string
-  // clientName: string
-  // clientAddress: {
-  //   street: string
-  //   city: string
-  //   postCode: string
-  //   country: string
-  // }
-  // clientEmail: string
+  data: {
+    description: string
+    senderAddress: {
+      street: string
+      city: string
+      postCode: string
+      country: string
+    }
+    createdAt: string
+    paymentDue: string
+    clientName: string
+    clientAddress: {
+      street: string
+      city: string
+      postCode: string
+      country: string
+    }
+    clientEmail: string
+  }
 }
 
 const Card = styled.main`
@@ -121,46 +123,48 @@ const ClientEmail = styled.div`
   }
 `
 
-export function MainCard(props: MainCardProps) {
+export function MainCard({ data, id }: MainCardProps) {
+  console.log(data)
+
   return (
     <Card>
       <TopInfo>
         <Id>
           <h1>
             <strong>#</strong>
-            {props.id}
+            {id}
           </h1>
-          <p>Graphic Design</p>
+          <p>{data.description}</p>
         </Id>
         <SenderAddress>
-          <span>19 Union Terrare</span>
-          <span>London</span>
-          <span>E1 3EZ</span>
-          <span>United Kingdom</span>
+          <span>{data.senderAddress.street}</span>
+          <span>{data.senderAddress.city}</span>
+          <span>{data.senderAddress.postCode}</span>
+          <span>{data.senderAddress.country}</span>
         </SenderAddress>
       </TopInfo>
       <BottomInfo>
-        <DatesClientInfo> {/*change the name*/}
+        <DatesClientInfo>
           <Dates>
             <span className="invoice-date">Invoice Date</span>
-            <strong>21 Aug 2021</strong>
+            <strong>{data.createdAt}</strong>
             <span className="payment-due">Payment Due</span>
-            <strong>20 Sep 2021</strong>
+            <strong>{data.paymentDue}</strong>
           </Dates>
           <ClientInfo>
             <span>Bill to</span>
-            <strong>Alex Grim</strong>
+            <strong>{data.clientName}</strong>
             <div>
-              <span>84 Church Way</span>
-              <span>Bradford</span>
-              <span>BDI 9PB</span>
-              <span>United Kingdom</span>
+              <span>{data.clientAddress.street}</span>
+              <span>{data.clientAddress.city}</span>
+              <span>{data.clientAddress.postCode}</span>
+              <span>{data.clientAddress.country}</span>
             </div>
           </ClientInfo>
         </DatesClientInfo>
         <ClientEmail>
           <span>Sent to</span>
-          <strong>alkegrim@gmail.com</strong>
+          <strong>{data.clientEmail}</strong>
         </ClientEmail>
       </BottomInfo>
     </Card>
