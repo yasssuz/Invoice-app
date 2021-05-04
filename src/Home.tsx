@@ -1,7 +1,7 @@
-// import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import styled from 'styled-components'
-// import { Invoice } from './components/home/_Invoice'
-// import { AppContext } from './contexts/_AppContext'
+import { Invoice } from './components/home/_Invoice'
+import { AppContext } from './contexts/_AppContext'
 
 const Main = styled.main`
   max-width: 73rem;
@@ -111,7 +111,7 @@ const AddInvoiceBtn = styled.button`
 // `
 
 export default function Home() {
-  // const { invoices } = useContext(AppContext)
+  const { invoices } = useContext(AppContext)
   // const [isEmpty, setIsEmpty] = useState(false)
 
   return (
@@ -130,22 +130,22 @@ export default function Home() {
           </AddInvoiceBtn>
         </LeftArea>
       </InvoicesInteractions>
-      {/* <InvoicesList>
-        {isEmpty ? (
+      {/* <InvoicesList> */}
+      {/* {isEmpty ? (
           <h1>its empty</h1>
-        ) : (
-          <ul>
-            {invoices.map(invoice => <Invoice
-              id={invoice.id}
-              client={invoice.clientName}
-              creationDate={invoice.createdAt}
-              amount={invoice.total}
-              status={invoice.status}
-              key={invoice.id}
-            />)}
-          </ul>
-        )}
-      </InvoicesList> */}
+        ) : ( */}
+      <ul>
+        {invoices.map(invoice => <Invoice
+          id={invoice.id}
+          client={invoice.clientName}
+          creationDate={invoice.createdAt}
+          amount={invoice.total}
+          status={invoice.status}
+          key={invoice.id}
+        />)}
+      </ul>
+      {/* )} */}
+      {/* </InvoicesList> */}
     </Main>
   )
 }
