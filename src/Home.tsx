@@ -114,6 +114,10 @@ export default function Home() {
   const { invoices } = useContext(AppContext)
   const [isEmpty, setIsEmpty] = useState(false)
 
+  function changeIEmpty() {
+    setIsEmpty(false)
+  }
+
   return (
     <Main>
       <InvoicesInteractions>
