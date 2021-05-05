@@ -53,8 +53,9 @@ const GoBack = styled.div`
 `
 
 export default function InvoiceInfo({ match }: any) {
+  const storage = JSON.parse(localStorage.getItem('invoices') || '{}')
   const id = match.params.id
-  const data = JSON.parse(localStorage.getItem(id) as any)
+  const data = storage.filter((invoice: { id: string }) => invoice.id === id && invoice)
 
   return (
     <InfoContainer>
@@ -64,10 +65,8 @@ export default function InvoiceInfo({ match }: any) {
           <span>Go back</span>
         </GoBack>
       </Link>
-      <Topbar status={data.status} /> {/*Component*/}
-      <MainCard
-        id={id}
-        data={data} />
+      <Topbar status={data[0].status} /> {/*Component*/}
+      <MainCard id={id} data={data[0]} /> {/*Component*/}
     </InfoContainer>
   )
 }
