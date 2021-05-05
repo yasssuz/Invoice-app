@@ -1,5 +1,5 @@
-import React from 'react'
 import styled from 'styled-components'
+import { formatDate } from '../../utils/formatters'
 
 interface MainCardProps {
   id: string
@@ -147,9 +147,9 @@ export function MainCard({ data, id }: MainCardProps) {
         <DatesClientInfo>
           <Dates>
             <span className="invoice-date">Invoice Date</span>
-            <strong>{data.createdAt}</strong>
+            <strong>{formatDate(data.createdAt)}</strong>
             <span className="payment-due">Payment Due</span>
-            <strong>{data.paymentDue}</strong>
+            <strong>{formatDate(data.paymentDue)}</strong>
           </Dates>
           <ClientInfo>
             <span>Bill to</span>
