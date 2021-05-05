@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
+import { formatMoneyAmount } from "../../utils/formatters"
 
 interface InvoiceProps {
   id: string
@@ -197,7 +198,7 @@ export const Invoice: React.FC<InvoiceProps> = (props) => {
           </IdDate>
           <ReceiverAmount>
             <Receiver>{props.client}</Receiver>
-            <Amount>$ {props.amount}</Amount>
+            <Amount>$ {formatMoneyAmount(props.amount)}</Amount>
           </ReceiverAmount>
           {props.status === "paid" ? (
             <StatusPaid>Paid</StatusPaid>
