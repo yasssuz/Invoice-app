@@ -3,6 +3,15 @@ import styled from 'styled-components'
 import { Invoice } from './components/home/_Invoice'
 import { AppContext } from './contexts/_AppContext'
 
+interface InvoiceProps {
+  id: string
+  clientName: string
+  createdAt: string
+  total: number
+  status: string
+  key: string
+}
+
 const Main = styled.main`
   max-width: 73rem;
   margin: 10.4rem auto 3rem;
@@ -111,8 +120,9 @@ const InvoicesList = styled.section`
 `
 
 export default function Home() {
-  const { invoices } = useContext(AppContext)
+  const { getInvoices } = useContext(AppContext)
   const [isEmpty, setIsEmpty] = useState(false)
+  const invoices = getInvoices()
 
   function changeIsEmpty() {
     setIsEmpty(false)
@@ -139,7 +149,7 @@ export default function Home() {
           <h1>its empty</h1>
         ) : (
           <ul>
-            {invoices.map(invoice => <Invoice
+            {invoices.map((invoice: InvoiceProps) => <Invoice
               id={invoice.id}
               client={invoice.clientName}
               creationDate={invoice.createdAt}
