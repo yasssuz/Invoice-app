@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { Invoice } from './components/home/_Invoice'
-import { AppContext } from './contexts/_AppContext'
+import { StorageContext } from './contexts/_StorageContext'
 
 interface InvoiceProps {
   id: string
@@ -120,7 +120,7 @@ const InvoicesList = styled.section`
 `
 
 export default function Home() {
-  const { getInvoices } = useContext(AppContext)
+  const { getInvoices } = useContext(StorageContext)
   const [isEmpty, setIsEmpty] = useState(false)
   const invoices = getInvoices()
 
