@@ -1,8 +1,11 @@
+import { useContext } from 'react'
 import styled from 'styled-components'
+import { StorageContext } from '../../contexts/_StorageContext'
 import { GrayBtn, RedBtn, PurpleBtn } from '../shared/_Buttons'
 import { StatusSwitcher } from '../shared/_Status'
 
 interface TopbarProps {
+  id: string
   status: string
 }
 
@@ -73,17 +76,19 @@ const Buttons = styled.div`
   }
 `
 
-export function Topbar({ status }: TopbarProps) {
+export function Topbar({ status, id }: TopbarProps) {
+  const { deleteInvoice, editInvoice, changeStatusInvoice } = useContext(StorageContext)
+
   return (
     <TopBar>
       <Status>
         <span>Status</span>
-        <StatusSwitcher status={status} />  {/*Status button*/}
+        <StatusSwitcher status={status} />  {/*Component*/}
       </Status>
       <Buttons>
-        <GrayBtn>Edit</GrayBtn> {/*Component*/}
-        <RedBtn>Delete</RedBtn> {/*Component*/}
-        <PurpleBtn>Mark as paid</PurpleBtn> {/*Component*/}
+        <GrayBtn onClick={() => editInvoice(id)}>Edit</GrayBtn> {/*Component*/}
+        <RedBtn type="button" onClick={() => deleteInvoice(id)}>Delete</RedBtn> {/*Component*/}
+        <PurpleBtn onClick={() => changeStatusInvoice(id)}>Mark as paid</PurpleBtn> {/*Component*/}
       </Buttons>
     </TopBar>
   )
