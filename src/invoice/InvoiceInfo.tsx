@@ -65,7 +65,7 @@ export default function InvoiceInfo({ match }: any) {
           <span>Go back</span>
         </GoBack>
       </Link>
-      <Topbar status={data[0].status} /> {/*Component*/}
+      <Topbar id={id} status={data[0].status} /> {/*Component*/}
       <MainCard id={id} data={data[0]} /> {/*Component*/}
     </InfoContainer>
   )
