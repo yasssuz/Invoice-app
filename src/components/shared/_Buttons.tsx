@@ -1,9 +1,4 @@
-import React, { ReactNode } from 'react'
 import styled from 'styled-components'
-
-interface ButtonProps {
-  children: ReactNode
-}
 
 const Button = styled.button`
   color: var(--color-white);
@@ -20,26 +15,15 @@ const Button = styled.button`
   }
 `
 
-const GrayButton = styled(Button)`
+export const GrayBtn = styled(Button)`
   background: var(--color-very-light-black);
 `
 
-const RedButton = styled(Button)`
+export const RedBtn = styled(Button)`
   background: var(--color-red);
 `
 
-const PurpleButton = styled(Button)`
+export const PurpleBtn = styled(Button)`
   background: var(--color-purple);
 `
 
-export function GrayBtn({ children }: ButtonProps) {
-  return <GrayButton type="button">{children}</GrayButton>
-}
-
-export function RedBtn({ children }: ButtonProps) {
-  return <RedButton type="button">{children}</RedButton>
-}
-
-export function PurpleBtn({ children }: ButtonProps) {
-  return <PurpleButton type="button">{children}</PurpleButton>
-}
