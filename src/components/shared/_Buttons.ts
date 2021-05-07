@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const Button = styled.button`
   color: var(--color-white);
-  border-radius: 2.4em;
+  border-radius: 2.4rem;
   font-weight: bold;
   font-size: 1.4rem;
   line-height: 1.7rem;
