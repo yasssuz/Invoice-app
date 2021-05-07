@@ -89,8 +89,7 @@ export function PaymentCard({ items }: ItemsProps) {
 
   useEffect(() => {
     items.map(item => setTotalAmount(prevAmount => prevAmount + item.total))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [items])
 
   return (
     <CardContainer>
