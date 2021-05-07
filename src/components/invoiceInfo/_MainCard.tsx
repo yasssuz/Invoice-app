@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { formatDate } from '../../utils/formatters'
+import { PaymentCard } from './_PaymentCard'
 
 interface MainCardProps {
   id: string
@@ -31,26 +32,18 @@ const Card = styled.main`
   background: var(--color-light-black);
   margin-top: 1.6rem;
 
+  address {
+    font-style: normal;
+  }
+
   span, p {
     font-weight: 500;
     font-size: 1.3rem;
     line-height: 1.8rem;
     color: var(--color-grayish-purple);
     display: block;
-  } 
-
-  strong {
-    font-weight: bold;
-    font-size: 1.7rem;
-    line-height: 2rem;
-    color: var(--color-white);
-  }
-
-  address {
-    font-style: normal;
   }
 `
-
 
 const TopInfo = styled.div`
   display: flex;
@@ -84,6 +77,13 @@ const SenderAddress = styled.address`
 `
 
 const BottomInfo = styled.div`
+  strong {
+    font-weight: bold;
+    font-size: 1.7rem;
+    line-height: 2rem;
+    color: var(--color-white);
+  }
+
 `
 
 const DatesClientInfo = styled.div`
@@ -167,6 +167,7 @@ export function MainCard({ data, id }: MainCardProps) {
           <strong>{data.clientEmail}</strong>
         </ClientEmail>
       </BottomInfo>
+      <PaymentCard />
     </Card>
   )
 }
