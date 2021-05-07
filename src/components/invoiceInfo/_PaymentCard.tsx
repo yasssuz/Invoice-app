@@ -84,7 +84,6 @@ const TotalAmount = styled.strong`
 `
 
 export function PaymentCard({ items }: ItemsProps) {
-  const itemsData = items
   const [totalAmount, setTotalAmount] = useState(0)
 
   useEffect(() => {
