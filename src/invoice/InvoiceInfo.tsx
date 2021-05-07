@@ -2,15 +2,17 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { MainCard } from '../components/invoiceInfo/_MainCard'
 import { Topbar } from '../components/invoiceInfo/_TopBar'
+import { BottomBar } from '../components/invoiceInfo/_BottomBar'
 
 const InfoContainer = styled.div`
-  margin: 10.4rem auto 3rem;
+  margin: 10.4rem auto 0;
   max-width: 75rem;
   padding: 0 24px;
   transition: padding 0.3s ease;
 
   @media screen and (min-width: 720px) {
     margin-top: 12.8rem;
+    margin-bottom: 3rem;
     padding: 0 40px;
   }
 
@@ -58,15 +60,18 @@ export default function InvoiceInfo({ match }: any) {
   const data = storage.filter((invoice: { id: string }) => invoice.id === id && invoice)
 
   return (
-    <InfoContainer>
-      <Link to="/" style={{ textDecoration: 'none' }}>
-        <GoBack>
-          <img src="/assets/icon-arrow-right.svg" alt="go back" />
-          <span>Go back</span>
-        </GoBack>
-      </Link>
-      <Topbar id={id} status={data[0].status} /> {/*Component*/}
-      <MainCard id={id} data={data[0]} /> {/*Component*/}
-    </InfoContainer>
+    <>
+      <InfoContainer>
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          <GoBack>
+            <img src="/assets/icon-arrow-right.svg" alt="go back" />
+            <span>Go back</span>
+          </GoBack>
+        </Link>
+        <Topbar id={id} status={data[0].status} /> {/*Component*/}
+        <MainCard id={id} data={data[0]} /> {/*Component*/}
+      </InfoContainer>
+      <BottomBar />
+    </>
   )
 }
