@@ -21,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
     --color-very-light-black: hsla(233, 30%, 21%, 1);
     --color-light-black: hsl(233, 31%, 17%);
     --color-nearly-black: hsl(233, 30%, 11%);
-    --color-darkest: hsl(228, 29%, 7%);
+    --color-darkest: hsl(231, 28%, 7%);
   }
 
   html {
