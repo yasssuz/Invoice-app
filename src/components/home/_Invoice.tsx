@@ -25,6 +25,12 @@ const InvoiceContainer = styled.li`
     padding: 2.3rem 24px;
   } 
 
+  &:focus {
+    border: 1px solid var(--color-purple);
+    transform: scale(1.02);
+    padding: 2.3rem 24px;
+  }
+
   .desktop-version {
     display: none;
   }
@@ -37,6 +43,12 @@ const InvoiceContainer = styled.li`
       transform: scale(1.04);
       padding: 1.8rem 24px;
     } 
+
+    &:focus {
+      border: 1px solid var(--color-purple);
+      transform: scale(1.04);
+      padding: 1.8rem 24px;
+    }
 
     .mobile-version {
       display: none;
