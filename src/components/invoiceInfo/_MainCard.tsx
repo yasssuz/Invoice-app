@@ -22,6 +22,12 @@ interface MainCardProps {
       country: string
     }
     clientEmail: string
+    items: Array<{
+      name: string
+      quantity: number
+      total: number
+      price: number
+    }>
   }
 }
 
@@ -124,7 +130,7 @@ const ClientEmail = styled.div`
 `
 
 export function MainCard({ data, id }: MainCardProps) {
-  console.log(data)
+  const items = data.items;
 
   return (
     <Card>
@@ -167,7 +173,7 @@ export function MainCard({ data, id }: MainCardProps) {
           <strong>{data.clientEmail}</strong>
         </ClientEmail>
       </BottomInfo>
-      <PaymentCard />
+      <PaymentCard items={items} />
     </Card>
   )
 }

@@ -1,4 +1,14 @@
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
+
+interface ItemsProps {
+  items: Array<{
+    name: string
+    quantity: number
+    price: number
+    total: number
+  }>
+}
 
 const CardContainer = styled.div`
   margin-top: 4rem;
@@ -8,6 +18,22 @@ const CardContainer = styled.div`
     color: var(--color-white);
     line-height: 1.5rem;
     font-weight: bold;
+  }
+
+  .mobileVersion {
+    @media screen and (min-width: 650px) {
+      display: none;
+    }
+  }
+
+  .desktopVersion {
+    @media screen and (max-width: 650px) {
+      display: none;
+    }
+
+    @media screen and (min-width: 650px) {
+      display: block;
+    }
   }
 `
 
@@ -29,7 +55,7 @@ const Item = styled.div`
 
 const ItemName = styled.h2`
   margin-bottom: 1rem;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: var(--color-white);
   line-height: 1.5rem;
   font-weight: bold;
@@ -57,22 +83,37 @@ const TotalAmount = styled.strong`
   font-size: 1.8rem !important;
 `
 
-export function PaymentCard() {
+export function PaymentCard({ items }: ItemsProps) {
+  const [totalAmount, setTotalAmount] = useState(0)
+
+  useEffect(() => {
+    items.map(item => setTotalAmount(prevAmount => prevAmount + item.total))
+  }, [])
+
   return (
     <CardContainer>
-      <ItemsRecap>
-        <Item>
-          <div>
-            <ItemName>Banner Design</ItemName>
-            <ItemPricePerQuantity>1 x $ 156.00</ItemPricePerQuantity>
-          </div>
-          <TotalItemPrice>$156.00</TotalItemPrice>
-        </Item>
-      </ItemsRecap>
-      <ItemsTotal>
-        <AmountText>Amount Due</AmountText>
-        <TotalAmount>$556.00</TotalAmount>
-      </ItemsTotal>
+      <div className="mobileVersion">
+        <ItemsRecap>
+          {items.map(item => (
+            <Item key={`${item.price * item.quantity * item.total}${item.name}`}>
+              <div>
+                <ItemName>{item.name}</ItemName>
+                <ItemPricePerQuantity>
+                  {item.quantity} x $ {item.price}
+                </ItemPricePerQuantity>
+              </div>
+              <TotalItemPrice>$ {item.total}</TotalItemPrice>
+            </Item>
+          ))}
+        </ItemsRecap>
+        <ItemsTotal>
+          <AmountText>Amount Due</AmountText>
+          <TotalAmount>$ {totalAmount}</TotalAmount>
+        </ItemsTotal>
+      </div>
+      <div className="desktopVersion">
+        <strong>HELLOOOO</strong>
+      </div>
     </CardContainer>
   )
 }
