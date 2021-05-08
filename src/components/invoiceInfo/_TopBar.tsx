@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import styled from 'styled-components'
-import { StorageContext } from '../../contexts/_StorageContext'
+import { StorageContext } from '../../contexts/StorageContext'
 import { GrayBtn, RedBtn, PurpleBtn } from '../shared/_Buttons'
 import { StatusSwitcher } from '../shared/_Status'
 
@@ -77,7 +77,7 @@ const Buttons = styled.div`
 `
 
 export function Topbar({ status, id }: TopbarProps) {
-  const { deleteInvoice, editInvoice, changeStatusInvoice } = useContext(StorageContext)
+  const { deleteInvoice, editInvoice, changeToPaidInvoice } = useContext(StorageContext)
 
   return (
     <TopBar>
@@ -86,9 +86,27 @@ export function Topbar({ status, id }: TopbarProps) {
         <StatusSwitcher status={status} />  {/*Component*/}
       </Status>
       <Buttons>
-        <GrayBtn onClick={() => editInvoice(id)}>Edit</GrayBtn> {/*Component*/}
-        <RedBtn type="button" onClick={() => deleteInvoice(id)}>Delete</RedBtn> {/*Component*/}
-        <PurpleBtn onClick={() => changeStatusInvoice(id)}>Mark as paid</PurpleBtn> {/*Component*/}
+
+        <GrayBtn
+          type="button"
+          onClick={() => editInvoice(id)}>
+          Edit
+        </GrayBtn> {/*Component*/}
+
+        <RedBtn
+          type="button"
+          onClick={() => deleteInvoice(id)}>
+          Delete
+        </RedBtn> {/*Component*/}
+
+        {status === 'pending' && (
+          <PurpleBtn
+            type="button"
+            onClick={() => changeToPaidInvoice(id)}>
+            Mark as paid
+          </PurpleBtn>
+        )} {/*Component*/}
+
       </Buttons>
     </TopBar>
   )
