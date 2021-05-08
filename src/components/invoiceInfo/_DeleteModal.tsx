@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { InvoiceContext } from '../../contexts/InvoiceInfoContext'
 import { StorageContext } from '../../contexts/StorageContext'
@@ -17,9 +18,16 @@ const CardContainer = styled.div`
   border-radius: 0.8rem;
   box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
   background: var(--color-light-black); 
-  max-width: 52.8rem;
+  max-width: 48rem;
   margin: 0 24px;
   padding: 3.4rem 34px;
+  z-index: 2000;
+
+  @media screen and (min-width: 750px) {
+    left: 50%;
+    right: unset;
+    transform: translateX(-50%);
+  }
 `
 
 const Title = styled.h3`
@@ -53,6 +61,12 @@ const ButtonsArea = styled.div`
   .deleteBtn {
     width: 34.5%;
     min-width: 8.9rem;
+    height: auto;
+    
+    a {
+      text-decoration: none;
+      color: var(--color-white);
+    }
   }
 `
 
@@ -75,8 +89,13 @@ export function DeleteModal({ id }: DeleteModalProps) {
         <RedBtn
           type="button"
           className="deleteBtn"
-          onClick={() => deleteInvoice(id)}>
-          Delete
+          onClick={() => {
+            openCloseModal()
+            deleteInvoice(id)
+          }}>
+          <Link to="/">
+            Delete
+          </Link>
         </RedBtn>
       </ButtonsArea>
     </CardContainer>
