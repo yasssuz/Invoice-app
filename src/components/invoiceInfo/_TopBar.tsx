@@ -103,7 +103,7 @@ export function Topbar({ status, id }: TopbarProps) {
           <PurpleBtn
             type="button"
             onClick={() => changeToPaidInvoice(id)}>
-            Mark as paid
+            Mark a paid
           </PurpleBtn>
         )} {/*Component*/}
 
