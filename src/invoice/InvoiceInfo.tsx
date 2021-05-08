@@ -9,15 +9,19 @@ import { DeleteModal } from '../components/invoiceInfo/_DeleteModal'
 
 const Overlay = styled.div`
   background: hsla(0, 0%, 0%, 0.5);
-  opacity: 0.5;
   position: absolute;
-  top: 0;
+  top: -100vh;
   bottom: 0;
   right: 0;
   left: 0;
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.2s ease, visibility 0.2s ease;
+  z-index: 1000;
+`
+
+const Test = styled.div`
+  position: relative;
 
   .active {
     visibility: visible;
@@ -30,7 +34,6 @@ const InfoContainer = styled.div`
   max-width: 75rem;
   padding: 0 24px;
   transition: padding 0.3s ease;
-  position: relative;
 
   @media screen and (min-width: 720px) {
     margin-top: 12.8rem;
@@ -85,7 +88,7 @@ export default function InvoiceInfo({ match }: any) {
   useEffect(() => setStatus(data[0].status), [])
 
   return (
-    <>
+    <Test>
       <Overlay className={`${deleteModal && 'active'}`} />
       <InfoContainer>
         {deleteModal && <DeleteModal id={id} />}
@@ -99,6 +102,6 @@ export default function InvoiceInfo({ match }: any) {
         <MainCard id={id} data={data[0]} /> {/*Component*/}
       </InfoContainer>
       <BottomBar id={id} />
-    </>
+    </Test>
   )
 }
