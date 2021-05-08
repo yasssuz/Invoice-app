@@ -44,7 +44,7 @@ const BottomBarContainer = styled.footer`
 `
 
 export function BottomBar({ id }: BottomBarProps) {
-  const { deleteInvoice, editInvoice, changeToPaidInvoice } = useContext(StorageContext)
+  const { editInvoice, changeToPaidInvoice } = useContext(StorageContext)
   const { status, openCloseModal } = useContext(InvoiceContext)
 
   return (
