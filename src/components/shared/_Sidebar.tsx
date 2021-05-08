@@ -10,6 +10,7 @@ const SidebarContainer = styled.aside`
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 999;
 
   @media screen and (min-width: 1000px) {
     width: auto;
