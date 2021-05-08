@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import styled from 'styled-components'
+import { InvoiceContext } from '../../contexts/InvoiceInfoContext'
 import { StorageContext } from '../../contexts/StorageContext'
 import { GrayBtn, RedBtn, PurpleBtn } from '../shared/_Buttons'
 import { StatusSwitcher } from '../shared/_Status'
@@ -77,7 +78,8 @@ const Buttons = styled.div`
 `
 
 export function Topbar({ status, id }: TopbarProps) {
-  const { deleteInvoice, editInvoice, changeToPaidInvoice } = useContext(StorageContext)
+  const { editInvoice, changeToPaidInvoice } = useContext(StorageContext)
+  const { openCloseModal } = useContext(InvoiceContext)
 
   return (
     <TopBar>
@@ -95,7 +97,7 @@ export function Topbar({ status, id }: TopbarProps) {
 
         <RedBtn
           type="button"
-          onClick={() => deleteInvoice(id)}>
+          onClick={openCloseModal}>
           Delete
         </RedBtn> {/*Component*/}
 
