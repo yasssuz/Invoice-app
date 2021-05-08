@@ -1,8 +1,8 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './app';
 import { createGlobalStyle } from 'styled-components'
-import { StorageProvider } from './contexts/_StorageContext';
+import { StorageProvider } from './contexts/StorageContext';
+import { InvoiceProvider } from './contexts/InvoiceInfoContext';
 
 const GlobalStyle = createGlobalStyle`
   :root {
@@ -48,10 +48,12 @@ const GlobalStyle = createGlobalStyle`
 `
 
 ReactDOM.render(
-  <StorageProvider>
-    <GlobalStyle />
-    <App />
-  </StorageProvider>,
+  <InvoiceProvider>
+    <StorageProvider>
+      <GlobalStyle />
+      <App />
+    </StorageProvider>
+  </InvoiceProvider>,
   document.getElementById('root')
 );
 
