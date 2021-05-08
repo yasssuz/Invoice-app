@@ -1,5 +1,12 @@
+import { useContext } from 'react'
 import styled from 'styled-components'
+import { InvoiceContext } from '../../contexts/InvoiceInfoContext'
+import { StorageContext } from '../../contexts/StorageContext'
 import { GrayBtn, RedBtn, PurpleBtn } from '../shared/_Buttons'
+
+interface BottomBarProps {
+  id: string
+}
 
 const BottomBarContainer = styled.footer`
   padding: 2.2rem 24px;
@@ -30,14 +37,41 @@ const BottomBarContainer = styled.footer`
   .purpleBtn {
     width: 45.6%;
   }
+
+  .large {
+    width: 48%;
+  }
 `
 
-export function BottomBar() {
+export function BottomBar({ id }: BottomBarProps) {
+  const { deleteInvoice, editInvoice, changeToPaidInvoice } = useContext(StorageContext)
+  const { status, openCloseModal } = useContext(InvoiceContext)
+
   return (
     <BottomBarContainer>
-      <GrayBtn className="grayBtn">Edit</GrayBtn>
-      <RedBtn className="redBtn">Delete</RedBtn>
-      <PurpleBtn className="purpleBtn">Mark as paid</PurpleBtn>
+      <GrayBtn
+        type="button"
+        className={`grayBtn ${status === 'pending' ? '' : 'large'}`}
+        onClick={() => editInvoice(id)}
+      >
+        Edit
+      </GrayBtn>
+      <RedBtn
+        type="button"
+        className={`redBtn ${status === 'pending' ? '' : 'large'}`}
+        onClick={openCloseModal}
+      >
+        Delete
+      </RedBtn>
+      {status === 'pending' && (
+        <PurpleBtn
+          type="button"
+          className="purpleBtn"
+          onClick={() => changeToPaidInvoice(id)}
+        >
+          Mark as paid
+        </PurpleBtn>
+      )}
     </BottomBarContainer>
   )
 }
