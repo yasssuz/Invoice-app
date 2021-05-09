@@ -24,7 +24,6 @@ export function InvoiceProvider({ children }: InvoiceProviderProps) {
 
   function openCloseModal() {
     setDeleteModal(prevState => !prevState)
-    console.log(deleteModal)
   }
 
   return (

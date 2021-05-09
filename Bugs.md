@@ -9,4 +9,4 @@
 
 - [x] key not working for each invoice on the index page
 - [] problem with seo, the <a> tag is being displayed before the <li>
-- [] sometimes the total amount is multiplied by two
+- [x] sometimes the total amount is multiplied by two

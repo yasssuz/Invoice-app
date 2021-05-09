@@ -87,8 +87,12 @@ export function PaymentCard({ items }: ItemsProps) {
   const [totalAmount, setTotalAmount] = useState(0)
 
   useEffect(() => {
-    items.map(item => setTotalAmount(prevAmount => prevAmount + item.total))
-  }, [items])
+    items.map(item => handleTotalAmount(item))
+  }, [])
+
+  function handleTotalAmount(item: any) {
+    setTotalAmount(prevState => prevState + item.total)
+  }
 
   return (
     <CardContainer>
