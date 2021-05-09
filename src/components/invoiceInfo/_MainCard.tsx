@@ -38,6 +38,10 @@ const Card = styled.main`
   background: var(--color-light-black);
   margin-top: 1.6rem;
 
+  @media screen and (min-width: 750px) {
+    padding: 3.2rem 32px;
+  }
+
   address {
     font-style: normal;
   }
@@ -55,6 +59,10 @@ const TopInfo = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+
+  @media screen and (min-width: 750px) {
+    flex-direction: row;
+  }
 `
 
 const Id = styled.div`
@@ -63,6 +71,10 @@ const Id = styled.div`
     line-height: 1.5rem;
     font-weight: 600;
     color: var(--color-white);
+
+    @media screen and (min-width: 750px) {
+      font-size: 1.8rem;
+    }
   }
 
   strong {
@@ -77,19 +89,30 @@ const Id = styled.div`
 const SenderAddress = styled.address`
   margin: 3rem 0;
 
+  @media screen and (min-width: 750px) {
+    margin: 0;
+  }
+
   span + span {
     margin-top: 0.5rem;
   }
 `
 
 const BottomInfo = styled.div`
+  @media screen and (min-width: 750px) {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 2.1rem;
+    margin-right: 6rem;
+  }
+
   strong {
     font-weight: bold;
     font-size: 1.7rem;
     line-height: 2rem;
     color: var(--color-white);
   }
-
 `
 
 const DatesClientInfo = styled.div`
@@ -97,6 +120,10 @@ const DatesClientInfo = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 3.2rem;
+
+  @media screen and (min-width: 750px) {
+    width: 33rem
+  }
 `
 
 const Dates = styled.div`
