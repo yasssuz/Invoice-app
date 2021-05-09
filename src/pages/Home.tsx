@@ -1,7 +1,8 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { Invoice } from '../components/home/_Invoice'
 import { StorageContext } from '../contexts/StorageContext'
+import { Invoice } from '../components/home/_Invoice'
+import { EmptyPage } from '../components/home/_EmptyPage'
 
 interface InvoiceProps {
   id: string
@@ -119,20 +120,29 @@ const InvoicesList = styled.section`
   }
 `
 
+const Test = styled.section`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
+  transform: translateY(-50%);
+`
+
 export default function Home() {
   const { getInvoices } = useContext(StorageContext)
   const [isEmpty, setIsEmpty] = useState(false)
   const invoices = getInvoices()
 
-  function changeIsEmpty() {
-    setIsEmpty(false)
-  }
+  useEffect(() => {
+    invoices.length === 0 ? setIsEmpty(true) : setIsEmpty(false)
+  }, [invoices])
 
   return (
     <Main>
       <InvoicesInteractions>
         <div>
-          <Title onClick={changeIsEmpty}>Invoices</Title>
+          <Title>Invoices</Title>
           <Counter>7 Invoices</Counter>
         </div>
         <LeftArea>
@@ -144,10 +154,12 @@ export default function Home() {
           </AddInvoiceBtn>
         </LeftArea>
       </InvoicesInteractions>
-      <InvoicesList>
-        {isEmpty ? (
-          <h1>its empty</h1>
-        ) : (
+      {isEmpty ? (
+        // <Test>
+        <EmptyPage />
+        // </Test>
+      ) : (
+        <InvoicesList>
           <ul>
             {invoices.map((invoice: InvoiceProps) => <Invoice
               id={invoice.id}
@@ -158,8 +170,8 @@ export default function Home() {
               key={invoice.id}
             />)}
           </ul>
-        )}
-      </InvoicesList>
+        </InvoicesList>
+      )}
     </Main>
   )
 }
