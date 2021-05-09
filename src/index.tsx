@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import App from './app';
+import App from './pages/app';
 import { createGlobalStyle } from 'styled-components'
 import { StorageProvider } from './contexts/StorageContext';
 import { InvoiceProvider } from './contexts/InvoiceInfoContext';

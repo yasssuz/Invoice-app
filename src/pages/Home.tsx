@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import styled from 'styled-components'
-import { Invoice } from './components/home/_Invoice'
-import { StorageContext } from './contexts/StorageContext'
+import { Invoice } from '../components/home/_Invoice'
+import { StorageContext } from '../contexts/StorageContext'
 
 interface InvoiceProps {
   id: string

@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Home from './Home'
 import InvoiceInfo from './invoice/InvoiceInfo'
-import { Sidebar } from './components/shared/_Sidebar'
+import { Sidebar } from '../components/shared/_Sidebar'
 
 export default function App() {
   return (

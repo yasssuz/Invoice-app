@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { MainCard } from '../components/invoiceInfo/_MainCard'
-import { Topbar } from '../components/invoiceInfo/_TopBar'
-import { BottomBar } from '../components/invoiceInfo/_BottomBar'
+import { MainCard } from '../../components/invoiceInfo/_MainCard'
+import { Topbar } from '../../components/invoiceInfo/_TopBar'
+import { BottomBar } from '../../components/invoiceInfo/_BottomBar'
 import { useContext, useEffect } from 'react'
-import { InvoiceContext } from '../contexts/InvoiceInfoContext'
-import { DeleteModal } from '../components/invoiceInfo/_DeleteModal'
+import { InvoiceContext } from '../../contexts/InvoiceInfoContext'
+import { DeleteModal } from '../../components/invoiceInfo/_DeleteModal'
 
 const Overlay = styled.div`
   background: hsla(0, 0%, 0%, 0.5);
@@ -20,7 +20,7 @@ const Overlay = styled.div`
   z-index: 1000;
 `
 
-const Test = styled.div`
+const PageContainer = styled.div`
   position: relative;
 
   .active {
@@ -88,7 +88,7 @@ export default function InvoiceInfo({ match }: any) {
   useEffect(() => setStatus(data[0].status), [])
 
   return (
-    <Test>
+    <PageContainer>
       <Overlay className={`${deleteModal && 'active'}`} />
       <InfoContainer>
         {deleteModal && <DeleteModal id={id} />}
@@ -102,6 +102,6 @@ export default function InvoiceInfo({ match }: any) {
         <MainCard id={id} data={data[0]} /> {/*Component*/}
       </InfoContainer>
       <BottomBar id={id} />
-    </Test>
+    </PageContainer>
   )
 }
