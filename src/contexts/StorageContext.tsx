@@ -1,36 +1,6 @@
-import { createContext, ReactNode, useContext } from 'react'
-import { InvoiceContext } from './InvoiceInfoContext'
+import { createContext, ReactNode } from 'react'
 
 interface AppContextProps {
-  // invoices: Array<{
-  //   id: string
-  //   createdAt: string
-  //   paymentDue: string
-  //   description: string
-  //   paymentTerms: number
-  //   clientName: string
-  //   clientEmail: string
-  //   status: string
-  //   senderAddress: {
-  //     street: string
-  //     city: string
-  //     postCode: string
-  //     country: string
-  //   }
-  //   clientAddress: {
-  //     street: string
-  //     city: string
-  //     postCode: string
-  //     country: string
-  //   }
-  //   items: Array<{
-  //     name: string
-  //     quantity: number
-  //     price: number
-  //     total: number
-  //   }>
-  //   total: number
-  // }>
   getInvoices: () => Array<any>
   editInvoice: (id: string) => void
   changeToPaidInvoice: (id: string) => void
@@ -44,8 +14,6 @@ interface AppProviderProps {
 export const StorageContext = createContext({} as AppContextProps)
 
 export const StorageProvider = ({ children }: AppProviderProps) => {
-  const { setPaid } = useContext(InvoiceContext)
-
   function getInvoices() {
     let invoiceStorage: any
 
@@ -74,11 +42,12 @@ export const StorageProvider = ({ children }: AppProviderProps) => {
 
   function changeToPaidInvoice(id: string) {
     const invoices = getInvoices()
-    const invoice = invoices.filter((invoice: any) => invoice.id === id)
+    const invoice = invoices.filter(
+      (invoice: { id: string }) => invoice.id === id
+    )
 
     invoice[0].status = 'paid'
     localStorage.setItem('invoices', JSON.stringify(invoices))
-    setPaid()
   }
 
   return (

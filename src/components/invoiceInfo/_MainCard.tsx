@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import styled from 'styled-components'
 import { formatDate } from '../../utils/formatters'
 import { PaymentCard } from './_PaymentCard'
@@ -156,8 +157,8 @@ const ClientEmail = styled.div`
   }
 `
 
-export function MainCard({ data, id }: MainCardProps) {
-  const items = data.items;
+export const MainCard = memo((props: MainCardProps) => {
+  const data = props.data
 
   return (
     <Card>
@@ -165,7 +166,7 @@ export function MainCard({ data, id }: MainCardProps) {
         <Id>
           <h1>
             <strong>#</strong>
-            {id}
+            {props.id}
           </h1>
           <p>{data.description}</p>
         </Id>
@@ -200,7 +201,13 @@ export function MainCard({ data, id }: MainCardProps) {
           <strong>{data.clientEmail}</strong>
         </ClientEmail>
       </BottomInfo>
-      <PaymentCard items={items} />
+      <PaymentCard items={props.data.items} />
     </Card>
   )
-}
+}, (prevProps, nextProps) => {
+  if (prevProps.id !== nextProps.id) {
+    return false
+  }
+
+  return true
+})

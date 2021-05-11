@@ -1,13 +1,13 @@
-import { useContext } from 'react'
+import { memo } from 'react'
 import styled from 'styled-components'
-import { InvoiceContext } from '../../contexts/InvoiceInfoContext'
-import { StorageContext } from '../../contexts/StorageContext'
 import { GrayBtn, RedBtn, PurpleBtn } from '../shared/_Buttons'
 import { StatusSwitcher } from '../shared/_Status'
 
 interface TopbarProps {
   id: string
   status: string
+  handleModal: () => void
+  setPaid: () => void
 }
 
 const TopBar = styled.header`
@@ -77,39 +77,34 @@ const Buttons = styled.div`
   }
 `
 
-export function Topbar({ status, id }: TopbarProps) {
-  const { editInvoice, changeToPaidInvoice } = useContext(StorageContext)
-  const { openCloseModal } = useContext(InvoiceContext)
-
+export const Topbar = memo((props: TopbarProps) => {
   return (
     <TopBar>
       <Status>
         <span>Status</span>
-        <StatusSwitcher status={status} />  {/*Component*/}
+        <StatusSwitcher status={props.status} />  {/*Component*/}
       </Status>
       <Buttons>
-
         <GrayBtn
           type="button"
-          onClick={() => editInvoice(id)}>
+          onClick={() => console.log('editing feature not available')}>
           Edit
-        </GrayBtn> {/*Component*/}
+        </GrayBtn>
 
         <RedBtn
           type="button"
-          onClick={openCloseModal}>
+          onClick={props.handleModal}>
           Delete
-        </RedBtn> {/*Component*/}
+        </RedBtn>
 
-        {status === 'pending' && (
+        {props.status === 'pending' && (
           <PurpleBtn
             type="button"
-            onClick={() => changeToPaidInvoice(id)}>
+            onClick={props.setPaid}>
             Mark a paid
           </PurpleBtn>
-        )} {/*Component*/}
-
+        )}
       </Buttons>
     </TopBar>
   )
-}
+})

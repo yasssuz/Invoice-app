@@ -160,8 +160,9 @@ const TotalAmount = styled.strong`
   }
 `
 
-export function PaymentCard({ items }: ItemsProps) {
+export function PaymentCard(props: ItemsProps) {
   const [totalAmount, setTotalAmount] = useState(0)
+  const items = props.items
 
   useEffect(() => {
     items.map(item => handleTotalAmount(item))

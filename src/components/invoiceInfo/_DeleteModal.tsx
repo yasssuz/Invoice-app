@@ -1,12 +1,12 @@
 import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { InvoiceContext } from '../../contexts/InvoiceInfoContext'
 import { StorageContext } from '../../contexts/StorageContext'
 import { GrayBtn, RedBtn } from '../shared/_Buttons'
 
 interface DeleteModalProps {
   id: string
+  handleModal: () => void
 }
 
 const CardContainer = styled.div`
@@ -18,7 +18,6 @@ const CardContainer = styled.div`
   border-radius: 0.8rem;
   box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
   background: var(--color-light-black); 
-  max-width: 48rem;
   margin: 0 24px;
   padding: 3.4rem 34px;
   z-index: 2000;
@@ -26,7 +25,8 @@ const CardContainer = styled.div`
   @media screen and (min-width: 750px) {
     left: 50%;
     right: unset;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
+    width: 48rem;
   }
 `
 
@@ -62,36 +62,41 @@ const ButtonsArea = styled.div`
     width: 34.5%;
     min-width: 8.9rem;
     height: auto;
-    
+    overflow: hidden;
+     
     a {
       text-decoration: none;
       color: var(--color-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
     }
   }
 `
 
 
-export function DeleteModal({ id }: DeleteModalProps) {
-  const { openCloseModal } = useContext(InvoiceContext)
+export function DeleteModal(props: DeleteModalProps) {
   const { deleteInvoice } = useContext(StorageContext)
 
   return (
     <CardContainer>
       <Title>Confirm Deletion</Title>
-      <Message>Are you sure you want to delete invoice #{id}? This action cannot be undone.</Message>
+      <Message>Are you sure you want to delete invoice #{props.id}? This action cannot be undone.</Message>
       <ButtonsArea>
         <GrayBtn
           type="button"
           className="cancelBtn"
-          onClick={openCloseModal}>
+          onClick={props.handleModal}>
           Cancel
         </GrayBtn>
         <RedBtn
           type="button"
           className="deleteBtn"
           onClick={() => {
-            openCloseModal()
-            deleteInvoice(id)
+            props.handleModal()
+            deleteInvoice(props.id)
           }}>
           <Link to="/">
             Delete

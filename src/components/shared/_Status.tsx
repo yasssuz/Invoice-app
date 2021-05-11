@@ -54,14 +54,14 @@ const StatusDraft = styled(Status)`
   }
 `
 
-export function StatusSwitcher({ status }: StatusProps) {
+export function StatusSwitcher(props: StatusProps) {
   return (
     <>
-      {status === "paid" ? (
+      {props.status === "paid" ? (
         <StatusPaid>Paid</StatusPaid>
       ) : (
         <>
-          {status === "pending" ? (
+          {props.status === "pending" ? (
             <StatusPending>Pending</StatusPending>
           ) : (
             <StatusDraft>Draft</StatusDraft>

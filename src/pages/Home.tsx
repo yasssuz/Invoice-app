@@ -155,9 +155,7 @@ export default function Home() {
         </LeftArea>
       </InvoicesInteractions>
       {isEmpty ? (
-        // <Test>
         <EmptyPage />
-        // </Test>
       ) : (
         <InvoicesList>
           <ul>

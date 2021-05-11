@@ -1,11 +1,19 @@
+import { useContext, useEffect, useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { StorageContext } from '../../contexts/StorageContext'
 import { MainCard } from '../../components/invoiceInfo/_MainCard'
 import { Topbar } from '../../components/invoiceInfo/_TopBar'
 import { BottomBar } from '../../components/invoiceInfo/_BottomBar'
-import { useContext, useEffect } from 'react'
-import { InvoiceContext } from '../../contexts/InvoiceInfoContext'
 import { DeleteModal } from '../../components/invoiceInfo/_DeleteModal'
+
+interface InvoiceInfoProps {
+  match: {
+    params: {
+      id: string;
+    }
+  }
+}
 
 const Overlay = styled.div`
   background: hsla(0, 0%, 0%, 0.5);
@@ -18,6 +26,10 @@ const Overlay = styled.div`
   opacity: 0;
   transition: opacity 0.2s ease, visibility 0.2s ease;
   z-index: 1000;
+
+  @media screen and (min-width: 750px) {
+    bottom: -10vh;
+  }
 `
 
 const PageContainer = styled.div`
@@ -79,29 +91,50 @@ const GoBack = styled.div`
   }
 `
 
-export default function InvoiceInfo({ match }: any) {
+export default function InvoiceInfo(props: InvoiceInfoProps) {
+  const { changeToPaidInvoice } = useContext(StorageContext)
+  const [deleteModal, setDeleteModal] = useState(false)
+  const [status, setStatus] = useState('')
   const storage = JSON.parse(localStorage.getItem('invoices') || '{}')
-  const id = match.params.id
+  const id = props.match.params.id
   const data = storage.filter((invoice: { id: string }) => invoice.id === id && invoice)
-  const { status, setStatus, deleteModal } = useContext(InvoiceContext)
 
   useEffect(() => setStatus(data[0].status), [])
+
+  const handleModal = useCallback(() => {
+    setDeleteModal(prevState => !prevState)
+  }, [])
+
+  const setPaid = useCallback(() => {
+    setStatus('paid')
+    changeToPaidInvoice(id)
+  }, [id])
 
   return (
     <PageContainer>
       <Overlay className={`${deleteModal && 'active'}`} />
       <InfoContainer>
-        {deleteModal && <DeleteModal id={id} />}
+        {deleteModal && <DeleteModal handleModal={handleModal} id={id} />}
         <Link to="/" style={{ textDecoration: 'none' }}>
           <GoBack>
             <img src="/assets/icon-arrow-right.svg" alt="go back" />
             <span>Go back</span>
           </GoBack>
         </Link>
-        <Topbar id={id} status={status} /> {/*Component*/}
-        <MainCard id={id} data={data[0]} /> {/*Component*/}
+        <Topbar
+          id={id}
+          status={status}
+          handleModal={handleModal}
+          setPaid={setPaid}
+        /> {/*Component*/}
+        <MainCard id={id} data={data[0]} />
       </InfoContainer>
-      <BottomBar id={id} />
+      <BottomBar
+        id={id}
+        status={status}
+        handleModal={handleModal}
+        setPaid={setPaid}
+      /> {/*Component*/}
     </PageContainer>
   )
 }
