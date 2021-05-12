@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 import { formatMoneyAmount } from "../../utils/formatters"
+import { StatusSwitcher } from "../shared/_Status"
 
 interface InvoiceProps {
   id: string
@@ -190,17 +191,7 @@ export const Invoice: React.FC<InvoiceProps> = (props) => {
               <Date>{props.creationDate}</Date>
               <Amount>$ {props.amount}</Amount>
             </div>
-            {props.status === "paid" ? (
-              <StatusPaid>Paid</StatusPaid>
-            ) : (
-              <>
-                {props.status === "pending" ? (
-                  <StatusPending>Pending</StatusPending>
-                ) : (
-                  <StatusDraft>Draft</StatusDraft>
-                )}
-              </>
-            )}
+            <StatusSwitcher status={props.status} />
           </Information>
         </div>
         <div className="desktop-version">
@@ -212,17 +203,7 @@ export const Invoice: React.FC<InvoiceProps> = (props) => {
             <Receiver>{props.client}</Receiver>
             <Amount>$ {formatMoneyAmount(props.amount)}</Amount>
           </ReceiverAmount>
-          {props.status === "paid" ? (
-            <StatusPaid>Paid</StatusPaid>
-          ) : (
-            <>
-              {props.status === "pending" ? (
-                <StatusPending>Pending</StatusPending>
-              ) : (
-                <StatusDraft>Draft</StatusDraft>
-              )}
-            </>
-          )}
+          <StatusSwitcher status={props.status} />
           <img src="/assets/icon-arrow-right.svg" alt="icon arrow" />
         </div>
       </InvoiceContainer>

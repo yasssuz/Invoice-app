@@ -92,10 +92,10 @@ const GoBack = styled.div`
 `
 
 export default function InvoiceInfo(props: InvoiceInfoProps) {
-  const { changeToPaidInvoice } = useContext(StorageContext)
+  const { changeToPaidInvoice, getInvoices } = useContext(StorageContext)
   const [deleteModal, setDeleteModal] = useState(false)
   const [status, setStatus] = useState('')
-  const storage = JSON.parse(localStorage.getItem('invoices') || '{}')
+  const storage = getInvoices()
   const id = props.match.params.id
   const data = storage.filter((invoice: { id: string }) => invoice.id === id && invoice)
 
@@ -127,7 +127,7 @@ export default function InvoiceInfo(props: InvoiceInfoProps) {
           handleModal={handleModal}
           setPaid={setPaid}
         /> {/*Component*/}
-        <MainCard id={id} data={data[0]} />
+        <MainCard id={id} data={data[0]} /> {/*Component*/}
       </InfoContainer>
       <BottomBar
         id={id}

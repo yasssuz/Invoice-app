@@ -201,7 +201,7 @@ export const MainCard = memo((props: MainCardProps) => {
           <strong>{data.clientEmail}</strong>
         </ClientEmail>
       </BottomInfo>
-      <PaymentCard items={props.data.items} />
+      <PaymentCard items={props.data.items} /> {/*Component*/}
     </Card>
   )
 }, (prevProps, nextProps) => {
