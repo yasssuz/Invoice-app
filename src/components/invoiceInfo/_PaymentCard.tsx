@@ -166,7 +166,7 @@ export function PaymentCard(props: ItemsProps) {
 
   useEffect(() => {
     items.map(item => handleTotalAmount(item))
-  }, [])
+  }, [items])
 
   function handleTotalAmount(item: any) {
     setTotalAmount(prevState => prevState + item.total)

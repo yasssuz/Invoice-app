@@ -120,15 +120,6 @@ const InvoicesList = styled.section`
   }
 `
 
-const Test = styled.section`
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  top: 50%;
-  transform: translateY(-50%);
-`
-
 export default function Home() {
   const { getInvoices } = useContext(StorageContext)
   const [isEmpty, setIsEmpty] = useState(false)

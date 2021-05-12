@@ -99,7 +99,7 @@ export default function InvoiceInfo(props: InvoiceInfoProps) {
   const id = props.match.params.id
   const data = storage.filter((invoice: { id: string }) => invoice.id === id && invoice)
 
-  useEffect(() => setStatus(data[0].status), [])
+  useEffect(() => setStatus(data[0].status), [data])
 
   const handleModal = useCallback(() => {
     setDeleteModal(prevState => !prevState)
@@ -108,7 +108,7 @@ export default function InvoiceInfo(props: InvoiceInfoProps) {
   const setPaid = useCallback(() => {
     setStatus('paid')
     changeToPaidInvoice(id)
-  }, [id])
+  }, [id, changeToPaidInvoice])
 
   return (
     <PageContainer>
