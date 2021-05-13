@@ -4,6 +4,7 @@ import { StorageContext } from '../contexts/StorageContext'
 import { Invoice } from '../components/home/_Invoice'
 import { EmptyPage } from '../components/home/_EmptyPage'
 import { Interactions } from '../components/home/_Interactions'
+import { Form } from '../components/form/_Form'
 
 interface InvoiceProps {
   id: string
@@ -11,7 +12,6 @@ interface InvoiceProps {
   createdAt: string
   total: number
   status: string
-  key: string
 }
 
 const Main = styled.main`
@@ -48,31 +48,39 @@ const InvoicesList = styled.section`
 export default function Home() {
   const { getInvoices } = useContext(StorageContext)
   const [isEmpty, setIsEmpty] = useState(false)
+  const [formOpen, setFormOpen] = useState(false)
   const invoices = getInvoices()
 
   useEffect(() => {
     invoices.length === 0 ? setIsEmpty(true) : setIsEmpty(false)
   }, [invoices])
 
+  function handleForm() {
+    setFormOpen(prevState => !prevState)
+  }
+
   return (
-    <Main>
-      <Interactions /> {/*Component*/}
-      {isEmpty ? (
-        <EmptyPage /> //COMPONENT
-      ) : (
-        <InvoicesList>
-          <ul>
-            {invoices.map((invoice: InvoiceProps) => <Invoice
-              id={invoice.id}
-              client={invoice.clientName}
-              creationDate={invoice.createdAt}
-              amount={invoice.total}
-              status={invoice.status}
-              key={invoice.id}
-            />)}
-          </ul>
-        </InvoicesList>
-      )}
-    </Main>
+    <>
+      <Main>
+        <Interactions handleForm={handleForm} /> {/*Component*/}
+        {isEmpty ? (
+          <EmptyPage /> //COMPONENT
+        ) : (
+          <InvoicesList>
+            <ul>
+              {invoices.map((invoice: InvoiceProps) => <Invoice
+                id={invoice.id}
+                client={invoice.clientName}
+                creationDate={invoice.createdAt}
+                amount={invoice.total}
+                status={invoice.status}
+                key={invoice.id}
+              />)}
+            </ul>
+          </InvoicesList>
+        )}
+      </Main>
+      {formOpen && <Form />}
+    </>
   )
 }

@@ -47,7 +47,7 @@ const Description = styled.p`
   }
 `
 
-export function EmptyPage() {
+export const EmptyPage = () => {
   return (
     <ContentContainer>
       <Illustration src="/assets/illustration-empty.svg" alt="page empty" />

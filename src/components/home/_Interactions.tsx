@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 
+interface InteractionsProps {
+  handleForm: () => void
+}
+
 const InteractionsContainer = styled.section`
   display: flex;
   justify-content: space-between;
@@ -76,7 +80,9 @@ const AddInvoiceBtn = styled.button`
   }
 `
 
-export function Interactions() {
+export const Interactions = (props: InteractionsProps) => {
+  const { handleForm } = props
+
   return (
     <InteractionsContainer>
       <div>
@@ -85,7 +91,7 @@ export function Interactions() {
       </div>
       <LeftArea>
         <Select></Select>
-        <AddInvoiceBtn>
+        <AddInvoiceBtn onClick={handleForm}>
           <div>
             <img src="/assets/icon-plus.svg" alt="add icon" />
           </div>
@@ -93,5 +99,4 @@ export function Interactions() {
       </LeftArea>
     </InteractionsContainer>
   )
-
 }

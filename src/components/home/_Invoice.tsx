@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC, memo } from "react"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 import { formatMoneyAmount } from "../../utils/formatters"
@@ -129,36 +129,38 @@ const ReceiverAmount = styled.div`
   margin-right: 4rem;
 `
 
-export const Invoice: FC<InvoiceProps> = (props) => {
+export const Invoice = memo((props: InvoiceProps) => {
+  const { id, client, creationDate, amount, status } = props
+
   return (
-    <Link to={`/invoices/${props.id}`} style={{ textDecoration: 'none' }}>
+    <Link to={`/invoices/${id}`} style={{ textDecoration: 'none' }}>
       <InvoiceContainer>
         <div className="mobile-version">
           <About>
-            <Id><span>#</span>{props.id}</Id>
-            <Receiver>{props.client}</Receiver>
+            <Id><span>#</span>{id}</Id>
+            <Receiver>{client}</Receiver>
           </About>
           <Information>
             <div>
-              <Date>{props.creationDate}</Date>
-              <Amount>$ {props.amount}</Amount>
+              <Date>{creationDate}</Date>
+              <Amount>$ {amount}</Amount>
             </div>
-            <StatusSwitcher status={props.status} />
+            <StatusSwitcher status={status} />
           </Information>
         </div>
         <div className="desktop-version">
           <IdDate>
-            <Id><span>#</span>{props.id}</Id>
-            <Date>{props.creationDate}</Date>
+            <Id><span>#</span>{id}</Id>
+            <Date>{creationDate}</Date>
           </IdDate>
           <ReceiverAmount>
-            <Receiver>{props.client}</Receiver>
-            <Amount>$ {formatMoneyAmount(props.amount)}</Amount>
+            <Receiver>{client}</Receiver>
+            <Amount>$ {formatMoneyAmount(amount)}</Amount>
           </ReceiverAmount>
-          <StatusSwitcher status={props.status} />
+          <StatusSwitcher status={status} />
           <img src="/assets/icon-arrow-right.svg" alt="icon arrow" />
         </div>
       </InvoiceContainer>
     </Link>
   )
-}
+})
