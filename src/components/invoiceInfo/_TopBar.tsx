@@ -1,10 +1,8 @@
-import { memo } from 'react'
 import styled from 'styled-components'
 import { GrayBtn, RedBtn, PurpleBtn } from '../shared/_Buttons'
 import { StatusSwitcher } from '../shared/_Status'
 
 interface TopbarProps {
-  id: string
   status: string
   handleModal: () => void
   setPaid: () => void
@@ -77,12 +75,14 @@ const Buttons = styled.div`
   }
 `
 
-export const Topbar = memo((props: TopbarProps) => {
+export const Topbar = (props: TopbarProps) => {
+  const { status, handleModal, setPaid } = props
+
   return (
     <TopBar>
       <Status>
         <span>Status</span>
-        <StatusSwitcher status={props.status} />  {/*Component*/}
+        <StatusSwitcher status={status} />  {/*Component*/}
       </Status>
       <Buttons>
         <GrayBtn
@@ -93,18 +93,18 @@ export const Topbar = memo((props: TopbarProps) => {
 
         <RedBtn
           type="button"
-          onClick={props.handleModal}>
+          onClick={handleModal}>
           Delete
         </RedBtn>
 
-        {props.status === 'pending' && (
+        {status === 'pending' && (
           <PurpleBtn
             type="button"
-            onClick={props.setPaid}>
+            onClick={setPaid}>
             Mark a paid
           </PurpleBtn>
         )}
       </Buttons>
     </TopBar>
   )
-})
+}

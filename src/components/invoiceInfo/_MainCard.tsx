@@ -158,7 +158,7 @@ const ClientEmail = styled.div`
 `
 
 export const MainCard = memo((props: MainCardProps) => {
-  const data = props.data
+  const { id, data } = props
 
   return (
     <Card>
@@ -166,7 +166,7 @@ export const MainCard = memo((props: MainCardProps) => {
         <Id>
           <h1>
             <strong>#</strong>
-            {props.id}
+            {id}
           </h1>
           <p>{data.description}</p>
         </Id>
@@ -201,7 +201,7 @@ export const MainCard = memo((props: MainCardProps) => {
           <strong>{data.clientEmail}</strong>
         </ClientEmail>
       </BottomInfo>
-      <PaymentCard items={props.data.items} /> {/*Component*/}
+      <PaymentCard items={data.items} /> {/*Component*/}
     </Card>
   )
 }, (prevProps, nextProps) => {

@@ -79,24 +79,25 @@ const ButtonsArea = styled.div`
 
 export function DeleteModal(props: DeleteModalProps) {
   const { deleteInvoice } = useContext(StorageContext)
+  const { id, handleModal } = props
 
   return (
     <CardContainer>
       <Title>Confirm Deletion</Title>
-      <Message>Are you sure you want to delete invoice #{props.id}? This action cannot be undone.</Message>
+      <Message>Are you sure you want to delete invoice #{id}? This action cannot be undone.</Message>
       <ButtonsArea>
         <GrayBtn
           type="button"
           className="cancelBtn"
-          onClick={props.handleModal}>
+          onClick={handleModal}>
           Cancel
         </GrayBtn>
         <RedBtn
           type="button"
           className="deleteBtn"
           onClick={() => {
-            props.handleModal()
-            deleteInvoice(props.id)
+            handleModal()
+            deleteInvoice(id)
           }}>
           <Link to="/">
             Delete

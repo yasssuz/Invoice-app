@@ -162,13 +162,13 @@ const TotalAmount = styled.strong`
 
 export function PaymentCard(props: ItemsProps) {
   const [totalAmount, setTotalAmount] = useState(0)
-  const items = props.items
+  const { items } = props
 
   useEffect(() => {
     items.map(item => handleTotalAmount(item))
   }, [items])
 
-  function handleTotalAmount(item: any) {
+  function handleTotalAmount(item: { total: number }) {
     setTotalAmount(prevState => prevState + item.total)
   }
 

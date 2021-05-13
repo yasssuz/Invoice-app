@@ -122,7 +122,6 @@ export default function InvoiceInfo(props: InvoiceInfoProps) {
           </GoBack>
         </Link>
         <Topbar
-          id={id}
           status={status}
           handleModal={handleModal}
           setPaid={setPaid}
@@ -130,7 +129,6 @@ export default function InvoiceInfo(props: InvoiceInfoProps) {
         <MainCard id={id} data={data[0]} /> {/*Component*/}
       </InfoContainer>
       <BottomBar
-        id={id}
         status={status}
         handleModal={handleModal}
         setPaid={setPaid}

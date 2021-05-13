@@ -1,9 +1,7 @@
-import { memo } from 'react'
 import styled from 'styled-components'
 import { GrayBtn, RedBtn, PurpleBtn } from '../shared/_Buttons'
 
 interface BottomBarProps {
-  id: string
   status: string
   handleModal: () => void
   setPaid: () => void
@@ -44,31 +42,33 @@ const BottomBarContainer = styled.footer`
   }
 `
 
-export const BottomBar = memo((props: BottomBarProps) => {
+export const BottomBar = (props: BottomBarProps) => {
+  const { status, handleModal, setPaid } = props
+
   return (
     <BottomBarContainer>
       <GrayBtn
         type="button"
-        className={`grayBtn ${props.status === 'pending' ? '' : 'large'}`}
+        className={`grayBtn ${status === 'pending' ? '' : 'large'}`}
         onClick={() => console.log('editing feature not available')}>
         Edit
       </GrayBtn>
 
       <RedBtn
         type="button"
-        className={`redBtn ${props.status === 'pending' ? '' : 'large'}`}
-        onClick={props.handleModal}>
+        className={`redBtn ${status === 'pending' ? '' : 'large'}`}
+        onClick={handleModal}>
         Delete
       </RedBtn>
 
-      {props.status === 'pending' && (
+      {status === 'pending' && (
         <PurpleBtn
           type="button"
           className="purpleBtn"
-          onClick={props.setPaid}>
+          onClick={setPaid}>
           Mark as paid
         </PurpleBtn>
       )}
     </BottomBarContainer>
   )
-})
+}
