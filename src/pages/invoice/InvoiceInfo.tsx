@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState, useCallback } from 'react'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { StorageContext } from '../../contexts/StorageContext'
 import { MainCard } from '../../components/invoiceInfo/_MainCard'
 import { Topbar } from '../../components/invoiceInfo/_TopBar'
 import { BottomBar } from '../../components/invoiceInfo/_BottomBar'
 import { DeleteModal } from '../../components/invoiceInfo/_DeleteModal'
+import { GoBack } from '../../components/shared/_GoBack'
 
 interface InvoiceInfoProps {
   match: {
@@ -62,34 +62,6 @@ const InfoContainer = styled.div`
     margin-top: 11.1rem;
   }
 `
-const GoBack = styled.div`
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-
-  &:hover {
-    img {
-      transform: rotate(-180deg);
-    }
-
-    span {
-      filter: brightness(0.7);
-    }
-  }
-
-  img {
-    transform: rotate(180deg);
-    transition: transform 0.5s ease;
-  }
-
-  span {
-    margin-left: 2.4rem;
-    font-weight: bold;
-    font-size: 1.4rem;
-    color: var(--color-white);
-    transition: filter 0.3s ease;
-  }
-`
 
 export default function InvoiceInfo(props: InvoiceInfoProps) {
   const { changeToPaidInvoice, getInvoices } = useContext(StorageContext)
@@ -115,12 +87,7 @@ export default function InvoiceInfo(props: InvoiceInfoProps) {
       <Overlay className={`${deleteModal && 'active'}`} />
       <InfoContainer>
         {deleteModal && <DeleteModal handleModal={handleModal} id={id} />}
-        <Link to="/" style={{ textDecoration: 'none' }}>
-          <GoBack>
-            <img src="/assets/icon-arrow-right.svg" alt="go back" />
-            <span>Go back</span>
-          </GoBack>
-        </Link>
+        <GoBack /> {/*Component*/}
         <Topbar
           status={status}
           handleModal={handleModal}
