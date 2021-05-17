@@ -38,6 +38,16 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Spartan', sans-serif;
   }
 
+  a, 
+  input, 
+  button, 
+  select, 
+  textarea {
+    &:focus {
+      outline: dashed 2px var(--color-purple);
+    }
+  }
+
   * {
     margin: 0;
     padding: 0;
