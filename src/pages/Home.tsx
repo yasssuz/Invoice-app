@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState, useCallback } from 'react'
 import styled from 'styled-components'
 import { StorageContext } from '../contexts/StorageContext'
 import { Invoice } from '../components/home/_Invoice'
@@ -55,9 +55,9 @@ export default function Home() {
     invoices.length === 0 ? setIsEmpty(true) : setIsEmpty(false)
   }, [invoices])
 
-  function handleForm() {
+  const handleForm = useCallback(() => {
     setFormOpen(prevState => !prevState)
-  }
+  }, [])
 
   return (
     <>
@@ -80,7 +80,7 @@ export default function Home() {
           </InvoicesList>
         )}
       </Main>
-      {formOpen && <Form />}
+      {formOpen && <Form handleModal={handleForm} />}
     </>
   )
 }
