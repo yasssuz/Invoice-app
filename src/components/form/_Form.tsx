@@ -1,6 +1,5 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from 'yup'
 import { GoBack } from '../shared/_GoBack'
 import {
   FormContainer,
@@ -10,8 +9,11 @@ import {
   SmallInputsArea,
   InputBlock,
   Label,
-  TextInput
+  TextInput,
+  Selector,
+  Option
 } from './Form.styles'
+import { FormSchema } from './_FormSchema'
 
 interface FormProps {
   handleModal: () => void
@@ -28,20 +30,10 @@ interface FormData {
   clientCity: string
   clientPostCode: string
   clientCountry: string
+  invoiceDate: Date
+  paymentTerms: any
+  description: string
 }
-
-const FormSchema = yup.object().shape({
-  senderStreetAddress: yup.string().required(),
-  senderCity: yup.string().matches(/^[aA-zZ\s]+$/).required(),
-  senderPostCode: yup.string().required(),
-  senderCountry: yup.string().matches(/^[aA-zZ\s]+$/).required(),
-  clientName: yup.string().matches(/^[aA-zZ\s]+$/).required(),
-  clientEmail: yup.string().email().required(),
-  clientStreetAddress: yup.string().required(),
-  clientCity: yup.string().matches(/^[aA-zZ\s]+$/).required(),
-  clientPostCode: yup.string().required(),
-  clientCountry: yup.string().matches(/^[aA-zZ\s]+$/).required(),
-})
 
 export function Form(props: FormProps) {
   const { handleModal } = props
@@ -161,6 +153,44 @@ export function Form(props: FormProps) {
             </InputBlock>
 
           </SmallInputsArea>
+        </Fieldset>
+
+        <Fieldset>
+          <Legend style={{ display: 'none' }}>Info</Legend>
+
+          <InputBlock className={errors.invoiceDate && 'error'}>
+            <Label htmlFor="invoice-date">Invoice Date</Label>
+            <TextInput
+              type="date"
+              className="date"
+              id="invoice-date"
+              {...register("invoiceDate")}
+            />
+          </InputBlock>
+
+          <InputBlock className={errors.paymentTerms && 'error'}>
+            <Label htmlFor="payment-terms">Payment Terms</Label>
+            <Selector
+              id="payment-terms"
+              defaultValue="Net 30 Days"
+              {...register("paymentTerms")}
+            >
+              <Option>Net 1 Day</Option>
+              <Option>Net 7 Days</Option>
+              <Option>Net 14 Days</Option>
+              <Option>Net 30 Days</Option>
+            </Selector>
+          </InputBlock>
+
+          <InputBlock className={errors.description && 'error'}>
+            <Label htmlFor="description">Project / Description</Label>
+            <TextInput
+              type="text"
+              id="description"
+              {...register("description")}
+            />
+          </InputBlock>
+
         </Fieldset>
 
         <button type="submit">teeeest</button>

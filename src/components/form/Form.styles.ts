@@ -58,7 +58,8 @@ export const InputBlock = styled.div`
       color: var(--color-red);
     }
 
-    input {
+    input, 
+    select {
       border: 1px solid var(--color-red);
     }
   }
@@ -84,4 +85,32 @@ export const TextInput = styled.input`
   font-weight: bold;
   color: var(--color-white);
   padding: 0 2rem;
+
+  &.date {
+    &::-webkit-calendar-picker-indicator {
+      opacity: 0;
+    }  
+
+    &::after {
+      content: url('/assets/icon-calendar.svg');
+      margin-bottom: -2px;
+    }
+  }
+`
+
+export const Selector = styled.select`
+  width: 100%;
+  border-radius: 0.4rem;
+  height: 4.8rem;
+  border: 1px solid var(--color-very-light-black);
+  background: var(--color-light-black);
+  font-size: 1.2rem;
+  line-height: 1.5rem;
+  font-weight: bold;
+  color: var(--color-white);
+  padding: 0 2rem;
+`
+
+export const Option = styled.option`
+  font-weight: bold;
 `
