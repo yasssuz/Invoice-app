@@ -188,6 +188,7 @@ export function Form(props: FormProps) {
               type="text"
               id="description"
               {...register("description")}
+              placeholder="e.g. Graphic Service"
             />
           </InputBlock>
 

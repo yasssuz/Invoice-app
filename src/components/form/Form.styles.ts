@@ -103,12 +103,14 @@ export const Selector = styled.select`
   border-radius: 0.4rem;
   height: 4.8rem;
   border: 1px solid var(--color-very-light-black);
-  background: var(--color-light-black);
   font-size: 1.2rem;
   line-height: 1.5rem;
   font-weight: bold;
   color: var(--color-white);
   padding: 0 2rem;
+  appearance: none; 
+  background: url('/assets/icon-arrow-down.svg') no-repeat, var(--color-light-black);
+  background-position: calc(100% - 2rem) center;
 `
 
 export const Option = styled.option`
