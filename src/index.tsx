@@ -15,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
     --color-light-purple: hsl(252, 100%, 73%);
     --color-dark-purple: hsl(231, 37%, 63%);
     --color-semi-gray: hsl(231, 20%, 61%);
-    --color-dark-gray: #254638;
+    --color-dark-gray: hsl(231, 20%, 27%);
     --color-very-light-black: hsla(233, 30%, 21%, 1);
     --color-light-black: hsl(233, 31%, 17%);
     --color-nearly-black: hsl(233, 30%, 11%);
