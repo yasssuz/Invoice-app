@@ -1,4 +1,4 @@
-import { DarkButton, GrayButton, PurpleButton, RedButton } from "../shared/_Button";
+import { DarkButton, GrayButton, PurpleButton } from "../shared/_Button";
 import styled from 'styled-components'
 
 interface BottomBarProps {
