@@ -8,11 +8,12 @@ export const FormContainer = styled.div`
   z-index: 900;
   top: 0;
   bottom: 0;
-  padding: 10.4rem 2.4rem 0;
-  height: 300vh;
+  padding-top: 10.4rem;
+  height: 100vh;
+  overflow: auto;
 
-  button {
-    margin-top: 10rem;
+  #go-back-component {
+    padding: 0 2.4rem;
   }
 `
 
@@ -22,10 +23,12 @@ export const Title = styled.h1`
   font-size: 2.4rem;
   line-height: 3.2rem;
   color: var(--color-white);
+  padding: 0 2.4rem;
 `
 
 export const Fieldset = styled.fieldset`
   border: none; 
+  padding: 0 2.4rem;
 
   & + & {
     margin-top: 4.8rem;
