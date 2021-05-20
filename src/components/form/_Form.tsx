@@ -14,6 +14,7 @@ import {
   Option
 } from './Form.styles'
 import { FormSchema } from './_FormSchema'
+import { BottomBar } from './_BottomBar';
 
 interface FormProps {
   handleModal: () => void
@@ -41,7 +42,10 @@ export function Form(props: FormProps) {
     resolver: yupResolver(FormSchema),
     mode: "onTouched"
   })
-  const onSubmit: SubmitHandler<FormData> = data => console.log(data)
+  const onSubmit: SubmitHandler<FormData> = data => {
+    console.log(data)
+  }
+
 
   return (
     <FormContainer>
@@ -194,7 +198,7 @@ export function Form(props: FormProps) {
 
         </Fieldset>
 
-        <button type="submit">teeeest</button>
+        <BottomBar handleModal={handleModal} />
       </form>
     </FormContainer>
   )
