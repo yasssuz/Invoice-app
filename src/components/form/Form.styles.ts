@@ -42,6 +42,12 @@ export const Legend = styled.legend`
   font-weight: bold;
 `
 
+export const LegendItem = styled(Legend)`
+  color: hsla(225, 14%, 53%, 1);
+  font-size: 1.8rem;
+  line-height: 3.2rem;
+`
+
 export const SmallInputsArea = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -52,6 +58,12 @@ export const SmallInputsArea = styled.div`
   }
 `
 
+export const ItemInfoArea = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr;
+  gap: 1.6rem;
+`
+
 export const InputBlock = styled.div`
   margin-top: 2.4rem;
   position: relative;
@@ -59,7 +71,7 @@ export const InputBlock = styled.div`
   &.error {
     label {
       color: var(--color-red);
-    }
+    } 
 
     input, 
     select {
@@ -118,4 +130,13 @@ export const Selector = styled.select`
 
 export const Option = styled.option`
   font-weight: bold;
+`
+
+export const Total = styled.strong`
+  font-size: 1.4rem;
+  line-height: 1.8rem;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  color: var(--color-semi-gray);
 `
