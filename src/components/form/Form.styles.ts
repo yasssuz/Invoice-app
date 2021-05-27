@@ -140,3 +140,17 @@ export const Total = styled.strong`
   top: 50%;
   color: var(--color-semi-gray);
 `
+
+export const AddItemBtn = styled.button`
+  border-radius: 2.4rem;
+  background: var(--color-very-light-black);
+  font-size: 1.3rem;
+  line-height: 1.7rem;
+  text-align: center;
+  padding: 1.55rem 1rem;
+  border: none;
+  font-weight: bold;
+  color: var(--color-semi-gray);
+  width: 100%;
+  margin-top: 4.8rem;
+`
