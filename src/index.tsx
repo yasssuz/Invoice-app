@@ -30,6 +30,10 @@ const GlobalStyle = createGlobalStyle`
     background: var(--color-nearly-black);
   }
 
+  body.form-open {
+      overflow: hidden;
+    }
+
   body, 
   input, 
   button, 
