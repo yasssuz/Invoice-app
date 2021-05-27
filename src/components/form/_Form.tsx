@@ -18,7 +18,7 @@ import {
 } from './Form.styles'
 import { FormSchema } from './_FormSchema'
 import { BottomBar } from './_BottomBar';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { formatMoneyAmount } from '../../utils/formatters';
 
 interface FormProps {
@@ -77,8 +77,6 @@ export function Form(props: FormProps) {
     // }
     // console.log(newInvoice)
   }
-  const randomNumber = 40
-  // const itemQuantity = useRef(null)
   const [itemQuantity, setItemQuantity] = useState(1)
   const [itemPrice, setItemPrice] = useState(100.00)
   const total = itemQuantity * itemPrice
