@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 
 export function formatMoneyAmount(amount: number) {
-  return (amount).toLocaleString('en')
+  return amount.toLocaleString('en', { useGrouping: false, minimumFractionDigits: 2 })
 }
 
 export function formatDate(date: string) {
