@@ -14,9 +14,9 @@ export function BottomBar(props: BottomBarProps) {
 
   return (
     <BottomBarContainer>
-      <DarkButton func={handleModal} text="Discard" />
-      <GrayButton func={handleDraft} text="Save as Draft" />
-      <PurpleButton text="Save & Send" />
+      <DarkButton type="button" func={handleModal} text="Discard" />
+      <GrayButton type="button" func={handleDraft} text="Save as Draft" />
+      <PurpleButton type="submit" text="Save & Send" />
     </BottomBarContainer>
   )
 }
@@ -28,7 +28,7 @@ const BottomBarContainer = styled.footer`
   justify-content: space-between;
   background: var(--color-light-black);
   min-height: 9.1rem;
-  margin-top: 5.6rem;
+  margin-top: 8.8rem;
   width: 100%;
 
   button:nth-of-type(1) {
