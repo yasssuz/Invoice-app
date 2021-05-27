@@ -1,28 +1,29 @@
 import styled from 'styled-components'
 
 interface ButtonProps {
+  type: "button" | "submit" | "reset" | undefined
   func?: () => void
   text: string
 }
 
 export function DarkButton(props: ButtonProps) {
-  const { func, text } = props
-  return <Dark onClick={func}>{text}</Dark>
+  const { func, text, type } = props
+  return <Dark type={type} onClick={func}>{text}</Dark>
 }
 
 export function GrayButton(props: ButtonProps) {
-  const { func, text } = props
-  return <Gray onClick={func}>{text}</Gray>
+  const { func, text, type } = props
+  return <Gray type={type} onClick={func}>{text}</Gray>
 }
 
 export function RedButton(props: ButtonProps) {
-  const { func, text } = props
-  return <Red onClick={func}>{text}</Red>
+  const { func, text, type } = props
+  return <Red type={type} onClick={func}>{text}</Red>
 }
 
 export function PurpleButton(props: ButtonProps) {
-  const { func, text } = props
-  return <Purple onClick={func}>{text}</Purple>
+  const { func, text, type } = props
+  return <Purple type={type} onClick={func}>{text}</Purple>
 }
 
 const Button = styled.button`
