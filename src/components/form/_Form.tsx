@@ -11,10 +11,15 @@ import {
   Label,
   TextInput,
   Selector,
-  Option
+  Option,
+  LegendItem,
+  ItemInfoArea,
+  Total
 } from './Form.styles'
 import { FormSchema } from './_FormSchema'
 import { BottomBar } from './_BottomBar';
+import { useRef, useState } from 'react';
+import { formatMoneyAmount } from '../../utils/formatters';
 
 interface FormProps {
   handleModal: () => void
@@ -34,6 +39,10 @@ interface FormData {
   invoiceDate: Date
   paymentTerms: any
   description: string
+  itemName: string
+  itemQuantity: number
+  itemPrice: number
+  itemTotal: number
 }
 
 export function Form(props: FormProps) {
@@ -44,8 +53,35 @@ export function Form(props: FormProps) {
   })
   const onSubmit: SubmitHandler<FormData> = data => {
     console.log(data)
+    // const newInvoice = {
+    //   id: '209320',
+    //   createdAt: data.invoiceDate,
+    //   paymentDue: data.paymentTerms,
+    //   description: data.description,
+    //   paymentTerms: data.paymentTerms,
+    //   clientName: data.clientName,
+    //   clientEmail: data.clientEmail,
+    //   status: 'pending',
+    //   senderAddress: {
+    //     street: data.senderStreetAddress,
+    //     city: data.senderCity,
+    //     postCode: data.senderPostCode,
+    //     country: data.senderCountry
+    //   },
+    //   clientAddress: {
+    //     street: data.clientStreetAddress,
+    //     city: data.clientCity,
+    //     postCode: data.clientPostCode,
+    //     country: data.clientCountry
+    //   },
+    // }
+    // console.log(newInvoice)
   }
-
+  const randomNumber = 40
+  // const itemQuantity = useRef(null)
+  const [itemQuantity, setItemQuantity] = useState(1)
+  const [itemPrice, setItemPrice] = useState(100.00)
+  const total = itemQuantity * itemPrice
 
   return (
     <FormContainer>
@@ -198,8 +234,54 @@ export function Form(props: FormProps) {
 
         </Fieldset>
 
+        <Fieldset>
+          <LegendItem className="items">Items List</LegendItem>
+
+          <InputBlock className={errors.itemName && 'error'}>
+            <Label htmlFor="item-name">Item Name</Label>
+            <TextInput
+              type="text"
+              id="item-name"
+              {...register("itemName")}
+            />
+          </InputBlock>
+
+          <ItemInfoArea>
+
+            <InputBlock className={errors.itemQuantity && 'error'}>
+              <Label htmlFor="item-quantity">Qty.</Label>
+              <TextInput
+                type="number"
+                id="item-quantity"
+                {...register("itemQuantity")}
+                defaultValue="1"
+                onChange={e => setItemQuantity(Number(e.target.value))}
+              // ref={itemQuantity}
+              />
+            </InputBlock>
+
+            <InputBlock className={errors.itemPrice && 'error'}>
+              <Label htmlFor="item-price">Qty.</Label>
+              <TextInput
+                type="number"
+                id="item-price"
+                {...register("itemPrice")}
+                defaultValue="100.00"
+                onChange={e => setItemPrice(Number(e.target.value))}
+              />
+            </InputBlock>
+
+            <InputBlock>
+              <Label>Total</Label>
+              <Total>{formatMoneyAmount(total)}</Total>
+            </InputBlock>
+
+          </ItemInfoArea>
+
+        </Fieldset>
+
         <BottomBar handleModal={handleModal} />
       </form>
-    </FormContainer>
+    </FormContainer >
   )
 }
