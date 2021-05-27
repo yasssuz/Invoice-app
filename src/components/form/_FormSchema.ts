@@ -12,5 +12,8 @@ export const FormSchema = yup.object().shape({
   clientPostCode: yup.string().required(),
   clientCountry: yup.string().matches(/^[aA-zZ\s]+$/).required(),
   invoiceDate: yup.date().required(),
-  description: yup.string().required()
+  description: yup.string().required(),
+  itemName: yup.string().required(),
+  itemQuantity: yup.number().required(),
+  itemPrice: yup.number().required()
 })
