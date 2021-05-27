@@ -56,6 +56,7 @@ export default function Home() {
   }, [invoices])
 
   const handleForm = useCallback(() => {
+    document.querySelector('body')!.classList.toggle('form-open')
     setFormOpen(prevState => !prevState)
   }, [])
 
