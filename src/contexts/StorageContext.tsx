@@ -4,6 +4,7 @@ interface AppContextProps {
   getInvoices: () => Array<any>
   editInvoice: (id: string) => void
   changeToPaidInvoice: (id: string) => void
+  addInvoice: (data: Object) => void
   deleteInvoice: (id: string) => void
 }
 
@@ -40,6 +41,12 @@ export const StorageProvider = ({ children }: AppProviderProps) => {
     console.log('editing invoice')
   }
 
+  function addInvoice(data: Object) {
+    const invoices = getInvoices()
+    invoices.push(data)
+    localStorage.setItem('invoices', JSON.stringify(invoices))
+  }
+
   function changeToPaidInvoice(id: string) {
     const invoices = getInvoices()
     const invoice = invoices.filter(
@@ -55,6 +62,7 @@ export const StorageProvider = ({ children }: AppProviderProps) => {
       getInvoices,
       deleteInvoice,
       editInvoice,
+      addInvoice,
       changeToPaidInvoice,
     }}>
       {children}
