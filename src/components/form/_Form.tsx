@@ -26,7 +26,6 @@ import { BottomBar } from './_BottomBar';
 import { useContext, useState } from 'react';
 import { formatMoneyAmount } from '../../utils/formatters';
 import { StorageContext } from '../../contexts/StorageContext';
-import { listenerCount } from 'node:events';
 
 type FormProps = {
   handleModal: () => void
@@ -71,7 +70,7 @@ export function Form(props: FormProps) {
     let quantity = 0
     let price = 0
 
-    data.items.map(item => {
+    data.items.forEach(item => {
       quantity = Number(item.quantity) + quantity
       price = Number(item.price) + price
     })
@@ -87,7 +86,7 @@ export function Form(props: FormProps) {
     addInvoice(invoiceData)
     handleModal()
   }
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append } = useFieldArray({
     name: "items",
     control
   })
