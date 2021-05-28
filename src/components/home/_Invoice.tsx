@@ -143,7 +143,7 @@ export const Invoice = memo((props: InvoiceProps) => {
           <Information>
             <div>
               <Date>{creationDate}</Date>
-              <Amount>$ {amount}</Amount>
+              <Amount>$ {formatMoneyAmount(amount)}</Amount>
             </div>
             <StatusSwitcher status={status} />
           </Information>
