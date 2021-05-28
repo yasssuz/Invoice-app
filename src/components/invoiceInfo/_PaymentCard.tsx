@@ -6,7 +6,6 @@ interface ItemsProps {
     name: string
     quantity: number
     price: number
-    total: number
   }>
 }
 
@@ -165,26 +164,24 @@ export function PaymentCard(props: ItemsProps) {
   const { items } = props
 
   useEffect(() => {
-    items.map(item => handleTotalAmount(item))
+    items.forEach(item => {
+      setTotalAmount(prevState => item.price * item.quantity + prevState)
+    })
   }, [items])
-
-  function handleTotalAmount(item: { total: number }) {
-    setTotalAmount(prevState => prevState + item.total)
-  }
 
   return (
     <CardContainer>
       <div className="mobileVersion">
         <ItemsRecap>
           {items.map(item => (
-            <Item key={`${item.price * item.quantity * item.total}${item.name}`}>
+            <Item key={`${item.price * item.quantity}${item.name}`}>
               <div>
                 <ItemName>{item.name}</ItemName>
                 <ItemPricePerQuantity>
                   {item.quantity} x $ {item.price}
                 </ItemPricePerQuantity>
               </div>
-              <TotalItemPrice>$ {item.total}</TotalItemPrice>
+              <TotalItemPrice>$ {item.quantity * item.price}</TotalItemPrice>
             </Item>
           ))}
         </ItemsRecap>
@@ -201,11 +198,11 @@ export function PaymentCard(props: ItemsProps) {
           </TableHead>
           <TableBody>
             {items.map(item => (
-              <tr key={`${item.price * item.quantity * item.total}${item.name}`}>
+              <tr key={`${item.price * item.quantity}${item.name}`}>
                 <td className="tableBodyFirstElement">{item.name}</td>
                 <td className="tableBodySecondElement">{item.quantity}</td>
                 <td>$ {item.price}</td>
-                <td>$ {item.total}</td>
+                <td>$ {item.price * item.quantity}</td>
               </tr>
             ))}
           </TableBody>
