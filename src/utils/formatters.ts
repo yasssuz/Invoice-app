@@ -5,8 +5,9 @@ export function formatMoneyAmount(amount: number) {
 }
 
 export function formatDate(date: string) {
-  const dateFormat = dayjs(date, 'YYYY-MM-DD')
-  const formatedDate = dateFormat.format('DD MMM YYYY')
+  return dayjs(date, 'YYYY-MM-DD').format('DD MMM YYYY')
+}
 
-  return formatedDate
+export function formatIsoDate(date: any) {
+  return dayjs(date).format('YYYY-MM-DD')
 }
