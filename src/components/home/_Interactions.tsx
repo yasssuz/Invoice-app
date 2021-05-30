@@ -1,7 +1,46 @@
+import { useState } from 'react'
 import styled from 'styled-components'
+import { FilterBox } from './_FilterBox'
 
 interface InteractionsProps {
   handleForm: () => void
+}
+
+export const Interactions = (props: InteractionsProps) => {
+  const { handleForm } = props
+  const [filterOpen, setFilterOpen] = useState(false)
+
+  return (
+    <InteractionsContainer>
+      <div>
+        <Title>Invoices</Title>
+        <Counter>7 Invoices</Counter>
+      </div>
+      <LeftArea>
+        <div>
+          <FilterButton
+            type="button"
+            onClick={() => setFilterOpen(prevState => !prevState)}
+          >
+            Filter
+            <img src="/assets/icon-arrow-down.svg" />
+          </FilterButton>
+          {filterOpen && (
+            <FilterContent>
+              <FilterBox id="draft" />
+              <FilterBox id="pending" />
+              <FilterBox id="paid" />
+            </FilterContent>
+          )}
+        </div>
+        <AddInvoiceBtn onClick={handleForm}>
+          <div>
+            <img src="/assets/icon-plus.svg" alt="add icon" />
+          </div>
+        </AddInvoiceBtn>
+      </LeftArea>
+    </InteractionsContainer>
+  )
 }
 
 const InteractionsContainer = styled.section`
@@ -9,7 +48,6 @@ const InteractionsContainer = styled.section`
   justify-content: space-between;
   align-items: center;
 `
-
 const Title = styled.h1`
   font-size: clamp(2.2rem, 5vw, 3.6rem);
   line-height: 1.3;
@@ -28,11 +66,6 @@ const Counter = styled.span`
 const LeftArea = styled.div`
   display: flex;
   align-items: center;
-`
-
-const Select = styled.select`
-  border: none;
-  background: transparent;
 `
 
 const AddInvoiceBtn = styled.button`
@@ -80,23 +113,28 @@ const AddInvoiceBtn = styled.button`
   }
 `
 
-export const Interactions = (props: InteractionsProps) => {
-  const { handleForm } = props
+const FilterButton = styled.button`
+  background: transparent;
+  border: none;
+  color: var(--color-white);
+  line-height: 1.7rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+  position: relative;
 
-  return (
-    <InteractionsContainer>
-      <div>
-        <Title>Invoices</Title>
-        <Counter>7 Invoices</Counter>
-      </div>
-      <LeftArea>
-        <Select></Select>
-        <AddInvoiceBtn onClick={handleForm}>
-          <div>
-            <img src="/assets/icon-plus.svg" alt="add icon" />
-          </div>
-        </AddInvoiceBtn>
-      </LeftArea>
-    </InteractionsContainer>
-  )
-}
+  img {
+    margin-left: 1.2rem;
+  }
+`
+
+const FilterContent = styled.div`
+  position: absolute;
+  margin-top: 2.3rem;
+  width: 192px;
+  border-radius: 0.8rem;
+  background: var(--color-very-light-black);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
+  transform: translateX(-25%);
+  padding: 2.4rem 2.4rem;
+  z-index: 10;
+`
