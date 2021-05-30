@@ -23,7 +23,7 @@ export const Interactions = (props: InteractionsProps) => {
             onClick={() => setFilterOpen(prevState => !prevState)}
           >
             Filter
-            <img src="/assets/icon-arrow-down.svg" />
+            <img src="/assets/icon-arrow-down.svg" alt="open filter" />
           </FilterButton>
           {filterOpen && (
             <FilterContent>
