@@ -24,7 +24,7 @@ import {
 import { FormSchema } from './_FormSchema'
 import { BottomBar } from './_BottomBar';
 import { useContext, useState } from 'react';
-import { formatMoneyAmount } from '../../utils/formatters';
+import { formatIsoDate, formatMoneyAmount } from '../../utils/formatters';
 import { StorageContext } from '../../contexts/StorageContext';
 
 type FormProps = {
@@ -79,6 +79,7 @@ export function Form(props: FormProps) {
     const invoiceData = {
       ...data,
       id: getRandomId(),
+      createdAt: formatIsoDate(data.invoiceDate),
       total: total,
       status: 'pending'
     }
