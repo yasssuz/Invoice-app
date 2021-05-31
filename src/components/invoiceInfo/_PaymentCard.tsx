@@ -1,12 +1,70 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import { formatMoneyAmount } from '../../utils/formatters'
 
 interface ItemsProps {
-  items: Array<{
+  items: {
     name: string
     quantity: number
     price: number
-  }>
+  }[]
+}
+
+export function PaymentCard(props: ItemsProps) {
+  const [totalAmount, setTotalAmount] = useState(0)
+  const { items } = props
+
+  useEffect(() => {
+    items.forEach(item => {
+      setTotalAmount(prevState => item.price * item.quantity + prevState)
+    })
+  }, [items])
+
+  return (
+    <CardContainer>
+      <div className="mobileVersion">
+        <ItemsRecap>
+          {items.map(item => (
+            <Item key={`${item.price * item.quantity}${item.name}`}>
+              <div>
+                <ItemName>{item.name}</ItemName>
+                <ItemPricePerQuantity>
+                  {item.quantity} x $ {formatMoneyAmount(item.price)}
+                </ItemPricePerQuantity>
+              </div>
+              <TotalItemPrice>$ {formatMoneyAmount(item.quantity * item.price)}</TotalItemPrice>
+            </Item>
+          ))}
+        </ItemsRecap>
+      </div>
+      <div className="desktopVersion">
+        <ItemsTable>
+          <TableHead>
+            <tr>
+              <th className="tableHeadFirstElement">Item Name</th>
+              <th className="tableHeadSecondElement">QTY.</th>
+              <th>Price</th>
+              <th>Total</th>
+            </tr>
+          </TableHead>
+          <TableBody>
+            {items.map(item => (
+              <tr key={`${item.price * item.quantity}${item.name}`}>
+                <td className="tableBodyFirstElement">{item.name}</td>
+                <td className="tableBodySecondElement">{item.quantity}</td>
+                <td>$ {formatMoneyAmount(item.price)}</td>
+                <td>$ {formatMoneyAmount(item.quantity * item.price)}</td>
+              </tr>
+            ))}
+          </TableBody>
+        </ItemsTable>
+      </div>
+      <ItemsTotal>
+        <AmountText>Amount Due</AmountText>
+        <TotalAmount>$ {formatMoneyAmount(totalAmount)}</TotalAmount>
+      </ItemsTotal>
+    </CardContainer>
+  )
 }
 
 const CardContainer = styled.div`
@@ -158,60 +216,3 @@ const TotalAmount = styled.strong`
     font-size: 2.5rem !important;
   }
 `
-
-export function PaymentCard(props: ItemsProps) {
-  const [totalAmount, setTotalAmount] = useState(0)
-  const { items } = props
-
-  useEffect(() => {
-    items.forEach(item => {
-      setTotalAmount(prevState => item.price * item.quantity + prevState)
-    })
-  }, [items])
-
-  return (
-    <CardContainer>
-      <div className="mobileVersion">
-        <ItemsRecap>
-          {items.map(item => (
-            <Item key={`${item.price * item.quantity}${item.name}`}>
-              <div>
-                <ItemName>{item.name}</ItemName>
-                <ItemPricePerQuantity>
-                  {item.quantity} x $ {item.price}
-                </ItemPricePerQuantity>
-              </div>
-              <TotalItemPrice>$ {item.quantity * item.price}</TotalItemPrice>
-            </Item>
-          ))}
-        </ItemsRecap>
-      </div>
-      <div className="desktopVersion">
-        <ItemsTable>
-          <TableHead>
-            <tr>
-              <th className="tableHeadFirstElement">Item Name</th>
-              <th className="tableHeadSecondElement">QTY.</th>
-              <th>Price</th>
-              <th>Total</th>
-            </tr>
-          </TableHead>
-          <TableBody>
-            {items.map(item => (
-              <tr key={`${item.price * item.quantity}${item.name}`}>
-                <td className="tableBodyFirstElement">{item.name}</td>
-                <td className="tableBodySecondElement">{item.quantity}</td>
-                <td>$ {item.price}</td>
-                <td>$ {item.price * item.quantity}</td>
-              </tr>
-            ))}
-          </TableBody>
-        </ItemsTable>
-      </div>
-      <ItemsTotal>
-        <AmountText>Amount Due</AmountText>
-        <TotalAmount>$ {totalAmount}</TotalAmount>
-      </ItemsTotal>
-    </CardContainer>
-  )
-}
