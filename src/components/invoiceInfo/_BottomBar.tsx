@@ -7,6 +7,37 @@ interface BottomBarProps {
   setPaid: () => void
 }
 
+export const BottomBar = (props: BottomBarProps) => {
+  const { status, handleModal, setPaid } = props
+
+  return (
+    <BottomBarContainer>
+      <GrayBtn
+        type="button"
+        className={`grayBtn ${status !== 'pending' && 'large'}`}
+        onClick={() => console.log('editing feature not available')}>
+        Edit
+      </GrayBtn>
+
+      <RedBtn
+        type="button"
+        className={`redBtn ${status !== 'pending' && 'large'}`}
+        onClick={handleModal}>
+        Delete
+      </RedBtn>
+
+      {status === 'pending' && (
+        <PurpleBtn
+          type="button"
+          className="purpleBtn"
+          onClick={setPaid}>
+          Mark as paid
+        </PurpleBtn>
+      )}
+    </BottomBarContainer>
+  )
+}
+
 const BottomBarContainer = styled.footer`
   padding: 2.2rem 24px;
   display: flex;
@@ -41,34 +72,3 @@ const BottomBarContainer = styled.footer`
     width: 48%;
   }
 `
-
-export const BottomBar = (props: BottomBarProps) => {
-  const { status, handleModal, setPaid } = props
-
-  return (
-    <BottomBarContainer>
-      <GrayBtn
-        type="button"
-        className={`grayBtn ${status === 'pending' ? '' : 'large'}`}
-        onClick={() => console.log('editing feature not available')}>
-        Edit
-      </GrayBtn>
-
-      <RedBtn
-        type="button"
-        className={`redBtn ${status === 'pending' ? '' : 'large'}`}
-        onClick={handleModal}>
-        Delete
-      </RedBtn>
-
-      {status === 'pending' && (
-        <PurpleBtn
-          type="button"
-          className="purpleBtn"
-          onClick={setPaid}>
-          Mark as paid
-        </PurpleBtn>
-      )}
-    </BottomBarContainer>
-  )
-}
