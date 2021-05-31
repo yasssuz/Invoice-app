@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { StorageContext } from '../../contexts/StorageContext'
-import { GrayBtn, RedBtn } from '../shared/_Buttons'
+import { DarkButton, RedButton } from '../shared/_Buttons'
 
 interface DeleteModalProps {
   id: string
@@ -18,23 +18,20 @@ export function DeleteModal(props: DeleteModalProps) {
       <Title>Confirm Deletion</Title>
       <Message>Are you sure you want to delete invoice #{id}? This action cannot be undone.</Message>
       <ButtonsArea>
-        <GrayBtn
-          type="button"
-          className="cancelBtn"
-          onClick={handleModal}>
+
+        <DarkButton type="button" func={handleModal}>
           Cancel
-        </GrayBtn>
-        <RedBtn
-          type="button"
-          className="deleteBtn"
-          onClick={() => {
-            handleModal()
-            deleteInvoice(id)
-          }}>
+        </DarkButton>
+
+        <RedButton type="button" func={() => {
+          handleModal()
+          deleteInvoice(id)
+        }}>
           <Link to="/">
             Delete
           </Link>
-        </RedBtn>
+        </RedButton>
+
       </ButtonsArea>
     </CardContainer>
   )
@@ -83,13 +80,13 @@ const ButtonsArea = styled.div`
   justify-content: flex-end;
   min-height: 4.8rem;
 
-  .cancelBtn {
+  button:nth-of-type(1) {
     width: 35.3%;
     margin-right: 1rem;
     min-width: 9.1rem;
   }
 
-  .deleteBtn {
+  button:nth-of-type(2) {
     width: 34.5%;
     min-width: 8.9rem;
     height: auto;

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { GrayBtn, RedBtn, PurpleBtn } from '../shared/_Buttons'
+import { DarkButton, PurpleButton, RedButton } from '../shared/_Buttons'
 
 interface BottomBarProps {
   status: string
@@ -12,27 +12,30 @@ export const BottomBar = (props: BottomBarProps) => {
 
   return (
     <BottomBarContainer>
-      <GrayBtn
-        type="button"
-        className={`grayBtn ${status !== 'pending' && 'large'}`}
-        onClick={() => console.log('editing feature not available')}>
-        Edit
-      </GrayBtn>
 
-      <RedBtn
+      <DarkButton
+        cn={`${status !== 'pending' && 'large'}`}
         type="button"
-        className={`redBtn ${status !== 'pending' && 'large'}`}
-        onClick={handleModal}>
+        func={() => console.log('test')}
+      >
+        Edit
+      </DarkButton>
+
+      <RedButton
+        type="button"
+        func={handleModal}
+        cn={`${status !== 'pending' && 'large'}`}
+      >
         Delete
-      </RedBtn>
+      </RedButton>
 
       {status === 'pending' && (
-        <PurpleBtn
+        <PurpleButton
           type="button"
-          className="purpleBtn"
-          onClick={setPaid}>
+          func={setPaid}
+        >
           Mark as paid
-        </PurpleBtn>
+        </PurpleButton>
       )}
     </BottomBarContainer>
   )
@@ -52,23 +55,23 @@ const BottomBarContainer = styled.footer`
     display: none;
   }
 
+  button:nth-of-type(1) {
+    width: 22.6%;
+  }
+
+  button:nth-of-type(2) {
+    width: 27.3%;
+  }
+
+  button:nth-of-type(3) {
+    width: 45.6%;
+  }
+
   button {
     font-size: 13px;
   }
 
-  .grayBtn {
-    width: 22.6%;
-  }
-
-  .redBtn {
-    width: 27.3%;
-  }
-
-  .purpleBtn {
-    width: 45.6%;
-  }
-
-  .large {
+  button.large {
     width: 48%;
   }
 `

@@ -1,11 +1,41 @@
 import styled from 'styled-components'
-import { GrayBtn, RedBtn, PurpleBtn } from '../shared/_Buttons'
+import { DarkButton, PurpleButton, RedButton } from '../shared/_Buttons'
 import { StatusSwitcher } from '../shared/_Status'
 
 interface TopbarProps {
   status: string
   handleModal: () => void
   setPaid: () => void
+}
+
+export const Topbar = (props: TopbarProps) => {
+  const { status, handleModal, setPaid } = props
+
+  return (
+    <TopBar>
+      <Status>
+        <span>Status</span>
+        <StatusSwitcher status={status} />  {/*Component*/}
+      </Status>
+      <Buttons>
+
+        <DarkButton type="button" func={() => console.log('test')}>
+          Edit
+        </DarkButton>
+
+        <RedButton type="button" func={handleModal}>
+          Delete
+        </RedButton>
+
+        {status === 'pending' && (
+          <PurpleButton type="button" func={setPaid}>
+            Mark as paid
+          </PurpleButton>
+        )}
+
+      </Buttons>
+    </TopBar>
+  )
 }
 
 const TopBar = styled.header`
@@ -74,37 +104,3 @@ const Buttons = styled.div`
     margin-left: 1.5rem;
   }
 `
-
-export const Topbar = (props: TopbarProps) => {
-  const { status, handleModal, setPaid } = props
-
-  return (
-    <TopBar>
-      <Status>
-        <span>Status</span>
-        <StatusSwitcher status={status} />  {/*Component*/}
-      </Status>
-      <Buttons>
-        <GrayBtn
-          type="button"
-          onClick={() => console.log('editing feature not available')}>
-          Edit
-        </GrayBtn>
-
-        <RedBtn
-          type="button"
-          onClick={handleModal}>
-          Delete
-        </RedBtn>
-
-        {status === 'pending' && (
-          <PurpleBtn
-            type="button"
-            onClick={setPaid}>
-            Mark a paid
-          </PurpleBtn>
-        )}
-      </Buttons>
-    </TopBar>
-  )
-}
