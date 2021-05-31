@@ -32,6 +32,61 @@ interface MainCardProps {
   }
 }
 
+export const MainCard = memo((props: MainCardProps) => {
+  const { id, data } = props
+
+  return (
+    <Card>
+      <TopInfo>
+        <Id>
+          <h1>
+            <strong>#</strong>
+            {id}
+          </h1>
+          <p>{data.description}</p>
+        </Id>
+        <SenderAddress>
+          <span>{data.senderAddress.street}</span>
+          <span>{data.senderAddress.city}</span>
+          <span>{data.senderAddress.postCode}</span>
+          <span>{data.senderAddress.country}</span>
+        </SenderAddress>
+      </TopInfo>
+      <BottomInfo>
+        <DatesClientInfo>
+          <Dates>
+            <span className="invoice-date">Invoice Date</span>
+            <strong>{formatDate(data.createdAt)}</strong>
+            <span className="payment-due">Payment Due</span>
+            <strong>{formatDate(data.paymentDue)}</strong>
+          </Dates>
+          <ClientInfo>
+            <span>Bill to</span>
+            <strong>{data.clientName}</strong>
+            <div>
+              <span>{data.clientAddress.street}</span>
+              <span>{data.clientAddress.city}</span>
+              <span>{data.clientAddress.postCode}</span>
+              <span>{data.clientAddress.country}</span>
+            </div>
+          </ClientInfo>
+        </DatesClientInfo>
+        <ClientEmail>
+          <span>Sent to</span>
+          <strong>{data.clientEmail}</strong>
+        </ClientEmail>
+      </BottomInfo>
+      <PaymentCard items={data.items} /> {/*Component*/}
+    </Card>
+  )
+}, (prevProps, nextProps) => {
+  if (prevProps.id !== nextProps.id) {
+    return false
+  }
+
+  return true
+})
+
 const Card = styled.main`
   padding: 2.4rem 24px;
   border-radius: 0.8rem;
@@ -138,6 +193,8 @@ const Dates = styled.div`
 `
 
 const ClientInfo = styled.div`
+  margin-left: 4rem;
+
   & > span {
     margin-bottom: 1.2rem;
   }
@@ -156,58 +213,3 @@ const ClientEmail = styled.div`
     margin-bottom: 1.2rem;
   }
 `
-
-export const MainCard = memo((props: MainCardProps) => {
-  const { id, data } = props
-
-  return (
-    <Card>
-      <TopInfo>
-        <Id>
-          <h1>
-            <strong>#</strong>
-            {id}
-          </h1>
-          <p>{data.description}</p>
-        </Id>
-        <SenderAddress>
-          <span>{data.senderAddress.street}</span>
-          <span>{data.senderAddress.city}</span>
-          <span>{data.senderAddress.postCode}</span>
-          <span>{data.senderAddress.country}</span>
-        </SenderAddress>
-      </TopInfo>
-      <BottomInfo>
-        <DatesClientInfo>
-          <Dates>
-            <span className="invoice-date">Invoice Date</span>
-            <strong>{formatDate(data.createdAt)}</strong>
-            <span className="payment-due">Payment Due</span>
-            <strong>{formatDate(data.paymentDue)}</strong>
-          </Dates>
-          <ClientInfo>
-            <span>Bill to</span>
-            <strong>{data.clientName}</strong>
-            <div>
-              <span>{data.clientAddress.street}</span>
-              <span>{data.clientAddress.city}</span>
-              <span>{data.clientAddress.postCode}</span>
-              <span>{data.clientAddress.country}</span>
-            </div>
-          </ClientInfo>
-        </DatesClientInfo>
-        <ClientEmail>
-          <span>Sent to</span>
-          <strong>{data.clientEmail}</strong>
-        </ClientEmail>
-      </BottomInfo>
-      <PaymentCard items={data.items} /> {/*Component*/}
-    </Card>
-  )
-}, (prevProps, nextProps) => {
-  if (prevProps.id !== nextProps.id) {
-    return false
-  }
-
-  return true
-})
