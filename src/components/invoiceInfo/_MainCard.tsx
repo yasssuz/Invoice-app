@@ -23,12 +23,7 @@ interface MainCardProps {
       country: string
     }
     clientEmail: string
-    items: Array<{
-      name: string
-      quantity: number
-      total: number
-      price: number
-    }>
+    items: []
   }
 }
 
