@@ -9,6 +9,37 @@ interface DeleteModalProps {
   handleModal: () => void
 }
 
+export function DeleteModal(props: DeleteModalProps) {
+  const { deleteInvoice } = useContext(StorageContext)
+  const { id, handleModal } = props
+
+  return (
+    <CardContainer>
+      <Title>Confirm Deletion</Title>
+      <Message>Are you sure you want to delete invoice #{id}? This action cannot be undone.</Message>
+      <ButtonsArea>
+        <GrayBtn
+          type="button"
+          className="cancelBtn"
+          onClick={handleModal}>
+          Cancel
+        </GrayBtn>
+        <RedBtn
+          type="button"
+          className="deleteBtn"
+          onClick={() => {
+            handleModal()
+            deleteInvoice(id)
+          }}>
+          <Link to="/">
+            Delete
+          </Link>
+        </RedBtn>
+      </ButtonsArea>
+    </CardContainer>
+  )
+}
+
 const CardContainer = styled.div`
   position: fixed;
   top: 50%;
@@ -75,35 +106,3 @@ const ButtonsArea = styled.div`
     }
   }
 `
-
-
-export function DeleteModal(props: DeleteModalProps) {
-  const { deleteInvoice } = useContext(StorageContext)
-  const { id, handleModal } = props
-
-  return (
-    <CardContainer>
-      <Title>Confirm Deletion</Title>
-      <Message>Are you sure you want to delete invoice #{id}? This action cannot be undone.</Message>
-      <ButtonsArea>
-        <GrayBtn
-          type="button"
-          className="cancelBtn"
-          onClick={handleModal}>
-          Cancel
-        </GrayBtn>
-        <RedBtn
-          type="button"
-          className="deleteBtn"
-          onClick={() => {
-            handleModal()
-            deleteInvoice(id)
-          }}>
-          <Link to="/">
-            Delete
-          </Link>
-        </RedBtn>
-      </ButtonsArea>
-    </CardContainer>
-  )
-}
