@@ -1,4 +1,4 @@
-import { DarkButton, GrayButton, PurpleButton } from "../shared/_Button";
+import { DarkButton, GrayButton, PurpleButton } from "../shared/_Buttons";
 import styled from 'styled-components'
 
 interface BottomBarProps {
@@ -14,9 +14,15 @@ export function BottomBar(props: BottomBarProps) {
 
   return (
     <BottomBarContainer>
-      <DarkButton type="button" func={handleModal} text="Discard" />
-      <GrayButton type="button" func={handleDraft} text="Save as Draft" />
-      <PurpleButton type="submit" text="Save & Send" />
+      <DarkButton type="button" func={handleModal}>
+        Discard
+      </DarkButton>
+      <GrayButton type="button" func={handleDraft}>
+        Save as Draft
+      </GrayButton>
+      <PurpleButton type="submit">
+        Save & Send
+      </PurpleButton>
     </BottomBarContainer>
   )
 }
