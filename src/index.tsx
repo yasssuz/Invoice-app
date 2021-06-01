@@ -5,7 +5,7 @@ import { createGlobalStyle } from 'styled-components'
 const GlobalStyle = createGlobalStyle`
   :root {
     --color-white: hsl(0, 0%, 100%);
-    --color-grayish-purple: hsl(231, 73%, 93%);
+    --color-grayish-purple: hsl(231, 75%, 93%);
     --color-grayish-white: hsl(240, 27%, 98%);
     --color-green: hsl(159, 66%, 52%);
     --color-red: hsl(0, 80%, 63%);
