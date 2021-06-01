@@ -38,6 +38,11 @@ export const FormContainer = styled.div`
       border-right: 29px solid var(--color-nearly-black);
     }
   }
+
+  @media screen and (min-width: 1000px) {
+    left: 10.3rem;
+    top: 0;
+  }
 `
 
 export const Title = styled.h1`
