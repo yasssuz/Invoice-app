@@ -2,6 +2,50 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+export function Sidebar() {
+  const [isLightModeActive, setIsLightModeActive] = useState(false)
+
+  function changeColorMode() {
+    setIsLightModeActive(prevState => !prevState)
+  }
+
+  return (
+    <SidebarContainer>
+      <Link to="/">
+        <LogoArea>
+          <img src="/assets/logo.svg" alt="invoicer logo" />
+        </LogoArea>
+      </Link>
+      <InteractiveArea>
+        <ChangeThemeBtn>
+          {isLightModeActive ? (
+            <img
+              src="/assets/icon-moon.svg"
+              alt="dark mode icon"
+              onClick={changeColorMode}
+              style={{ cursor: 'pointer' }}
+            />
+          ) : (
+            <img
+              src="/assets/icon-sun.svg"
+              alt="light mode icon"
+              onClick={changeColorMode}
+              style={{ cursor: 'pointer' }}
+            />
+          )}
+        </ChangeThemeBtn>
+        <MiddleBorder />
+        <ProfilePicture src="/assets/image-avatar.jpg" alt="profile picture" />
+      </InteractiveArea>
+    </SidebarContainer>
+  )
+}
+
+const ChangeThemeBtn = styled.button`
+  background: transparent;
+  border: none;
+`
+
 const SidebarContainer = styled.aside`
   display: flex;
   align-items: center;
@@ -125,40 +169,3 @@ const ProfilePicture = styled.img`
     margin: 24px 0; 
   }
 `
-
-export function Sidebar() {
-  const [isLightModeActive, setIsLightModeActive] = useState(false)
-
-  function changeColorMode() {
-    setIsLightModeActive(prevState => !prevState)
-  }
-
-  return (
-    <SidebarContainer>
-      <Link to="/">
-        <LogoArea>
-          <img src="/assets/logo.svg" alt="invoicer logo" />
-        </LogoArea>
-      </Link>
-      <InteractiveArea>
-        {isLightModeActive ? (
-          <img
-            src="/assets/icon-moon.svg"
-            alt="dark mode icon"
-            onClick={changeColorMode}
-            style={{ cursor: 'pointer' }}
-          />
-        ) : (
-          <img
-            src="/assets/icon-sun.svg"
-            alt="light mode icon"
-            onClick={changeColorMode}
-            style={{ cursor: 'pointer' }}
-          />
-        )}
-        <MiddleBorder />
-        <ProfilePicture src="/assets/image-avatar.jpg" alt="profile picture" />
-      </InteractiveArea>
-    </SidebarContainer>
-  )
-}
