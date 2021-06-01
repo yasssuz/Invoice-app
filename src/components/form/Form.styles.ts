@@ -1,37 +1,71 @@
 import styled from 'styled-components'
 
 export const FormContainer = styled.div`
-  max-width: 72rem;
+  max-width: 61.6rem;
   width: 100%;
   background: var(--color-nearly-black);
   position: absolute;
   z-index: 900;
+  padding-top: 10.4rem;
   top: 0;
   bottom: 0;
-  padding-top: 10.4rem;
-  height: 100vh;
   overflow: auto;
 
   #go-back-component {
-    padding: 0 2.4rem;
+    margin: 0 2.4rem;
+
+    @media screen and (min-width: 630px) {
+      display: none;
+    }
+  }
+
+  @media screen and (min-width: 630px) {
+    top: 8rem;
+    border-radius: 0px 20px 20px 0px;;
+    padding: 5.6rem 1.5rem 3.2rem 5.6rem;
+
+    &::-webkit-scrollbar {
+      width: 37px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }  
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--color-light-black);
+      border-radius: 4px;
+      border-right: 29px solid var(--color-nearly-black);
+    }
   }
 `
 
 export const Title = styled.h1`
-  margin: 2.4rem 0;
+  margin: 2.4rem;
   font-weight: bold;
   font-size: 2.4rem;
   line-height: 3.2rem;
   color: var(--color-white);
-  padding: 0 2.4rem;
+
+  @media screen and (min-width: 630px) {
+    margin: 0 0 4.8rem;
+  }
 `
 
 export const Fieldset = styled.fieldset`
   border: none; 
-  padding: 0 2.4rem;
+  margin: 0 2.4rem;
 
   & + & {
     margin-top: 4.8rem;
+  }
+
+  @media screen and (min-width: 630px) {
+    margin: 0;
+  }
+
+  &:nth-child(4) {
+    margin-top: 2.8rem;
   }
 `
 
@@ -56,12 +90,34 @@ export const SmallInputsArea = styled.div`
   .last-child {
     grid-column: 1 /span 2;
   }
+
+  @media screen and (min-width: 630px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0 2.4rem;
+
+    .last-child {
+      grid-column: unset;
+    }
+  }
 `
 
 export const ItemInfoArea = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr 2fr;
-  gap: 1.6rem;
+  gap: 0 1.6rem;
+  position: relative;
+
+  div:first-of-type {
+    grid-column: 1 /4;
+  }
+
+  @media screen and (min-width: 630px) {
+    grid-template-columns: 3fr 0.7fr 1.45fr 1.56fr;
+
+    div:first-of-type {
+      grid-column: unset;
+    }  
+  }
 `
 
 export const InputBlock = styled.div`
@@ -80,6 +136,16 @@ export const InputBlock = styled.div`
   }
 `
 
+export const DatesInputArea = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+
+  @media screen and (min-width: 630px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 2.4rem;
+  }
+`
+
 export const Label = styled.label`
   display: block;
   line-height: 1.5rem;
@@ -87,6 +153,10 @@ export const Label = styled.label`
   font-weight: 500;
   color: var(--color-semi-gray);
   margin-bottom: 1rem;
+
+  @media screen and (min-width: 630px) {
+    color: var(--color-grayish-purple);
+  }
 `
 
 export const TextInput = styled.input`
@@ -109,6 +179,14 @@ export const TextInput = styled.input`
     &::after {
       content: url('/assets/icon-calendar.svg');
       margin-bottom: -2px;
+    }
+  }
+
+  &[type=number] {
+    padding: 1.5rem;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      appearance: none;
     }
   }
 `
@@ -139,6 +217,10 @@ export const Total = styled.strong`
   position: absolute;
   top: 50%;
   color: var(--color-semi-gray);
+
+  @media screen and (min-width: 650px) {
+    color: var(--color-grayish-purple);
+  }
 `
 
 export const AddItemBtn = styled.button`
@@ -153,4 +235,18 @@ export const AddItemBtn = styled.button`
   color: var(--color-semi-gray);
   width: 100%;
   margin-top: 4.8rem;
+
+  @media screen and (min-width: 650px) {
+    color: var(--color-grayish-purple);
+    margin-top: 3rem;
+  }
+`
+
+export const DeleteButton = styled.button`
+  background: transparent;
+  border: none;
+  position: absolute;
+  right: 8px;
+  bottom: 1.6rem;
+  cursor: pointer;
 `

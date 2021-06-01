@@ -19,7 +19,9 @@ import {
   LegendItem,
   ItemInfoArea,
   Total,
-  AddItemBtn
+  AddItemBtn,
+  DeleteButton,
+  DatesInputArea
 } from './Form.styles'
 import { FormSchema } from './_FormSchema'
 import { BottomBar } from './_BottomBar';
@@ -87,7 +89,7 @@ export function Form(props: FormProps) {
     addInvoice(invoiceData)
     handleModal()
   }
-  const { fields, append } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     name: "items",
     control
   })
@@ -225,29 +227,31 @@ export function Form(props: FormProps) {
         <Fieldset>
           <Legend style={{ display: 'none' }}>Info</Legend>
 
-          <InputBlock className={errors.invoiceDate && 'error'}>
-            <Label htmlFor="invoice-date">Invoice Date</Label>
-            <TextInput
-              type="date"
-              className="date"
-              id="invoice-date"
-              {...register("invoiceDate")}
-            />
-          </InputBlock>
+          <DatesInputArea>
+            <InputBlock className={errors.invoiceDate && 'error'}>
+              <Label htmlFor="invoice-date">Invoice Date</Label>
+              <TextInput
+                type="date"
+                className="date"
+                id="invoice-date"
+                {...register("invoiceDate")}
+              />
+            </InputBlock>
 
-          <InputBlock className={errors.paymentTerms && 'error'}>
-            <Label htmlFor="payment-terms">Payment Terms</Label>
-            <Selector
-              id="payment-terms"
-              defaultValue="Net 30 Days"
-              {...register("paymentTerms")}
-            >
-              <Option value={1}>Net 1 Day</Option>
-              <Option value={7}>Net 7 Days</Option>
-              <Option value={14}>Net 14 Days</Option>
-              <Option value={30}>Net 30 Days</Option>
-            </Selector>
-          </InputBlock>
+            <InputBlock className={errors.paymentTerms && 'error'}>
+              <Label htmlFor="payment-terms">Payment Terms</Label>
+              <Selector
+                id="payment-terms"
+                defaultValue="Net 30 Days"
+                {...register("paymentTerms")}
+              >
+                <Option value={1}>Net 1 Day</Option>
+                <Option value={7}>Net 7 Days</Option>
+                <Option value={14}>Net 14 Days</Option>
+                <Option value={30}>Net 30 Days</Option>
+              </Selector>
+            </InputBlock>
+          </DatesInputArea>
 
           <InputBlock className={errors.description && 'error'}>
             <Label htmlFor="description">Project / Description</Label>
@@ -265,7 +269,7 @@ export function Form(props: FormProps) {
           <LegendItem className="items">Items List</LegendItem>
 
           {fields.map((field, index) => (
-            <div key={field.id}>
+            <ItemInfoArea key={field.id}>
               <InputBlock className={errors.items?.[index]?.name && 'error'}>
                 <Label htmlFor="item-name">Item Name</Label>
                 <TextInput
@@ -278,44 +282,47 @@ export function Form(props: FormProps) {
                 />
               </InputBlock>
 
-              <ItemInfoArea>
+              <InputBlock className={errors?.items?.[index]?.quantity ? 'error' : ""}>
+                <Label htmlFor="item-quantity">Qty.</Label>
+                <TextInput
+                  type="number"
+                  id="item-quantity"
+                  style={{ appearance: 'none' }}
+                  min="1"
+                  {...register(`items.${index}.quantity` as const, {
+                    required: true,
+                    min: 10,
+                    minLength: 10
+                  })}
+                  defaultValue="1"
+                  onChange={e => setItemQuantity(Number(e.target.value))}
+                />
+              </InputBlock>
 
-                <InputBlock className={errors?.items?.[index]?.quantity ? 'error' : ""}>
-                  <Label htmlFor="item-quantity">Qty.</Label>
-                  <TextInput
-                    type="number"
-                    id="item-quantity"
-                    {...register(`items.${index}.quantity` as const, {
-                      required: true,
-                      min: 10,
-                      minLength: 10
-                    })}
-                    defaultValue="1"
-                    onChange={e => setItemQuantity(Number(e.target.value))}
-                  />
-                </InputBlock>
+              <InputBlock className={errors.items?.[index]?.price && 'error'}>
+                <Label htmlFor="item-price">Price</Label>
+                <TextInput
+                  type="number"
+                  id="item-price"
+                  {...register(`items.${index}.price` as const, {
+                    required: true,
 
-                <InputBlock className={errors.items?.[index]?.price && 'error'}>
-                  <Label htmlFor="item-price">Price</Label>
-                  <TextInput
-                    type="number"
-                    id="item-price"
-                    {...register(`items.${index}.price` as const, {
-                      required: true,
+                  })}
+                  defaultValue="100.00"
+                  onChange={e => setItemPrice(Number(e.target.value))}
+                />
+              </InputBlock>
 
-                    })}
-                    defaultValue="100.00"
-                    onChange={e => setItemPrice(Number(e.target.value))}
-                  />
-                </InputBlock>
+              <InputBlock>
+                <Label>Total</Label>
+                <Total>{formatMoneyAmount(total)}</Total>
+              </InputBlock>
 
-                <InputBlock>
-                  <Label>Total</Label>
-                  <Total>{formatMoneyAmount(total)}</Total>
-                </InputBlock>
+              <DeleteButton onClick={() => remove(index)}>
+                <img src="/assets/icon-delete.svg" alt="delete item" />
+              </DeleteButton>
 
-              </ItemInfoArea>
-            </div>
+            </ItemInfoArea>
           ))}
 
           <AddItemBtn

@@ -48,4 +48,25 @@ const BottomBarContainer = styled.footer`
   button:nth-of-type(3) {
     width: 34.5%;
   }
+
+  @media screen and (min-width: 630px) {
+    margin-top: 4.7rem;
+    background: transparent;
+    padding: 2.2rem 0;
+    justify-content: flex-end;
+
+    button:nth-of-type(1) {
+      width: 10.5rem;
+      margin-right: auto;
+    }
+
+    button:nth-of-type(2) {
+      width: 14rem;
+      margin-right: 1.2rem
+    }
+
+    button:nth-of-type(3) {
+      width: 13.5rem;
+    }
+  }
 `
