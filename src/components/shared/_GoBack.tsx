@@ -5,6 +5,18 @@ interface GoBackProps {
   onClick?: () => void
 }
 
+export const GoBack = (props: GoBackProps) => {
+  const { onClick } = props
+  return (
+    <Link to="/" style={{ textDecoration: 'none' }}>
+      <ContentContainer onClick={onClick} id="go-back-component">
+        <img src="/assets/icon-arrow-right.svg" alt="go back" />
+        <span>Go back</span>
+      </ContentContainer>
+    </Link>
+  )
+}
+
 const ContentContainer = styled.div`
   display: flex;
   align-items: center;
@@ -33,15 +45,3 @@ const ContentContainer = styled.div`
     transition: filter 0.3s ease;
   }
 `
-
-export const GoBack = (props: GoBackProps) => {
-  const { onClick } = props
-  return (
-    <Link to="/" style={{ textDecoration: 'none' }}>
-      <ContentContainer onClick={onClick} id="go-back-component">
-        <img src="/assets/icon-arrow-right.svg" alt="go back" />
-        <span>Go back</span>
-      </ContentContainer>
-    </Link>
-  )
-}
