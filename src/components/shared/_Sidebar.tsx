@@ -17,7 +17,7 @@ export function Sidebar() {
         </LogoArea>
       </Link>
       <InteractiveArea>
-        <ChangeThemeBtn>
+        <ChangeThemeBtn type="button">
           {isLightModeActive ? (
             <img
               src="/assets/icon-moon.svg"
