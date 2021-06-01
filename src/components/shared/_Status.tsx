@@ -1,8 +1,26 @@
-import React from 'react'
 import styled from 'styled-components'
 
 interface StatusProps {
   status: string
+}
+
+export function StatusSwitcher(props: StatusProps) {
+  const { status } = props
+  return (
+    <>
+      {status === "paid" ? (
+        <StatusPaid>Paid</StatusPaid>
+      ) : (
+        <>
+          {status === "pending" ? (
+            <StatusPending>Pending</StatusPending>
+          ) : (
+            <StatusDraft>Draft</StatusDraft>
+          )}
+        </>
+      )}
+    </>
+  )
 }
 
 const Status = styled.div`
@@ -53,21 +71,3 @@ const StatusDraft = styled(Status)`
     background: var(--color-grayish-purple);
   }
 `
-
-export function StatusSwitcher(props: StatusProps) {
-  return (
-    <>
-      {props.status === "paid" ? (
-        <StatusPaid>Paid</StatusPaid>
-      ) : (
-        <>
-          {props.status === "pending" ? (
-            <StatusPending>Pending</StatusPending>
-          ) : (
-            <StatusDraft>Draft</StatusDraft>
-          )}
-        </>
-      )}
-    </>
-  )
-}
