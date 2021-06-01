@@ -5,6 +5,7 @@ import { Invoice } from '../components/home/_Invoice'
 import { EmptyPage } from '../components/home/_EmptyPage'
 import { Interactions } from '../components/home/_Interactions'
 import { Form } from '../components/form/_Form'
+import { Overlay } from '../components/shared/_Overlay'
 
 interface InvoiceProps {
   id: string
@@ -13,6 +14,49 @@ interface InvoiceProps {
   total: number
   status: string
 }
+
+export default function Home() {
+  const { getInvoices } = useContext(StorageContext)
+  const [isEmpty, setIsEmpty] = useState(false)
+  const [formOpen, setFormOpen] = useState(false)
+  const invoices = getInvoices()
+
+  useEffect(() => {
+    invoices.length === 0 ? setIsEmpty(true) : setIsEmpty(false)
+  }, [invoices])
+
+  const handleForm = useCallback(() => {
+    document.querySelector('body')!.classList.toggle('form-open')
+    setFormOpen(prevState => !prevState)
+  }, [])
+
+  return (
+    <>
+      <Main>
+        <Interactions handleForm={handleForm} /> {/*Component*/}
+        {isEmpty ? (
+          <EmptyPage />  /*Component*/
+        ) : (
+          <InvoicesList>
+            <ul>
+              {invoices.map((invoice: InvoiceProps) => <Invoice
+                id={invoice.id}
+                client={invoice.clientName}
+                creationDate={invoice.createdAt}
+                amount={invoice.total}
+                status={invoice.status}
+                key={invoice.id}
+              />)} {/*Component*/}
+            </ul>
+          </InvoicesList>
+        )}
+      </Main>
+      {formOpen && <Overlay />} {/*Component*/}
+      {formOpen && <Form handleModal={handleForm} />} {/*Component*/}
+    </>
+  )
+}
+
 
 const Main = styled.main`
   max-width: 73rem;
@@ -45,43 +89,3 @@ const InvoicesList = styled.section`
   }
 `
 
-export default function Home() {
-  const { getInvoices } = useContext(StorageContext)
-  const [isEmpty, setIsEmpty] = useState(false)
-  const [formOpen, setFormOpen] = useState(false)
-  const invoices = getInvoices()
-
-  useEffect(() => {
-    invoices.length === 0 ? setIsEmpty(true) : setIsEmpty(false)
-  }, [invoices])
-
-  const handleForm = useCallback(() => {
-    document.querySelector('body')!.classList.toggle('form-open')
-    setFormOpen(prevState => !prevState)
-  }, [])
-
-  return (
-    <>
-      <Main>
-        <Interactions handleForm={handleForm} /> {/*Component*/}
-        {isEmpty ? (
-          <EmptyPage /> //COMPONENT
-        ) : (
-          <InvoicesList>
-            <ul>
-              {invoices.map((invoice: InvoiceProps) => <Invoice
-                id={invoice.id}
-                client={invoice.clientName}
-                creationDate={invoice.createdAt}
-                amount={invoice.total}
-                status={invoice.status}
-                key={invoice.id}
-              />)}
-            </ul>
-          </InvoicesList>
-        )}
-      </Main>
-      {formOpen && <Form handleModal={handleForm} />}
-    </>
-  )
-}
