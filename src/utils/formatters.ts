@@ -8,6 +8,6 @@ export function formatDate(date: string) {
   return dayjs(date, 'YYYY-MM-DD').format('DD MMM YYYY')
 }
 
-export function formatIsoDate(date: any) {
+export function formatIsoDate(date: Date) {
   return dayjs(date).format('YYYY-MM-DD')
 }
