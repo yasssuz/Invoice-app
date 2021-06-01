@@ -1,5 +1,21 @@
 import styled from 'styled-components'
 
+
+export function EmptyPage() {
+  return (
+    <ContentContainer>
+      <Illustration src="/assets/illustration-empty.svg" alt="page empty" />
+      <Title>There is nothing here</Title>
+      <Description>
+        Create an invoice by clicking the
+        <strong className="mobile"> New </strong>
+        <strong className="desktop"> New Invoice </strong>
+        button and get started
+      </Description>
+    </ContentContainer>
+  )
+}
+
 const ContentContainer = styled.div`
   position: absolute;
   top: 56%;
@@ -46,18 +62,3 @@ const Description = styled.p`
     }
   }
 `
-
-export const EmptyPage = () => {
-  return (
-    <ContentContainer>
-      <Illustration src="/assets/illustration-empty.svg" alt="page empty" />
-      <Title>There is nothing here</Title>
-      <Description>
-        Create an invoice by clicking the
-        <strong className="mobile"> New </strong>
-        <strong className="desktop"> New Invoice </strong>
-        button and get started
-      </Description>
-    </ContentContainer>
-  )
-}
