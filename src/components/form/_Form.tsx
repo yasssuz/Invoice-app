@@ -25,7 +25,7 @@ import {
 } from './Form.styles'
 import { FormSchema } from './_FormSchema'
 import { BottomBar } from './_BottomBar';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { formatIsoDate, formatMoneyAmount } from '../../utils/formatters';
 import { StorageContext } from '../../contexts/StorageContext';
 import { InputContainer } from './_InputContainer'
