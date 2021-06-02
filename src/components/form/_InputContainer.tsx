@@ -1,6 +1,6 @@
 import { InputBlock, Label, TextInput } from './Form.styles'
 
-interface InputContainer {
+interface InputContainerProps {
   label: string
   registration: string
   register: any
@@ -8,7 +8,7 @@ interface InputContainer {
   type: string
 }
 
-export function InputContainer(props: InputContainer) {
+export function InputContainer(props: InputContainerProps) {
   const { label, registration, errors, register, type } = props
 
   return (
