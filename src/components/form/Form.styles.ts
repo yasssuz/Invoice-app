@@ -92,7 +92,7 @@ export const SmallInputsArea = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: 0 2.3rem; 
 
-  .last-child {
+  div:last-of-type {
     grid-column: 1 /span 2;
   }
 
@@ -100,7 +100,7 @@ export const SmallInputsArea = styled.div`
     grid-template-columns: repeat(3, 1fr);
     gap: 0 2.4rem;
 
-    .last-child {
+    div:last-of-type {
       grid-column: unset;
     }
   }
@@ -176,7 +176,7 @@ export const TextInput = styled.input`
   color: var(--color-white);
   padding: 0 2rem;
 
-  &.date {
+  &[type=date] {
     &::-webkit-calendar-picker-indicator {
       opacity: 0;
     }  
