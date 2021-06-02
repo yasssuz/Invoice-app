@@ -94,9 +94,6 @@ export function Form(props: FormProps) {
     name: "items",
     control,
   })
-  const [itemQuantity, setItemQuantity] = useState(1)
-  const [itemPrice, setItemPrice] = useState(100.00)
-  const total = itemQuantity * itemPrice
 
   function getRandomId() {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
