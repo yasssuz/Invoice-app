@@ -183,7 +183,10 @@ export const TextInput = styled.input`
 
     &::after {
       content: url('/assets/icon-calendar.svg');
-      margin-bottom: -2px;
+      position: absolute;
+      right: 27px;
+      cursor: pointer;
+      pointer-events: none;
     }
   }
 
