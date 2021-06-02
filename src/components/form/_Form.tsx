@@ -28,12 +28,13 @@ import { BottomBar } from './_BottomBar';
 import { useContext, useState } from 'react';
 import { formatIsoDate, formatMoneyAmount } from '../../utils/formatters';
 import { StorageContext } from '../../contexts/StorageContext';
+import { InputContainer } from './_InputContainer'
 
-type FormProps = {
+interface FormProps {
   handleModal: () => void
 }
 
-type FormData = {
+interface FormData {
   clientName: string
   clientEmail: string
   invoiceDate: Date
@@ -121,106 +122,92 @@ export function Form(props: FormProps) {
         <Fieldset>
           <Legend>Bill From</Legend>
 
-          <InputBlock className={errors.senderAddress?.street && 'error'}>
-            <Label htmlFor="sender-street-address">Street Address</Label>
-            <TextInput
-              type="text"
-              id="sender-street-address"
-              {...register("senderAddress.street")}
-            />
-          </InputBlock>
+          <InputContainer
+            label="Street Address"
+            type="text"
+            registration="senderAddress.street"
+            errors={errors.senderAddress?.street && 'error'}
+            register={register}
+          />
 
           <SmallInputsArea>
+            <InputContainer
+              type="text"
+              label="City"
+              registration="senderAddress.city"
+              errors={errors.senderAddress?.city && 'error'}
+              register={register}
+            />
 
-            <InputBlock className={errors.senderAddress?.city && 'error'}>
-              <Label htmlFor="sender-city">City</Label>
-              <TextInput
-                type="text"
-                id="sender-city"
-                {...register("senderAddress.city")}
-              />
-            </InputBlock>
+            <InputContainer
+              type="text"
+              label="Post Code"
+              registration="senderAddress.postCode"
+              errors={errors.senderAddress?.postCode && 'error'}
+              register={register}
+            />
 
-            <InputBlock className={errors.senderAddress?.postCode && 'error'}>
-              <Label htmlFor="sender-post-code">Post Code</Label>
-              <TextInput
-                type="text"
-                id="sender-post-code"
-                {...register("senderAddress.postCode")}
-              />
-            </InputBlock>
-
-            <InputBlock className={`last-child ${errors.senderAddress?.country && 'error'}`}>
-              <Label htmlFor="sender-country">Country</Label>
-              <TextInput
-                type="text"
-                id="sender-country"
-                {...register("senderAddress.country")}
-              />
-            </InputBlock>
-
+            <InputContainer
+              type="text"
+              label="Country"
+              registration="senderAddress.country"
+              errors={errors.senderAddress?.country && 'error'}
+              register={register}
+            />
           </SmallInputsArea>
         </Fieldset>
 
         <Fieldset>
           <Legend>Bill To</Legend>
 
-          <InputBlock className={errors.clientName && 'error'}>
-            <Label htmlFor="client-name">Client's Name</Label>
-            <TextInput
-              type="text"
-              id="client-name"
-              {...register("clientName")}
-            />
-          </InputBlock>
+          <InputContainer
+            type="text"
+            label="Client's Name"
+            registration="clientName"
+            errors={errors.clientName && 'error'}
+            register={register}
+          />
 
-          <InputBlock className={errors.clientEmail && 'error'}>
-            <Label htmlFor="client-email">Client's Email</Label>
-            <TextInput
-              type="text"
-              id="client-email"
-              {...register("clientEmail")}
-            />
-          </InputBlock>
+          <InputContainer
+            type="text"
+            label="Client's Email"
+            registration="clientEmail"
+            errors={errors.clientEmail && 'error'}
+            register={register}
+          />
 
-          <InputBlock className={errors.clientAddress?.street && 'error'}>
-            <Label htmlFor="client-street-address">Street Address</Label>
-            <TextInput
-              type="text"
-              id="client-street-address"
-              {...register("clientAddress.street")}
-            />
-          </InputBlock>
+          <InputContainer
+            type="text"
+            label="Street Address"
+            registration="clientAddress.street"
+            errors={errors.clientAddress?.street && 'error'}
+            register={register}
+          />
 
           <SmallInputsArea>
+            <InputContainer
+              type="text"
+              label="City"
+              registration="clientAddress.city"
+              errors={errors.clientAddress?.city && 'error'}
+              register={register}
+            />
 
-            <InputBlock className={errors.clientAddress?.city && 'error'}>
-              <Label htmlFor="client-city">City</Label>
-              <TextInput
-                type="text"
-                id="client-city"
-                {...register("clientAddress.city")}
-              />
-            </InputBlock>
+            <InputContainer
+              type="text"
+              label="Post Code"
+              registration="clientAddress.postCode"
+              errors={errors.clientAddress?.postCode && 'error'}
+              register={register}
+            />
 
-            <InputBlock className={errors.clientAddress?.postCode && 'error'}>
-              <Label htmlFor="client-post-code">Post Code</Label>
-              <TextInput
-                type="text"
-                id="client-post-code"
-                {...register("clientAddress.postCode")}
-              />
-            </InputBlock>
-
-            <InputBlock className={`last-child ${errors.clientAddress?.country && 'error'}`}>
-              <Label htmlFor="client-coutry">Country</Label>
-              <TextInput
-                type="text"
-                id="client-country"
-                {...register("clientAddress.country")}
-              />
-            </InputBlock>
-
+            <InputContainer
+              type="text"
+              label="Country"
+              registration="clientAddress.country"
+              errors={errors.clientAddress?.country && 'error'}
+              register={register}
+            />
           </SmallInputsArea>
         </Fieldset>
 
@@ -228,15 +215,13 @@ export function Form(props: FormProps) {
           <Legend style={{ display: 'none' }}>Info</Legend>
 
           <DatesInputArea>
-            <InputBlock className={errors.invoiceDate && 'error'}>
-              <Label htmlFor="invoice-date">Invoice Date</Label>
-              <TextInput
-                type="date"
-                className="date"
-                id="invoice-date"
-                {...register("invoiceDate")}
-              />
-            </InputBlock>
+            <InputContainer
+              type="date"
+              label="Invoice Date"
+              registration="invoiceDate"
+              errors={errors.invoiceDate && 'error'}
+              register={register}
+            />
 
             <InputBlock className={errors.paymentTerms && 'error'}>
               <Label htmlFor="payment-terms">Payment Terms</Label>
@@ -253,16 +238,13 @@ export function Form(props: FormProps) {
             </InputBlock>
           </DatesInputArea>
 
-          <InputBlock className={errors.description && 'error'}>
-            <Label htmlFor="description">Project / Description</Label>
-            <TextInput
-              type="text"
-              id="description"
-              {...register("description")}
-              placeholder="e.g. Graphic Service"
-            />
-          </InputBlock>
-
+          <InputContainer
+            type="text"
+            label="Project / Description"
+            registration="description"
+            errors={errors.description && 'error'}
+            register={register}
+          />
         </Fieldset>
 
         <Fieldset>
