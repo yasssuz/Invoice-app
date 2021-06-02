@@ -64,10 +64,10 @@ export function Form(props: FormProps) {
   const { handleModal } = props
   const { register, control, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: yupResolver(FormSchema),
-    mode: "onTouched",
     defaultValues: {
-      items: [{ name: undefined, quantity: 1, price: undefined }]
+      items: [{ name: undefined, quantity: 1, price: 100.00 }]
     },
+    mode: "onTouched",
   })
   const onSubmit: SubmitHandler<FormData> = data => {
     let quantity = 0
@@ -92,7 +92,7 @@ export function Form(props: FormProps) {
   }
   const { fields, append, remove } = useFieldArray({
     name: "items",
-    control
+    control,
   })
   const [itemQuantity, setItemQuantity] = useState(1)
   const [itemPrice, setItemPrice] = useState(100.00)
@@ -253,31 +253,23 @@ export function Form(props: FormProps) {
           {fields.map((field, index) => (
             <ItemInfoArea key={field.id}>
               <InputBlock className={errors.items?.[index]?.name && 'error'}>
-                <Label htmlFor="item-name">Item Name</Label>
+                <Label htmlFor={`item-name[${index}]`}>Item Name</Label>
                 <TextInput
                   type="text"
-                  id="item-name"
-                  {...register(`items.${index}.name` as const, {
-                    required: true,
-                    minLength: 20
-                  })}
+                  id={`item-name[${index}]`}
+                  defaultValue={field.name}
+                  {...register(`items.${index}.name` as const)}
                 />
               </InputBlock>
 
-              <InputBlock className={errors?.items?.[index]?.quantity ? 'error' : ""}>
+              <InputBlock className={errors?.items?.[index]?.quantity && 'error'}>
                 <Label htmlFor="item-quantity">Qty.</Label>
                 <TextInput
                   type="number"
                   id="item-quantity"
                   style={{ appearance: 'none' }}
-                  min="1"
-                  {...register(`items.${index}.quantity` as const, {
-                    required: true,
-                    min: 10,
-                    minLength: 10
-                  })}
-                  defaultValue="1"
-                  onChange={e => setItemQuantity(Number(e.target.value))}
+                  {...register(`items.${index}.quantity` as const)}
+                  defaultValue={field.quantity}
                 />
               </InputBlock>
 
@@ -286,18 +278,14 @@ export function Form(props: FormProps) {
                 <TextInput
                   type="number"
                   id="item-price"
-                  {...register(`items.${index}.price` as const, {
-                    required: true,
-
-                  })}
-                  defaultValue="100.00"
-                  onChange={e => setItemPrice(Number(e.target.value))}
+                  {...register(`items.${index}.price` as const)}
+                  defaultValue={field.price}
                 />
               </InputBlock>
 
               <InputBlock>
                 <Label>Total</Label>
-                <Total>{formatMoneyAmount(total)}</Total>
+                <Total>{formatMoneyAmount(field.price * field.quantity)}</Total>
               </InputBlock>
 
               <DeleteButton onClick={() => remove(index)}>
@@ -309,7 +297,7 @@ export function Form(props: FormProps) {
 
           <AddItemBtn
             type="button"
-            onClick={() => append({ name: "", quantity: 0, price: 0 })}
+            onClick={() => append({ name: undefined, quantity: 1, price: 100 })}
           >
             + Add New Item
           </AddItemBtn>
