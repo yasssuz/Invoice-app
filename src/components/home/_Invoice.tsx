@@ -12,6 +12,42 @@ interface InvoiceProps {
   status: string
 }
 
+export const Invoice = memo((props: InvoiceProps) => {
+  const { id, client, creationDate, amount, status } = props
+
+  return (
+    <Link to={`/invoices/${id}`} style={{ textDecoration: 'none' }}>
+      <InvoiceContainer>
+        <div className="mobile-version">
+          <About>
+            <Id><span>#</span>{id}</Id>
+            <Receiver>{client}</Receiver>
+          </About>
+          <Information>
+            <div>
+              <Date>{creationDate}</Date>
+              <Amount>$ {formatMoneyAmount(amount)}</Amount>
+            </div>
+            <StatusSwitcher status={status} />
+          </Information>
+        </div>
+        <div className="desktop-version">
+          <IdDate>
+            <Id><span>#</span>{id}</Id>
+            <Date>{creationDate}</Date>
+          </IdDate>
+          <ReceiverAmount>
+            <Receiver>{client}</Receiver>
+            <Amount>$ {formatMoneyAmount(amount)}</Amount>
+          </ReceiverAmount>
+          <StatusSwitcher status={status} />
+          <img src="/assets/icon-arrow-right.svg" alt="icon arrow" />
+        </div>
+      </InvoiceContainer>
+    </Link>
+  )
+})
+
 const InvoiceContainer = styled.li`
   padding: 2.4rem 24px;
   border-radius: 1em;
@@ -77,7 +113,7 @@ const About = styled.div`
 const Id = styled.h2`
   font-size: 1.3rem;
   line-height: 1.5rem;
-  font-weight: 600;
+  font-weight: bold;
   color: var(--color-white);
 
   span {
@@ -87,9 +123,9 @@ const Id = styled.h2`
 
 const Receiver = styled.span`
   font-size: 1.3rem;
-  font-weight: 500;
+  font-weight: normal;
   line-height: 1.5rem;
-  color: var(--color-white);
+  color: var( --color-grayish-purple);
 `
 
 const Information = styled.div`
@@ -105,7 +141,7 @@ const Date = styled(Receiver)`
 const Amount = styled.h3`
   font-size: 1.7rem;
   line-height: 2.4rem;
-  font-weight: 600;
+  font-weight: bold;
   color: var(--color-white);
   margin-top: 0.8rem;
 
@@ -128,39 +164,3 @@ const ReceiverAmount = styled.div`
   justify-content: space-between;
   margin-right: 4rem;
 `
-
-export const Invoice = memo((props: InvoiceProps) => {
-  const { id, client, creationDate, amount, status } = props
-
-  return (
-    <Link to={`/invoices/${id}`} style={{ textDecoration: 'none' }}>
-      <InvoiceContainer>
-        <div className="mobile-version">
-          <About>
-            <Id><span>#</span>{id}</Id>
-            <Receiver>{client}</Receiver>
-          </About>
-          <Information>
-            <div>
-              <Date>{creationDate}</Date>
-              <Amount>$ {formatMoneyAmount(amount)}</Amount>
-            </div>
-            <StatusSwitcher status={status} />
-          </Information>
-        </div>
-        <div className="desktop-version">
-          <IdDate>
-            <Id><span>#</span>{id}</Id>
-            <Date>{creationDate}</Date>
-          </IdDate>
-          <ReceiverAmount>
-            <Receiver>{client}</Receiver>
-            <Amount>$ {formatMoneyAmount(amount)}</Amount>
-          </ReceiverAmount>
-          <StatusSwitcher status={status} />
-          <img src="/assets/icon-arrow-right.svg" alt="icon arrow" />
-        </div>
-      </InvoiceContainer>
-    </Link>
-  )
-})
