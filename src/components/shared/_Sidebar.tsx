@@ -5,8 +5,9 @@ import styled from 'styled-components'
 export function Sidebar() {
   const [isLightModeActive, setIsLightModeActive] = useState(false)
 
-  function changeColorMode() {
+  function changeTheme() {
     setIsLightModeActive(prevState => !prevState)
+    document.documentElement.setAttribute('data-theme', isLightModeActive ? 'dark' : 'light')
   }
 
   return (
@@ -17,19 +18,17 @@ export function Sidebar() {
         </LogoArea>
       </Link>
       <InteractiveArea>
-        <ChangeThemeBtn type="button">
+        <ChangeThemeBtn type="button" onClick={changeTheme}>
           {isLightModeActive ? (
             <img
               src="/assets/icon-moon.svg"
               alt="dark mode icon"
-              onClick={changeColorMode}
               style={{ cursor: 'pointer' }}
             />
           ) : (
             <img
               src="/assets/icon-sun.svg"
               alt="light mode icon"
-              onClick={changeColorMode}
               style={{ cursor: 'pointer' }}
             />
           )}
@@ -44,13 +43,14 @@ export function Sidebar() {
 const ChangeThemeBtn = styled.button`
   background: transparent;
   border: none;
+  cursor: pointer;
 `
 
 const SidebarContainer = styled.aside`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--color-light-black);
+  background: hsl(233, 31%, 17%);
   position: fixed;
   top: 0;
   width: 100%;
