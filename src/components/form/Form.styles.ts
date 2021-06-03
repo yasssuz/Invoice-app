@@ -177,6 +177,8 @@ export const TextInput = styled.input`
   padding: 0 2rem;
 
   &[type=date] {
+    appearance: none;
+    
     &::-webkit-calendar-picker-indicator {
       opacity: 0;
     }  
@@ -192,6 +194,7 @@ export const TextInput = styled.input`
 
   &[type=number] {
     padding: 1.5rem;
+
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
       appearance: none;
@@ -243,6 +246,12 @@ export const AddItemBtn = styled.button`
   color: var(--color-semi-gray);
   width: 100%;
   margin-top: 4.8rem;
+  transition: filter 0.1s ease;
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(1.2);
+  }
 
   @media screen and (min-width: 650px) {
     color: var(--color-grayish-purple);
