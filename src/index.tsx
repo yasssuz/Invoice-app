@@ -17,13 +17,25 @@ const GlobalStyle = createGlobalStyle`
     --color-semi-gray: hsl(231, 20%, 61%);
     --color-dark-gray: hsl(231, 20%, 27%);
     --color-very-light-black: hsla(233, 30%, 21%, 1);
+    --color-dif-very-light-black: hsla(233, 30%, 21%, 1);
     --color-light-black: hsl(233, 31%, 17%);
     --color-nearly-black: hsl(233, 30%, 11%);
     --color-darkest: hsl(231, 28%, 7%);
   }
 
+
   html {
     font-size: 62.5%;
+  }
+
+  [data-theme="light"] {
+    --color-very-light-black: hsl(231, 75%, 93%);
+    --color-white: hsl(231, 28%, 7%);
+    --color-grayish-purple: hsl(231, 20%, 61%);
+    --color-light-black: hsl(0, 0%, 100%);
+    --color-nearly-black: hsl(240, 27%, 98%);
+    --color-darkest: hsl(231, 20%, 27%);
+    --color-dif-very-light-black: hsl(231, 67%, 99%);
   }
 
   body {
