@@ -28,7 +28,7 @@ export const PurpleButton: FC<ButtonProps> = (props) => {
 }
 
 const Button = styled.button`
-  color: var(--color-white);
+  color: white;
   border-radius: 2.4rem;
   font-weight: bold;
   font-size: 1.3rem;
@@ -38,11 +38,16 @@ const Button = styled.button`
   transition: filter 0.3s ease;
 
   &:hover {
-    filter: brightness(1.3);
+    filter: brightness(1.25);
   }
 `
 const Dark = styled(Button)`
+  color: var(--color-white);
   background: var(--color-very-light-black);
+
+  &:hover {
+    filter: brightness(1.1)
+  }
 `
 
 const Gray = styled(Button)`
