@@ -51,7 +51,7 @@ const InteractionsContainer = styled.section`
 const Title = styled.h1`
   font-size: clamp(2.2rem, 5vw, 3.6rem);
   line-height: 1.3;
-  font-weight: 600;
+  font-weight: bold;
   color: var(--color-white);
   margin-bottom: 0.5rem;
 `
@@ -73,7 +73,7 @@ const AddInvoiceBtn = styled.button`
   font-size: 1.2rem;
   font-weight: 600;
   line-height: 1.5rem;
-  color: var(--color-white);
+  color: white;
   background: var(--color-purple);
   border: none;
   display: flex;
@@ -102,7 +102,7 @@ const AddInvoiceBtn = styled.button`
   div {
     width: 3.2rem;
     height: 3.2rem;
-    background: var(--color-white);
+    background: white;
     border-radius: 50%;
     display: grid;
     place-items: center;

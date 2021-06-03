@@ -128,7 +128,9 @@ const ItemPricePerQuantity = styled.strong`
   color: var(--color-semi-gray) !important;
 `
 
-const TotalItemPrice = styled.strong``
+const TotalItemPrice = styled.strong`
+  color: white !important;
+`
 
 // DESKTOP
 
@@ -136,7 +138,7 @@ const ItemsTable = styled.table`
   width: 100%;
   border-radius: 0.8rem 0.8rem 0 0;
   padding: 3.2rem 3.2rem;
-  background: var(--color-very-light-black);
+  background: var(--color-dif-very-light-black);
 `
 
 const TableHead = styled.thead`
@@ -207,10 +209,13 @@ const ItemsTotal = styled.footer`
     padding: 3.1rem 32px;
   }
 `
-const AmountText = styled.span``
+const AmountText = styled.span`
+  color: white !important;
+`
 
 const TotalAmount = styled.strong`
   font-size: 1.8rem !important;
+  color: white !important;
 
   @media screen and (min-width: 750px) {
     font-size: 2.5rem !important;
