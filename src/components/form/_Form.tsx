@@ -29,6 +29,7 @@ import { useContext } from 'react';
 import { formatIsoDate, formatMoneyAmount } from '../../utils/formatters';
 import { StorageContext } from '../../contexts/StorageContext';
 import { InputContainer } from './_InputContainer'
+import dayjs from 'dayjs'
 
 interface FormProps {
   handleModal: () => void
@@ -81,11 +82,10 @@ export function Form(props: FormProps) {
       ...data,
       id: getRandomId(),
       createdAt: formatIsoDate(data.invoiceDate),
+      paymentDue: dayjs(data.invoiceDate).add(data.paymentTerms, 'day').format('YYYY-MM-DD'),
       total: total,
       status: 'pending'
     }
-
-    console.log(invoiceData)
 
     addInvoice(invoiceData)
     handleModal()
@@ -108,6 +108,10 @@ export function Form(props: FormProps) {
     }
 
     return result.join('')
+  }
+
+  function calcPaymentDays(date: Date, term: number) {
+
   }
 
   return (
