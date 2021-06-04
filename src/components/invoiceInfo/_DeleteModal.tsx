@@ -94,7 +94,7 @@ const ButtonsArea = styled.div`
      
     a {
       text-decoration: none;
-      color: var(--color-white);
+      color: white;
       display: flex;
       align-items: center;
       justify-content: center;
