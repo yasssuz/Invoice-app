@@ -9,7 +9,7 @@ export const FormContainer = styled.div`
   padding-top: 10.4rem;
   top: 0;
   bottom: 0;
-  overflow: auto;
+  overflow-x: hidden;
 
   #go-back-component {
     margin: 0 2.4rem;
@@ -178,7 +178,7 @@ export const TextInput = styled.input`
 
   &[type=date] {
     appearance: none;
-    
+
     &::-webkit-calendar-picker-indicator {
       opacity: 0;
     }  
@@ -221,13 +221,15 @@ export const Option = styled.option`
   font-weight: bold;
 `
 
-export const Total = styled.strong`
+export const Total = styled.input`
   font-size: 1.4rem;
   line-height: 1.8rem;
   font-weight: bold;
+  color: var(--color-semi-gray);
+  background: transparent;
+  border: none;
   position: absolute;
   top: 50%;
-  color: var(--color-semi-gray);
 
   @media screen and (min-width: 650px) {
     color: var(--color-grayish-purple);
