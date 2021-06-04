@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { getTheme, storeTheme } from '../../utils/storage'
@@ -6,13 +6,13 @@ import { getTheme, storeTheme } from '../../utils/storage'
 export function Sidebar() {
   const [isLightModeActive, setIsLightModeActive] = useState(false)
 
-  function changeTheme() {
+  const changeTheme = useCallback(() => {
     setIsLightModeActive(prevState => !prevState)
     const currentTheme = isLightModeActive ? 'dark' : 'light'
 
     document.documentElement.setAttribute('data-theme', currentTheme)
     storeTheme(currentTheme)
-  }
+  }, [storeTheme])
 
   useEffect(() => {
     const theme = getTheme()
