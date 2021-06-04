@@ -2,6 +2,8 @@ import { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { FilterContext } from '../../contexts/FilterContext'
 import { FilterBox } from './_FilterBox'
+import { getInvoices } from '../../utils/storage'
+
 
 interface InteractionsProps {
   handleForm: () => void
@@ -13,12 +15,13 @@ export const Interactions = (props: InteractionsProps) => {
   const { setShowingDraft, setShowingPending, setShowingPaid,
     showingDraft, showingPending, showingPaid
   } = useContext(FilterContext)
+  const invoices = getInvoices()
 
   return (
     <InteractionsContainer>
       <div>
         <Title>Invoices</Title>
-        <Counter>7 Invoices</Counter>
+        <Count>You have a total of {invoices.length} invoices</Count>
       </div>
       <LeftArea>
         <div>
@@ -63,6 +66,13 @@ export const Interactions = (props: InteractionsProps) => {
   )
 }
 
+const Count = styled.span`
+  font-weight: 500;
+  font-size: 1.3rem;
+  line-height: 1.5rem;
+  color: var(--color-grayish-purple);
+`
+
 const InteractionsContainer = styled.section`
   display: flex;
   justify-content: space-between;
@@ -74,13 +84,6 @@ const Title = styled.h1`
   font-weight: bold;
   color: var(--color-white);
   margin-bottom: 0.5rem;
-`
-
-const Counter = styled.span`
-  font-weight: 500;
-  font-size: 1.3rem;
-  line-height: 1.5rem;
-  color: var(--color-grayish-purple);
 `
 
 const LeftArea = styled.div`
