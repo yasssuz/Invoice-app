@@ -71,15 +71,12 @@ export function Form(props: FormProps) {
     mode: "onTouched",
   })
   const onSubmit: SubmitHandler<FormData> = data => {
-    let quantity = 0
-    let price = 0
+    let total = 0
 
     data.items.forEach(item => {
-      quantity = Number(item.quantity) + quantity
-      price = Number(item.price) + price
+      total = Number(item.total) + total
     })
 
-    let total = quantity * price
     const invoiceData = {
       ...data,
       id: getRandomId(),
@@ -87,6 +84,8 @@ export function Form(props: FormProps) {
       total: total,
       status: 'pending'
     }
+
+    console.log(invoiceData)
 
     addInvoice(invoiceData)
     handleModal()
@@ -301,11 +300,9 @@ export function Form(props: FormProps) {
                 <Label>Total</Label>
                 <Total
                   readOnly={true}
-                  defaultValue="00.00"
+                  defaultValue="100.00"
                   id="item-total"
                   {...register(`items.${index}.total` as const)}
-                // value={formatMoneyAmount(field.total)}
-                // value="0.00"
                 />
               </InputBlock>
 

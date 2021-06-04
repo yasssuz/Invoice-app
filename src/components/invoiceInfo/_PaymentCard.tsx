@@ -7,6 +7,7 @@ interface ItemsProps {
     name: string
     quantity: number
     price: number
+    total: number
   }[]
 }
 
@@ -16,7 +17,7 @@ export function PaymentCard(props: ItemsProps) {
 
   useEffect(() => {
     items.forEach(item => {
-      setTotalAmount(prevState => item.price * item.quantity + prevState)
+      setTotalAmount(prevState => Number(item.total) + prevState)
     })
   }, [items])
 
@@ -32,7 +33,7 @@ export function PaymentCard(props: ItemsProps) {
                   {item.quantity} x $ {formatMoneyAmount(item.price)}
                 </ItemPricePerQuantity>
               </div>
-              <TotalItemPrice>$ {formatMoneyAmount(item.quantity * item.price)}</TotalItemPrice>
+              <TotalItemPrice>$ {formatMoneyAmount(item.total)}</TotalItemPrice>
             </Item>
           ))}
         </ItemsRecap>
@@ -53,7 +54,7 @@ export function PaymentCard(props: ItemsProps) {
                 <td className="tableBodyFirstElement">{item.name}</td>
                 <td className="tableBodySecondElement">{item.quantity}</td>
                 <td>$ {formatMoneyAmount(item.price)}</td>
-                <td>$ {formatMoneyAmount(item.quantity * item.price)}</td>
+                <td>$ {formatMoneyAmount(item.total)}</td>
               </tr>
             ))}
           </TableBody>
