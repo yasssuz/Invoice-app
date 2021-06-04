@@ -1,14 +1,28 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { getTheme, storeTheme } from '../../utils/storage'
 
 export function Sidebar() {
   const [isLightModeActive, setIsLightModeActive] = useState(false)
 
   function changeTheme() {
     setIsLightModeActive(prevState => !prevState)
-    document.documentElement.setAttribute('data-theme', isLightModeActive ? 'dark' : 'light')
+    const currentTheme = isLightModeActive ? 'dark' : 'light'
+
+    document.documentElement.setAttribute('data-theme', currentTheme)
+    storeTheme(currentTheme)
   }
+
+  useEffect(() => {
+    const theme = getTheme()
+
+    if (theme === 'dark') {
+      return
+    } else {
+      changeTheme()
+    }
+  }, [])
 
   return (
     <SidebarContainer>
