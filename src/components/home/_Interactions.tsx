@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import styled from 'styled-components'
+import { FilterContext } from '../../contexts/FilterContext'
 import { FilterBox } from './_FilterBox'
 
 interface InteractionsProps {
@@ -9,6 +10,9 @@ interface InteractionsProps {
 export const Interactions = (props: InteractionsProps) => {
   const { handleForm } = props
   const [filterOpen, setFilterOpen] = useState(false)
+  const { setShowingDraft, setShowingPending, setShowingPaid,
+    showingDraft, showingPending, showingPaid
+  } = useContext(FilterContext)
 
   return (
     <InteractionsContainer>
@@ -27,9 +31,25 @@ export const Interactions = (props: InteractionsProps) => {
           </FilterButton>
           {filterOpen && (
             <FilterContent>
-              <FilterBox id="draft" />
-              <FilterBox id="pending" />
-              <FilterBox id="paid" />
+
+              <FilterBox
+                id="draft"
+                func={() => setShowingDraft(prevState => !prevState)}
+                state={showingDraft}
+              />
+
+              <FilterBox
+                id="pending"
+                func={() => setShowingPending(prevState => !prevState)}
+                state={showingPending}
+              />
+
+              <FilterBox
+                id="paid"
+                func={() => setShowingPaid(prevState => !prevState)}
+                state={showingPaid}
+              />
+
             </FilterContent>
           )}
         </div>
@@ -136,5 +156,5 @@ const FilterContent = styled.div`
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
   transform: translateX(-25%);
   padding: 2.4rem 2.4rem;
-  z-index: 10;
+  z-index: 2;
 `
