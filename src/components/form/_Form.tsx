@@ -56,16 +56,17 @@ interface FormData {
     name: string
     quantity: number
     price: number
+    total: number
   }[]
 }
 
 export function Form(props: FormProps) {
   const { addInvoice } = useContext(StorageContext)
   const { handleModal } = props
-  const { register, control, handleSubmit, formState: { errors } } = useForm<FormData>({
+  const { register, control, handleSubmit, formState: { errors }, setValue } = useForm<FormData>({
     resolver: yupResolver(FormSchema),
     defaultValues: {
-      items: [{ name: undefined, quantity: 1, price: 100.00 }]
+      items: [{ name: undefined, quantity: 1, price: 100.00, total: 100 }]
     },
     mode: "onTouched",
   })
@@ -266,7 +267,15 @@ export function Form(props: FormProps) {
                   id="item-quantity"
                   style={{ appearance: 'none' }}
                   {...register(`items.${index}.quantity` as const)}
+                  name={`items[${index}].quantity`}
                   defaultValue={field.quantity}
+                  onChange={e =>
+                    setValue(`items.${index}.total` as any,
+                      formatMoneyAmount(Number((document.querySelector(
+                        `input[name=items\\[${index}\\]\\.price]`
+                      ) as HTMLInputElement).value) * Number(e.target.value))
+                    )
+                  }
                 />
               </InputBlock>
 
@@ -277,12 +286,27 @@ export function Form(props: FormProps) {
                   id="item-price"
                   {...register(`items.${index}.price` as const)}
                   defaultValue={field.price}
+                  name={`items[${index}].price`}
+                  onChange={e =>
+                    setValue(`items.${index}.total` as any,
+                      formatMoneyAmount(Number((document.querySelector(
+                        `input[name=items\\[${index}\\]\\.quantity]`
+                      ) as HTMLInputElement).value) * Number(e.target.value))
+                    )
+                  }
                 />
               </InputBlock>
 
               <InputBlock>
                 <Label>Total</Label>
-                <Total>{formatMoneyAmount(field.price * field.quantity)}</Total>
+                <Total
+                  readOnly={true}
+                  defaultValue="00.00"
+                  id="item-total"
+                  {...register(`items.${index}.total` as const)}
+                // value={formatMoneyAmount(field.total)}
+                // value="0.00"
+                />
               </InputBlock>
 
               <DeleteButton onClick={() => remove(index)}>
@@ -294,7 +318,7 @@ export function Form(props: FormProps) {
 
           <AddItemBtn
             type="button"
-            onClick={() => append({ name: undefined, quantity: 1, price: 100 })}
+            onClick={() => append({ name: undefined, quantity: 1, price: 100, total: 100 })}
           >
             + Add New Item
           </AddItemBtn>
