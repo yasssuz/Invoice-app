@@ -110,10 +110,6 @@ export function Form(props: FormProps) {
     return result.join('')
   }
 
-  function calcPaymentDays(date: Date, term: number) {
-
-  }
-
   return (
     <FormContainer>
       <GoBack onClick={handleModal} />

@@ -22,7 +22,7 @@ export function Sidebar() {
     } else {
       changeTheme()
     }
-  }, [])
+  }, [changeTheme])
 
   return (
     <SidebarContainer>
