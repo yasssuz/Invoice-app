@@ -12,7 +12,7 @@ export function Sidebar() {
 
     document.documentElement.setAttribute('data-theme', currentTheme)
     storeTheme(currentTheme)
-  }, [storeTheme, isLightModeActive])
+  }, [isLightModeActive])
 
   useEffect(() => {
     const theme = getTheme()
