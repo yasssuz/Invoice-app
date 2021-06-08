@@ -1,7 +1,6 @@
-import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { StorageContext } from '../../contexts/StorageContext'
+import { deleteInvoice } from '../../utils/storage'
 import { DarkButton, RedButton } from '../shared/_Buttons'
 
 interface DeleteModalProps {
@@ -10,7 +9,6 @@ interface DeleteModalProps {
 }
 
 export function DeleteModal(props: DeleteModalProps) {
-  const { deleteInvoice } = useContext(StorageContext)
   const { id, handleModal } = props
 
   return (
