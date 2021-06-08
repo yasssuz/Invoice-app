@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import styled from 'styled-components'
-import { StorageContext } from '../../contexts/StorageContext'
 import { MainCard } from '../../components/invoiceInfo/_MainCard'
 import { Topbar } from '../../components/invoiceInfo/_TopBar'
 import { BottomBar } from '../../components/invoiceInfo/_BottomBar'
 import { DeleteModal } from '../../components/invoiceInfo/_DeleteModal'
 import { GoBack } from '../../components/shared/_GoBack'
+import { changeToPaidInvoice, getInvoices } from '../../utils/storage'
 
 
 interface InvoiceInfoProps {
@@ -17,7 +17,6 @@ interface InvoiceInfoProps {
 }
 
 export default function InvoiceInfo(props: InvoiceInfoProps) {
-  const { changeToPaidInvoice, getInvoices } = useContext(StorageContext)
   const [deleteModal, setDeleteModal] = useState(false)
   const [status, setStatus] = useState('')
   const storage = getInvoices()
