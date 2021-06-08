@@ -25,11 +25,11 @@ import {
 } from './Form.styles'
 import { FormSchema } from './_FormSchema'
 import { BottomBar } from './_BottomBar';
-import { useContext } from 'react';
 import { formatIsoDate, formatMoneyAmount } from '../../utils/formatters';
-import { StorageContext } from '../../contexts/StorageContext';
 import { InputContainer } from './_InputContainer'
 import dayjs from 'dayjs'
+import { addInvoice } from '../../utils/storage';
+import { generateRandomId } from '../../utils/generators';
 
 interface FormProps {
   handleModal: () => void
@@ -62,7 +62,6 @@ interface FormData {
 }
 
 export function Form(props: FormProps) {
-  const { addInvoice } = useContext(StorageContext)
   const { handleModal } = props
   const { register, control, handleSubmit, formState: { errors }, setValue } = useForm<FormData>({
     resolver: yupResolver(FormSchema),
@@ -80,7 +79,7 @@ export function Form(props: FormProps) {
 
     const invoiceData = {
       ...data,
-      id: getRandomId(),
+      id: generateRandomId(),
       createdAt: formatIsoDate(data.invoiceDate),
       paymentDue: dayjs(data.invoiceDate).add(data.paymentTerms, 'day').format('YYYY-MM-DD'),
       total: total,
@@ -95,19 +94,8 @@ export function Form(props: FormProps) {
     control,
   })
 
-  function getRandomId() {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const numbers = '0123456789'
-    let result = []
-
-    for (let i = 0; i < 2; i++) {
-      result.push(characters.charAt(Math.floor(Math.random() * characters.length)))
-    }
-    for (let i = 0; i < 4; i++) {
-      result.push(numbers.charAt(Math.floor(Math.random() * numbers.length)))
-    }
-
-    return result.join('')
+  function handleDraft() {
+    console.log('still testing')
   }
 
   return (
@@ -322,7 +310,7 @@ export function Form(props: FormProps) {
         </Fieldset>
 
 
-        <BottomBar handleModal={handleModal} />
+        <BottomBar handleDraft={handleDraft} handleModal={handleModal} />
       </form>
     </FormContainer >
   )

@@ -3,14 +3,11 @@ import styled from 'styled-components'
 
 interface BottomBarProps {
   handleModal: () => void
+  handleDraft: () => void
 }
 
 export function BottomBar(props: BottomBarProps) {
-  const { handleModal } = props
-
-  function handleDraft() {
-    console.log('preventing submit')
-  }
+  const { handleModal, handleDraft } = props
 
   return (
     <BottomBarContainer>
