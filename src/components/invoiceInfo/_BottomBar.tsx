@@ -1,4 +1,6 @@
+import { useContext } from 'react'
 import styled from 'styled-components'
+import { FormContext } from '../../contexts/FormContext'
 import { DarkButton, PurpleButton, RedButton } from '../shared/_Buttons'
 
 interface BottomBarProps {
@@ -9,6 +11,7 @@ interface BottomBarProps {
 
 export const BottomBar = (props: BottomBarProps) => {
   const { status, handleModal, setPaid } = props
+  const { handleForm, handleFormEdit } = useContext(FormContext)
 
   return (
     <BottomBarContainer>
@@ -16,7 +19,10 @@ export const BottomBar = (props: BottomBarProps) => {
       <DarkButton
         cn={`${status !== 'pending' && 'large'}`}
         type="button"
-        func={() => console.log('test')}
+        func={() => {
+          handleForm()
+          handleFormEdit()
+        }}
       >
         Edit
       </DarkButton>

@@ -1,4 +1,6 @@
+import { useContext } from 'react'
 import styled from 'styled-components'
+import { FormContext } from '../../contexts/FormContext'
 import { DarkButton, PurpleButton, RedButton } from '../shared/_Buttons'
 import { StatusSwitcher } from '../shared/_Status'
 
@@ -10,6 +12,7 @@ interface TopbarProps {
 
 export const Topbar = (props: TopbarProps) => {
   const { status, handleModal, setPaid } = props
+  const { handleForm, handleFormEdit } = useContext(FormContext)
 
   return (
     <TopBar>
@@ -19,7 +22,10 @@ export const Topbar = (props: TopbarProps) => {
       </Status>
       <Buttons>
 
-        <DarkButton type="button" func={() => console.log('test')}>
+        <DarkButton type="button" func={() => {
+          handleForm()
+          handleFormEdit()
+        }}>
           Edit
         </DarkButton>
 
