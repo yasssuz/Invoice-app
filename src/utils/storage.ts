@@ -1,5 +1,5 @@
 export function getInvoices() {
-  let invoiceStorage: object[]
+  let invoiceStorage: any
 
   if (localStorage.getItem('invoices') === null) {
     invoiceStorage = []
@@ -8,6 +8,32 @@ export function getInvoices() {
   }
 
   return invoiceStorage
+}
+
+export function deleteInvoice(id: string) {
+  const invoices = getInvoices()
+  invoices.forEach((invoice: { id: string }, index: number) => {
+    if (invoice.id === id) {
+      invoices.splice(index, 1)
+    }
+  })
+  localStorage.setItem('invoices', JSON.stringify(invoices))
+}
+
+export function addInvoice(data: Object) {
+  const invoices = getInvoices()
+  invoices.push(data)
+  localStorage.setItem('invoices', JSON.stringify(invoices))
+}
+
+export function changeToPaidInvoice(id: string) {
+  const invoices = getInvoices()
+  const invoice: { status: string }[] = invoices.filter(
+    (invoice: any) => invoice.id === id
+  )
+
+  invoice[0].status = 'paid'
+  localStorage.setItem('invoices', JSON.stringify(invoices))
 }
 
 export function getTheme() {

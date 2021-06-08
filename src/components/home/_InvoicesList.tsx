@@ -1,8 +1,8 @@
 import { useContext } from "react"
 import { FilterContext } from "../../contexts/FilterContext"
 import styled from "styled-components"
-import { StorageContext } from "../../contexts/StorageContext"
 import { Invoice } from "./_Invoice"
+import { getInvoices } from "../../utils/storage"
 
 interface InvoiceProps {
   id: string
@@ -14,7 +14,6 @@ interface InvoiceProps {
 
 export function InvoicesList() {
   const { showingDraft, showingPending, showingPaid } = useContext(FilterContext)
-  const { getInvoices } = useContext(StorageContext)
   const invoices = getInvoices()
 
   return (
@@ -34,8 +33,8 @@ export function InvoicesList() {
       ) : (
         <>
           {showingDraft && invoices
-            .filter(invoice => invoice.status === 'draft')
-            .map(invoice => <Invoice
+            .filter((invoice: { status: string }) => invoice.status === 'draft')
+            .map((invoice: InvoiceProps) => <Invoice
               id={invoice.id}
               client={invoice.clientName}
               creationDate={invoice.createdAt}
@@ -45,8 +44,8 @@ export function InvoicesList() {
             />)
           }
           {showingPending && invoices
-            .filter(invoice => invoice.status === 'pending')
-            .map(invoice => <Invoice
+            .filter((invoice: { status: string }) => invoice.status === 'pending')
+            .map((invoice: InvoiceProps) => <Invoice
               id={invoice.id}
               client={invoice.clientName}
               creationDate={invoice.createdAt}
@@ -56,8 +55,8 @@ export function InvoicesList() {
             />)
           }
           {showingPaid && invoices
-            .filter(invoice => invoice.status === 'paid')
-            .map(invoice => <Invoice
+            .filter((invoice: { status: string }) => invoice.status === 'paid')
+            .map((invoice: InvoiceProps) => <Invoice
               id={invoice.id}
               client={invoice.clientName}
               creationDate={invoice.createdAt}
