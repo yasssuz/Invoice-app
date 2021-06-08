@@ -2,13 +2,16 @@ import { createContext, FC, useState } from "react";
 
 interface FormContextProps {
   formOpen: boolean
+  formEdit: boolean
   handleForm: () => void
+  handleFormEdit: () => void
 }
 
 export const FormContext = createContext({} as FormContextProps)
 
 export const FormProvider: FC = ({ children }) => {
   const [formOpen, setFormOpen] = useState<boolean>(false)
+  const [formEdit, setFormEdit] = useState<boolean>(true)
 
   function handleForm(): void {
     console.log('hello')
@@ -16,10 +19,16 @@ export const FormProvider: FC = ({ children }) => {
     setFormOpen(prevState => !prevState)
   }
 
+  function handleFormEdit(): void {
+    setFormEdit(prevState => !prevState)
+  }
+
   return (
     <FormContext.Provider value={{
       formOpen,
-      handleForm
+      formEdit,
+      handleForm,
+      handleFormEdit
     }}>
       {children}
     </FormContext.Provider>
