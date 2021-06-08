@@ -11,7 +11,7 @@ export const FormContext = createContext({} as FormContextProps)
 
 export const FormProvider: FC = ({ children }) => {
   const [formOpen, setFormOpen] = useState<boolean>(false)
-  const [formEdit, setFormEdit] = useState<boolean>(true)
+  const [formEdit, setFormEdit] = useState<boolean>(false)
 
   function handleForm(): void {
     console.log('hello')
