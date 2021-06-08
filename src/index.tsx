@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom';
 import App from './pages/app';
 import { createGlobalStyle } from 'styled-components'
+import { FormProvider } from './contexts/FormContext';
 
 const GlobalStyle = createGlobalStyle`
   :root {
@@ -72,10 +73,10 @@ const GlobalStyle = createGlobalStyle`
 `
 
 ReactDOM.render(
-  <>
+  <FormProvider>
     <GlobalStyle />
     <App />
-  </>,
+  </FormProvider>,
   document.getElementById('root')
 );
 
