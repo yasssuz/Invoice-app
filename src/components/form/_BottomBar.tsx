@@ -1,17 +1,19 @@
 import { DarkButton, GrayButton, PurpleButton } from "../shared/_Buttons";
 import styled from 'styled-components'
+import { useContext } from "react";
+import { FormContext } from "../../contexts/FormContext";
 
 interface BottomBarProps {
-  handleModal: () => void
   handleDraft: () => void
 }
 
 export function BottomBar(props: BottomBarProps) {
-  const { handleModal, handleDraft } = props
+  const { handleForm } = useContext(FormContext)
+  const { handleDraft } = props
 
   return (
     <BottomBarContainer>
-      <DarkButton type="button" func={handleModal}>
+      <DarkButton type="button" func={handleForm}>
         Discard
       </DarkButton>
       <GrayButton type="button" func={handleDraft}>

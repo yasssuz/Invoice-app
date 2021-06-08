@@ -12,7 +12,7 @@ interface ItemsProps {
 }
 
 export function PaymentCard(props: ItemsProps) {
-  const [totalAmount, setTotalAmount] = useState(0)
+  const [totalAmount, setTotalAmount] = useState<number>(0)
   const { items } = props
 
   useEffect(() => {

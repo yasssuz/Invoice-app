@@ -30,10 +30,8 @@ import { InputContainer } from './_InputContainer'
 import dayjs from 'dayjs'
 import { addInvoice } from '../../utils/storage';
 import { generateRandomId } from '../../utils/generators';
-
-interface FormProps {
-  handleModal: () => void
-}
+import { useContext, useState } from 'react';
+import { FormContext } from '../../contexts/FormContext';
 
 interface FormData {
   clientName: string
@@ -61,8 +59,9 @@ interface FormData {
   }[]
 }
 
-export function Form(props: FormProps) {
-  const { handleModal } = props
+export function Form() {
+  const { handleForm } = useContext(FormContext)
+  const [isEdit, setIsEdit] = useState<boolean>(false)
   const { register, control, handleSubmit, formState: { errors }, setValue } = useForm<FormData>({
     resolver: yupResolver(FormSchema),
     defaultValues: {
@@ -87,7 +86,7 @@ export function Form(props: FormProps) {
     }
 
     addInvoice(invoiceData)
-    handleModal()
+    handleForm()
   }
   const { fields, append, remove } = useFieldArray({
     name: "items",
@@ -100,7 +99,7 @@ export function Form(props: FormProps) {
 
   return (
     <FormContainer>
-      <GoBack onClick={handleModal} />
+      <GoBack onClick={handleForm} />
       <Title>New Invoice</Title>
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
 
@@ -310,7 +309,7 @@ export function Form(props: FormProps) {
         </Fieldset>
 
 
-        <BottomBar handleDraft={handleDraft} handleModal={handleModal} />
+        <BottomBar handleDraft={handleDraft} />
       </form>
     </FormContainer >
   )

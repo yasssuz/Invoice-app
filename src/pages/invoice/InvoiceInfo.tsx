@@ -17,10 +17,11 @@ interface InvoiceInfoProps {
 }
 
 export default function InvoiceInfo(props: InvoiceInfoProps) {
-  const [deleteModal, setDeleteModal] = useState(false)
-  const [status, setStatus] = useState('')
+  const [deleteModal, setDeleteModal] = useState<boolean>(false)
+  const [status, setStatus] = useState<string>('')
   const storage = getInvoices()
-  const id = props.match.params.id
+  const { match } = props
+  const id = match.params.id
   const data = storage.filter((invoice: { id: string }) => invoice.id === id && invoice)
 
   useEffect(() => setStatus(data[0].status), [data])

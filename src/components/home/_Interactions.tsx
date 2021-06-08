@@ -3,15 +3,12 @@ import styled from 'styled-components'
 import { FilterContext } from '../../contexts/FilterContext'
 import { FilterBox } from './_FilterBox'
 import { getInvoices } from '../../utils/storage'
+import { FormContext } from '../../contexts/FormContext'
 
 
-interface InteractionsProps {
-  handleForm: () => void
-}
-
-export const Interactions = (props: InteractionsProps) => {
-  const { handleForm } = props
-  const [filterOpen, setFilterOpen] = useState(false)
+export const Interactions = () => {
+  const { handleForm } = useContext(FormContext)
+  const [filterOpen, setFilterOpen] = useState<boolean>(false)
   const { setShowingDraft, setShowingPending, setShowingPaid,
     showingDraft, showingPending, showingPaid
   } = useContext(FilterContext)
