@@ -1,4 +1,4 @@
-export function generateRandomId() {
+export function generateRandomId(): string {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   const numbers = '0123456789'
   let result = []

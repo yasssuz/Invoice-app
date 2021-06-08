@@ -1,4 +1,4 @@
-export function getInvoices() {
+export function getInvoices(): any {
   let invoiceStorage: any
 
   if (localStorage.getItem('invoices') === null) {
@@ -10,7 +10,7 @@ export function getInvoices() {
   return invoiceStorage
 }
 
-export function deleteInvoice(id: string) {
+export function deleteInvoice(id: string): void {
   const invoices = getInvoices()
   invoices.forEach((invoice: { id: string }, index: number) => {
     if (invoice.id === id) {
@@ -20,13 +20,13 @@ export function deleteInvoice(id: string) {
   localStorage.setItem('invoices', JSON.stringify(invoices))
 }
 
-export function addInvoice(data: Object) {
+export function addInvoice(data: Object): void {
   const invoices = getInvoices()
   invoices.push(data)
   localStorage.setItem('invoices', JSON.stringify(invoices))
 }
 
-export function changeToPaidInvoice(id: string) {
+export function changeToPaidInvoice(id: string): void {
   const invoices = getInvoices()
   const invoice: { status: string }[] = invoices.filter(
     (invoice: any) => invoice.id === id
@@ -36,7 +36,7 @@ export function changeToPaidInvoice(id: string) {
   localStorage.setItem('invoices', JSON.stringify(invoices))
 }
 
-export function getTheme() {
+export function getTheme(): string {
   let theme;
 
   if (localStorage.getItem('theme') === null) {
@@ -56,6 +56,6 @@ export function getTheme() {
   return theme
 }
 
-export function storeTheme(theme: string) {
+export function storeTheme(theme: string): void {
   localStorage.setItem('theme', theme)
 }
