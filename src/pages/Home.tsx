@@ -1,15 +1,14 @@
-import { useContext, useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import styled from 'styled-components'
-import { StorageContext } from '../contexts/StorageContext'
 import { EmptyPage } from '../components/home/_EmptyPage'
 import { Interactions } from '../components/home/_Interactions'
 import { Form } from '../components/form/_Form'
 import { Overlay } from '../components/shared/_Overlay'
 import { FilterProvider } from '../contexts/FilterContext'
 import { InvoicesList } from '../components/home/_InvoicesList'
+import { getInvoices } from '../utils/storage'
 
 export default function Home() {
-  const { getInvoices } = useContext(StorageContext)
   const [isEmpty, setIsEmpty] = useState(false)
   const [formOpen, setFormOpen] = useState(false)
   const invoices = getInvoices()
