@@ -32,7 +32,7 @@ export default function InvoiceInfo(props: InvoiceInfoProps) {
   const setPaid = useCallback(() => {
     setStatus('paid')
     changeToPaidInvoice(id)
-  }, [id, changeToPaidInvoice])
+  }, [id])
 
   return (
     <PageContainer>
