@@ -28,16 +28,20 @@ import { BottomBar } from './_BottomBar';
 import { formatIsoDate, formatMoneyAmount } from '../../utils/formatters';
 import { InputContainer } from './_InputContainer'
 import dayjs from 'dayjs'
-import { addInvoice } from '../../utils/storage';
+import { addInvoice, editInvoice } from '../../utils/storage';
 import { generateRandomId } from '../../utils/generators';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { FormContext } from '../../contexts/FormContext';
+import { useHistory } from 'react-router-dom'
 
 interface FormData {
+  id?: any
+  createdAt?: string
+  status: string
   clientName: string
   clientEmail: string
   invoiceDate: Date
-  paymentTerms: any
+  paymentTerms: string
   description: string
   senderAddress: {
     street: string
@@ -59,17 +63,40 @@ interface FormData {
   }[]
 }
 
-export function Form() {
-  const { handleForm } = useContext(FormContext)
-  const [isEdit, setIsEdit] = useState<boolean>(false)
+interface FormProps {
+  invoice?: FormData
+}
+
+export function Form(props: FormProps) {
+  const history = useHistory()
+  const { invoice } = props
+  const { handleForm, formEdit, handleFormEdit } = useContext(FormContext)
   const { register, control, handleSubmit, formState: { errors }, setValue } = useForm<FormData>({
     resolver: yupResolver(FormSchema),
     defaultValues: {
-      items: [{ name: undefined, quantity: 1, price: 100.00, total: 100 }]
+      senderAddress: {
+        street: formEdit ? invoice?.senderAddress.street : '',
+        city: formEdit ? invoice?.senderAddress.city : '',
+        postCode: formEdit ? invoice?.senderAddress.postCode : '',
+        country: formEdit ? invoice?.senderAddress.country : '',
+      },
+      clientName: formEdit ? invoice?.clientName : '',
+      clientEmail: formEdit ? invoice?.clientEmail : '',
+      clientAddress: {
+        street: formEdit ? invoice?.clientAddress.street : '',
+        city: formEdit ? invoice?.clientAddress.city : '',
+        postCode: formEdit ? invoice?.clientAddress.postCode : '',
+        country: formEdit ? invoice?.clientAddress.country : '',
+      },
+      paymentTerms: formEdit ? invoice?.paymentTerms : '',
+      description: formEdit ? invoice?.description : '',
+      invoiceDate: formEdit ? invoice?.createdAt : '',
+      items: formEdit ? invoice?.items : [{ name: undefined, quantity: 1, price: 100.00, total: 100 }]
     },
     mode: "onTouched",
   })
   const onSubmit: SubmitHandler<FormData> = data => {
+
     let total = 0
 
     data.items.forEach(item => {
@@ -78,11 +105,19 @@ export function Form() {
 
     const invoiceData = {
       ...data,
-      id: generateRandomId(),
+      id: formEdit ? invoice?.id : generateRandomId(),
       createdAt: formatIsoDate(data.invoiceDate),
-      paymentDue: dayjs(data.invoiceDate).add(data.paymentTerms, 'day').format('YYYY-MM-DD'),
+      paymentDue: dayjs(data.invoiceDate).add(Number(data.paymentTerms), 'day').format('YYYY-MM-DD'),
       total: total,
-      status: 'pending'
+      status: formEdit ? invoice?.status : 'pending'
+    }
+
+    if (formEdit === true) {
+      handleForm()
+      handleFormEdit()
+      editInvoice(invoiceData)
+      history.push('/')
+      return
     }
 
     addInvoice(invoiceData)
@@ -93,14 +128,20 @@ export function Form() {
     control,
   })
 
-  function handleDraft() {
+  function handleDraft(): void {
     console.log('still testing')
   }
 
   return (
     <FormContainer>
-      <GoBack onClick={handleForm} />
-      <Title>New Invoice</Title>
+      {formEdit ? (
+        <Title>Edit #{invoice?.id}</Title>
+      ) : (
+        <>
+          <GoBack onClick={handleForm} />
+          <Title>New Invoice</Title>
+        </>
+      )}
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
 
         <Fieldset>

@@ -8,36 +8,81 @@ interface BottomBarProps {
 }
 
 export function BottomBar(props: BottomBarProps) {
-  const { handleForm } = useContext(FormContext)
+  const { handleForm, formEdit, handleFormEdit } = useContext(FormContext)
   const { handleDraft } = props
 
   return (
     <BottomBarContainer>
-      <DarkButton type="button" func={handleForm}>
-        Discard
-      </DarkButton>
-      <GrayButton type="button" func={handleDraft}>
-        Save as Draft
-      </GrayButton>
-      <PurpleButton type="submit">
-        Save & Send
-      </PurpleButton>
-    </BottomBarContainer>
+      {formEdit ? (
+        <Editing>
+          <DarkButton type="button" func={() => {
+            handleForm()
+            handleFormEdit()
+          }}>
+            Cancel
+          </DarkButton>
+
+          <PurpleButton type="submit">
+            Save Changes
+          </PurpleButton>
+        </Editing>
+      ) : (
+        <NotEditing>
+          <DarkButton type="button" func={handleForm}>
+            Discard
+          </DarkButton>
+
+          <GrayButton type="button" func={handleDraft}>
+            Save as Draft
+          </GrayButton>
+
+          <PurpleButton type="submit">
+            Save & Send
+          </PurpleButton>
+        </NotEditing>
+      )}
+    </BottomBarContainer >
   )
 }
 
 const BottomBarContainer = styled.footer`
-  padding: 2.2rem 24px;
-  display: flex;
-  align-items: stretch;
-  justify-content: space-between;
-  background: var(--color-light-black);
-  min-height: 9.1rem;
   margin-top: 8.8rem;
-  width: 100%;
+
+  div {
+    min-height: 9.1rem;
+    padding: 2.2rem 24px;
+    background: var(--color-light-black);
+    display: flex;
+    align-items: stretch;
+
+    @media screen and (min-width: 630px) {
+      margin-top: 4.7rem;
+      background: transparent;
+      padding: 2.2rem 0;
+    }
+  }
+`
+
+const Editing = styled.div`
+  justify-content: flex-end;
 
   button:nth-of-type(1) {
-    width: 25%;
+    width: 32%;
+    max-width: 11rem;
+  }
+
+  button:nth-of-type(2) {
+    width: 45%; 
+    margin-left: 1rem;
+    max-width: 15.7rem;
+  }
+`
+
+const NotEditing = styled.div`
+  justify-content: space-between;
+
+  button:nth-of-type(1) {
+    width: 24%;
   }
 
   button:nth-of-type(2) {
@@ -49,9 +94,6 @@ const BottomBarContainer = styled.footer`
   }
 
   @media screen and (min-width: 630px) {
-    margin-top: 4.7rem;
-    background: transparent;
-    padding: 2.2rem 0;
     justify-content: flex-end;
 
     button:nth-of-type(1) {
