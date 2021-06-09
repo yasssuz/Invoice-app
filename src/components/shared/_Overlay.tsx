@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const OverLay = styled.div`
-  position: absolute;
+  position: fixed;
   bottom: 0;
   right: 0;
   top: 0;
