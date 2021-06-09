@@ -14,7 +14,6 @@ export const FormProvider: FC = ({ children }) => {
   const [formEdit, setFormEdit] = useState<boolean>(false)
 
   function handleForm(): void {
-    console.log('hello')
     document.querySelector('body')!.classList.toggle('form-open')
     setFormOpen(prevState => !prevState)
   }
