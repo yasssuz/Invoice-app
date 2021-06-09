@@ -44,8 +44,8 @@ export default function InvoiceInfo(props: InvoiceInfoProps) {
       {formOpen && <Overlay />} {/*Component*/}
       {formOpen && <Form invoice={data[0]} />} {/*Component*/}
       {deleteModal && <Overlay />} {/*Component*/}
+      {deleteModal && <DeleteModal handleModal={handleModal} id={id} />}
       <InfoContainer>
-        {deleteModal && <DeleteModal handleModal={handleModal} id={id} />}
         <GoBack /> {/*Component*/}
         <Topbar
           status={status}

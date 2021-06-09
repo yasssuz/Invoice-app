@@ -49,8 +49,8 @@ const CardContainer = styled.div`
   z-index: 2000;
 
   @media screen and (min-width: 750px) {
+    margin: 0;
     left: 50%;
-    right: unset;
     transform: translate(-50%, -50%);
     width: 48rem;
   }
