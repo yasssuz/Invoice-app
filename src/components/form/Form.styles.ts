@@ -4,7 +4,7 @@ export const FormContainer = styled.div`
   max-width: 61.6rem;
   width: 100%;
   background: var(--color-nearly-black);
-  position: absolute;
+  position: fixed;
   z-index: 900;
   padding-top: 10.4rem;
   top: 0;
