@@ -328,7 +328,7 @@ export function Form(props: FormProps) {
                 <Label>Total</Label>
                 <Total
                   readOnly={true}
-                  defaultValue="100.00"
+                  defaultValue={field.total}
                   id="item-total"
                   {...register(`items.${index}.total` as const)}
                 />
