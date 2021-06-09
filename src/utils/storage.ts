@@ -36,6 +36,21 @@ export function changeToPaidInvoice(id: string): void {
   localStorage.setItem('invoices', JSON.stringify(invoices))
 }
 
+export function editInvoice(invoice: { id: string }): void {
+  const invoices = getInvoices()
+  const id = invoice.id
+  let originalInvoice = invoices.find((invoice: { id: string }) => invoice.id === id)
+  originalInvoice = invoice
+
+  invoices.forEach((invoice: { id: string }, index: number) => {
+    if (invoice.id === id) {
+      invoices.splice(index, 1)
+    }
+  })
+  invoices.push(originalInvoice)
+  localStorage.setItem('invoices', JSON.stringify(invoices))
+}
+
 export function getTheme(): string {
   let theme;
 
