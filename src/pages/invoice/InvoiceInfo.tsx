@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useContext } from 'react'
 import styled from 'styled-components'
 import { MainCard } from '../../components/invoiceInfo/_MainCard'
 import { Topbar } from '../../components/invoiceInfo/_TopBar'
@@ -6,6 +6,9 @@ import { BottomBar } from '../../components/invoiceInfo/_BottomBar'
 import { DeleteModal } from '../../components/invoiceInfo/_DeleteModal'
 import { GoBack } from '../../components/shared/_GoBack'
 import { changeToPaidInvoice, getInvoices } from '../../utils/storage'
+import { Form } from '../../components/form/_Form'
+import { FormContext } from '../../contexts/FormContext'
+import { Overlay } from '../../components/shared/_Overlay'
 
 
 interface InvoiceInfoProps {
@@ -17,6 +20,7 @@ interface InvoiceInfoProps {
 }
 
 export default function InvoiceInfo(props: InvoiceInfoProps) {
+  const { formOpen } = useContext(FormContext)
   const [deleteModal, setDeleteModal] = useState<boolean>(false)
   const [status, setStatus] = useState<string>('')
   const storage = getInvoices()
@@ -36,8 +40,10 @@ export default function InvoiceInfo(props: InvoiceInfoProps) {
   }, [id])
 
   return (
-    <PageContainer>
-      <Overlay className={`${deleteModal && 'active'}`} />
+    <>
+      {formOpen && <Overlay />} {/*Component*/}
+      {formOpen && <Form invoice={data[0]} />} {/*Component*/}
+      {deleteModal && <Overlay />} {/*Component*/}
       <InfoContainer>
         {deleteModal && <DeleteModal handleModal={handleModal} id={id} />}
         <GoBack /> {/*Component*/}
@@ -53,35 +59,9 @@ export default function InvoiceInfo(props: InvoiceInfoProps) {
         handleModal={handleModal}
         setPaid={setPaid}
       /> {/*Component*/}
-    </PageContainer>
+    </>
   )
 }
-
-const Overlay = styled.div`
-  background: hsla(0, 0%, 0%, 0.5);
-  position: absolute;
-  top: -100vh;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.2s ease, visibility 0.2s ease;
-  z-index: 1000;
-
-  @media screen and (min-width: 750px) {
-    bottom: -10vh;
-  }
-`
-
-const PageContainer = styled.div`
-  position: relative;
-
-  .active {
-    visibility: visible;
-    opacity: 1;
-  }
-`
 
 const InfoContainer = styled.div`
   margin: 10.4rem auto 0;
