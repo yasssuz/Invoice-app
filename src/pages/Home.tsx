@@ -1,21 +1,26 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { EmptyPage } from '../components/home/_EmptyPage'
 import { Interactions } from '../components/home/_Interactions'
 import { FilterProvider } from '../contexts/FilterContext'
 import { InvoicesList } from '../components/home/_InvoicesList'
 import { getInvoices } from '../utils/storage'
+import { FormContext } from '../contexts/FormContext'
+import { Form } from '../components/form/_Form'
+import { Overlay } from '../components/shared/_Overlay'
 
 export default function Home() {
+  const { formOpen } = useContext(FormContext)
   const [isEmpty, setIsEmpty] = useState<boolean>(false)
   const invoices = getInvoices()
 
   useEffect(() => {
     invoices.length === 0 ? setIsEmpty(true) : setIsEmpty(false)
   }, [invoices])
-
   return (
     <FilterProvider>
+      {formOpen && <Overlay />} {/*Component*/}
+      {formOpen && <Form />} {/*Component*/}
       <Main>
         <Interactions /> {/*Component*/}
         {isEmpty ? (
