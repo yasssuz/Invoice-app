@@ -71,7 +71,7 @@ export function Form(props: FormProps) {
   const history = useHistory()
   const { invoice } = props
   const { handleForm, formEdit, handleFormEdit } = useContext(FormContext)
-  const { register, control, handleSubmit, formState: { errors }, setValue } = useForm<FormData>({
+  const { register, control, handleSubmit, formState: { errors }, setValue, watch } = useForm<FormData>({
     resolver: yupResolver(FormSchema),
     defaultValues: {
       senderAddress: {
@@ -88,7 +88,7 @@ export function Form(props: FormProps) {
         postCode: formEdit ? invoice?.clientAddress.postCode : '',
         country: formEdit ? invoice?.clientAddress.country : '',
       },
-      paymentTerms: formEdit ? invoice?.paymentTerms : '',
+      paymentTerms: formEdit ? invoice?.paymentTerms : '30',
       description: formEdit ? invoice?.description : '',
       invoiceDate: formEdit ? invoice?.createdAt : '',
       items: formEdit ? invoice?.items : [{ name: undefined, quantity: 1, price: 100.00, total: 100 }]
@@ -129,7 +129,24 @@ export function Form(props: FormProps) {
   })
 
   function handleDraft(): void {
-    console.log('still testing')
+    let total = 0
+    const draft = watch()
+
+    draft.items.forEach(item => {
+      total = Number(item.total) + total
+    })
+
+    const draftData = {
+      ...draft,
+      id: generateRandomId(),
+      createdAt: formatIsoDate(draft.invoiceDate),
+      paymentDue: dayjs(draft.invoiceDate).add(Number(draft.paymentTerms), 'day').format('YYYY-MM-DD'),
+      total: total,
+      status: 'draft'
+    }
+
+    addInvoice(draftData)
+    handleForm()
   }
 
   return (
