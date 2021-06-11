@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom';
 import App from './pages/app';
 import { createGlobalStyle } from 'styled-components'
 import { FormProvider } from './contexts/FormContext';
+import { BrowserRouter as Router } from 'react-router-dom'
 
 const GlobalStyle = createGlobalStyle`
   :root {
@@ -27,6 +28,7 @@ const GlobalStyle = createGlobalStyle`
 
   html {
     font-size: 62.5%;
+    overflow-x: hidden;
   }
 
   [data-theme="light"] {
@@ -73,10 +75,12 @@ const GlobalStyle = createGlobalStyle`
 `
 
 ReactDOM.render(
-  <FormProvider>
-    <GlobalStyle />
-    <App />
-  </FormProvider>,
+  <Router>
+    <FormProvider>
+      <GlobalStyle />
+      <App />
+    </FormProvider>
+  </Router>,
   document.getElementById('root')
 );
 

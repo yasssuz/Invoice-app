@@ -1,19 +1,21 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { Switch, Route, useLocation } from 'react-router-dom'
 import Home from './Home'
 import InvoiceInfo from './invoice/InvoiceInfo'
 import { Sidebar } from '../components/shared/_Sidebar'
+import { AnimatePresence } from 'framer-motion'
 
 export default function App() {
+  const location = useLocation()
 
   return (
-    <Router>
+    <>
       <Sidebar /> {/*Component*/}
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/invoices/:id" component={InvoiceInfo} />
-      </Switch>
-    </Router>
+      <AnimatePresence>
+        <Switch location={location} key={location.key}>
+          <Route exact path="/" component={Home} />
+          <Route path="/invoices/:id" component={InvoiceInfo} />
+        </Switch>
+      </AnimatePresence>
+    </>
   )
 }
