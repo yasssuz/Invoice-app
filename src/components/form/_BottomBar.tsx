@@ -1,15 +1,24 @@
 import { DarkButton, GrayButton, PurpleButton } from "../shared/_Buttons";
 import styled from 'styled-components'
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import { FormContext } from "../../contexts/FormContext";
+import { changeToPendingInvoice } from "../../utils/storage";
 
 interface BottomBarProps {
   handleDraft: () => void
+  setStatus: any;
+  status: string | undefined
+  id: string
 }
 
 export function BottomBar(props: BottomBarProps) {
   const { handleForm, formEdit, handleFormEdit } = useContext(FormContext)
-  const { handleDraft } = props
+  const { status, setStatus, handleDraft, id } = props
+
+  const setPending = useCallback(() => {
+    setStatus('pending')
+    changeToPendingInvoice(id)
+  }, [id, setStatus])
 
   return (
     <BottomBarContainer>
@@ -22,7 +31,9 @@ export function BottomBar(props: BottomBarProps) {
             Cancel
           </DarkButton>
 
-          <PurpleButton type="submit">
+          <PurpleButton type="submit" func={() => {
+            status === 'draft' && setPending()
+          }}>
             Save Changes
           </PurpleButton>
         </Editing>
