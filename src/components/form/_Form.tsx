@@ -65,15 +65,19 @@ interface FormData {
 
 interface FormProps {
   invoice?: FormData
+  setStatus?: any 
+  status?: string
 }
 
 export function Form(props: FormProps) {
   const history = useHistory()
-  const { invoice } = props
+  const { invoice, setStatus, status } = props
   const { handleForm, formEdit, handleFormEdit } = useContext(FormContext)
+  const invoiceId = invoice?.id
   const { register, control, handleSubmit, formState: { errors }, setValue, watch } = useForm<FormData>({
     resolver: yupResolver(FormSchema),
     defaultValues: {
+      id: formEdit ? invoice?.id : '',
       senderAddress: {
         street: formEdit ? invoice?.senderAddress.street : '',
         city: formEdit ? invoice?.senderAddress.city : '',
@@ -111,6 +115,8 @@ export function Form(props: FormProps) {
       total: total,
       status: formEdit ? invoice?.status : 'pending'
     }
+
+    console.log(invoiceData)
 
     if (formEdit === true) {
       handleForm()
@@ -366,8 +372,12 @@ export function Form(props: FormProps) {
           </AddItemBtn>
         </Fieldset>
 
-
-        <BottomBar handleDraft={handleDraft} />
+        <BottomBar 
+          setStatus={setStatus} 
+          id={invoiceId} 
+          status={status}
+          handleDraft={handleDraft}
+        />
       </form>
     </FormContainer >
   )
