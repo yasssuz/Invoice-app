@@ -26,9 +26,11 @@ export default function InvoiceInfo(props: InvoiceInfoProps) {
   const storage = getInvoices()
   const { match } = props
   const id = match.params.id
-  const data = storage.filter((invoice: { id: string }) => invoice.id === id && invoice)
+  const data = storage.find((invoice: { id: string }) => invoice.id === id && invoice)
 
-  useEffect(() => setStatus(data[0].status), [data])
+  useEffect(() => {
+    data === undefined ? setStatus('draft') : setStatus(data.status)
+  }, [data])
 
   const handleModal = useCallback(() => {
     setDeleteModal(prevState => !prevState)
@@ -75,7 +77,7 @@ export default function InvoiceInfo(props: InvoiceInfoProps) {
             animate={{ x: 0 }}
             transition={{ duration: 0.65, type: 'tween', ease: 'easeInOut' }}
           >
-            <Form invoice={data[0]} />
+            <Form status={status} invoice={data} setStatus={setStatus}/>
           </FormMotion>
         )} {/*Component*/}
       </AnimatePresence>
@@ -104,8 +106,8 @@ export default function InvoiceInfo(props: InvoiceInfoProps) {
           status={status}
           handleModal={handleModal}
           setPaid={setPaid}
-        /> {/*Component*/}
-        <MainCard id={id} data={data[0]} /> {/*Component*/}
+          /> {/*Component*/}
+        <MainCard id={id} data={data} /> {/*Component*/}
       </InfoContainer>
       <BottomBar
         status={status}
