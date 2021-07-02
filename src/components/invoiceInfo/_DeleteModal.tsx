@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { deleteInvoice } from '../../utils/storage'
 import { DarkButton, RedButton } from '../shared/_Buttons'
@@ -10,6 +10,7 @@ interface DeleteModalProps {
 
 export function DeleteModal(props: DeleteModalProps) {
   const { id, handleModal } = props
+  const history = useHistory()
 
   return (
     <CardContainer>
@@ -21,13 +22,21 @@ export function DeleteModal(props: DeleteModalProps) {
           Cancel
         </DarkButton>
 
-        <RedButton type="button" func={() => {
+        {/* <RedButton type="button" func={() => {
           handleModal()
           deleteInvoice(id)
         }}>
           <Link to="/">
             Delete
           </Link>
+        </RedButton> */}
+
+        <RedButton type="button" func={() => {
+          history.push('/')
+          deleteInvoice(id)
+          handleModal()
+        }}>
+            Delete
         </RedButton>
 
       </ButtonsArea>
