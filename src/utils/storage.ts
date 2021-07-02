@@ -36,6 +36,16 @@ export function changeToPaidInvoice(id: string): void {
   localStorage.setItem('invoices', JSON.stringify(invoices))
 }
 
+export function changeToPendingInvoice(id: string): void {
+  const invoices = getInvoices()
+  const invoice: { status: string }[] = invoices.filter(
+    (invoice: any) => invoice.id === id
+  )
+
+  invoice[0].status = 'pending'
+  localStorage.setItem('invoices', JSON.stringify(invoices))
+}
+
 export function editInvoice(invoice: { id: string }): void {
   const invoices = getInvoices()
   const id = invoice.id
