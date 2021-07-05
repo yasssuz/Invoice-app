@@ -4,25 +4,20 @@ import styled from 'styled-components'
 import { getTheme, storeTheme } from '../../utils/storage'
 
 export function Sidebar() {
-  const [isLightModeActive, setIsLightModeActive] = useState(false)
-
-  function changeTheme(): void {
-    setIsLightModeActive(prevState => !prevState)
-    const currentTheme = isLightModeActive ? 'light' : 'dark'
-
-    document.documentElement.setAttribute('data-theme', currentTheme)
-    storeTheme(currentTheme)
-  }
+  const [isLightModeActive, setIsLightModeActive] = useState<boolean>(false)
 
   useEffect(() => {
     const theme = getTheme()
 
-    if (theme === 'dark') {
-      return
-    } else {
-      document.documentElement.setAttribute('data-theme', 'light')
-    }
+    theme === 'light' && setIsLightModeActive(true)
   }, [])
+
+  useEffect(() => {
+    const currentTheme = isLightModeActive ? 'light' : 'dark'
+
+    document.documentElement.setAttribute('data-theme', currentTheme)
+    storeTheme(currentTheme)
+  }, [isLightModeActive])
 
   return (
     <SidebarContainer>
@@ -32,7 +27,9 @@ export function Sidebar() {
         </LogoArea>
       </Link>
       <InteractiveArea>
-        <ChangeThemeBtn type="button" onClick={changeTheme}>
+        <ChangeThemeBtn type="button" onClick={() => {
+          setIsLightModeActive(prevState => !prevState)
+        }}>
           {isLightModeActive ? (
             <img
               src="/assets/icon-moon.svg"
