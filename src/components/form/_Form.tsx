@@ -108,7 +108,8 @@ export function Form(props: FormProps) {
     let total = 0;
 
     data.items.forEach(item => {
-      total = Number(item.total) + total;
+      const itemTotal = String(item.total).replace(/,/g, "");
+      total = Number(itemTotal) + total;
     });
 
     const invoiceData = {
