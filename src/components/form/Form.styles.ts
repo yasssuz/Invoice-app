@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const FormContainer = styled.div`
   max-width: 61.6rem;
@@ -20,8 +20,7 @@ export const FormContainer = styled.div`
   }
 
   @media screen and (min-width: 630px) {
-    top: 8rem;
-    border-radius: 0px 20px 20px 0px;;
+    border-radius: 0px 20px 20px 0px;
     padding: 5.6rem 1.5rem 3.2rem 5.6rem;
 
     &::-webkit-scrollbar {
@@ -30,7 +29,7 @@ export const FormContainer = styled.div`
 
     &::-webkit-scrollbar-track {
       background: transparent;
-    }  
+    }
 
     &::-webkit-scrollbar-thumb {
       background: var(--color-light-black);
@@ -43,7 +42,7 @@ export const FormContainer = styled.div`
     left: 10.3rem;
     top: 0;
   }
-`
+`;
 
 export const Title = styled.h1`
   margin: 2.4rem;
@@ -55,10 +54,10 @@ export const Title = styled.h1`
   @media screen and (min-width: 630px) {
     margin: 0 0 4.8rem;
   }
-`
+`;
 
 export const Fieldset = styled.fieldset`
-  border: none; 
+  border: none;
   margin: 0 2.4rem;
 
   & + & {
@@ -72,28 +71,28 @@ export const Fieldset = styled.fieldset`
   &:nth-child(4) {
     margin-top: 2.8rem;
   }
-`
+`;
 
 export const Legend = styled.legend`
   color: var(--color-purple);
   font-size: 1.3rem;
   line-height: 1.5rem;
   font-weight: bold;
-`
+`;
 
 export const LegendItem = styled(Legend)`
   color: hsla(225, 14%, 53%, 1);
   font-size: 1.8rem;
   line-height: 3.2rem;
-`
+`;
 
 export const SmallInputsArea = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0 2.3rem; 
+  gap: 0 2.3rem;
 
   div:last-of-type {
-    grid-column: 1 /span 2;
+    grid-column: 1 / span 2;
   }
 
   @media screen and (min-width: 630px) {
@@ -104,7 +103,7 @@ export const SmallInputsArea = styled.div`
       grid-column: unset;
     }
   }
-`
+`;
 
 export const ItemInfoArea = styled.div`
   display: grid;
@@ -121,9 +120,9 @@ export const ItemInfoArea = styled.div`
 
     div:first-of-type {
       grid-column: unset;
-    }  
+    }
   }
-`
+`;
 
 export const InputBlock = styled.div`
   margin-top: 2.4rem;
@@ -132,14 +131,14 @@ export const InputBlock = styled.div`
   &.error {
     label {
       color: var(--color-red);
-    } 
+    }
 
-    input, 
+    input,
     select {
       border: 1px solid var(--color-red);
     }
   }
-`
+`;
 
 export const DatesInputArea = styled.div`
   display: grid;
@@ -149,7 +148,7 @@ export const DatesInputArea = styled.div`
     grid-template-columns: repeat(2, 1fr);
     gap: 0 2.4rem;
   }
-`
+`;
 
 export const Label = styled.label`
   display: block;
@@ -162,7 +161,7 @@ export const Label = styled.label`
   @media screen and (min-width: 630px) {
     color: var(--color-grayish-purple);
   }
-`
+`;
 
 export const TextInput = styled.input`
   width: 100%;
@@ -176,15 +175,15 @@ export const TextInput = styled.input`
   color: var(--color-white);
   padding: 0 2rem;
 
-  &[type=date] {
+  &[type="date"] {
     appearance: none;
 
     &::-webkit-calendar-picker-indicator {
       opacity: 0;
-    }  
+    }
 
     &::after {
-      content: url('/assets/icon-calendar.svg');
+      content: url("/assets/icon-calendar.svg");
       position: absolute;
       right: 27px;
       cursor: pointer;
@@ -192,7 +191,7 @@ export const TextInput = styled.input`
     }
   }
 
-  &[type=number] {
+  &[type="number"] {
     padding: 1.5rem;
 
     &::-webkit-outer-spin-button,
@@ -200,7 +199,7 @@ export const TextInput = styled.input`
       appearance: none;
     }
   }
-`
+`;
 
 export const Selector = styled.select`
   width: 100%;
@@ -212,14 +211,15 @@ export const Selector = styled.select`
   font-weight: bold;
   color: var(--color-white);
   padding: 0 2rem;
-  appearance: none; 
-  background: url('/assets/icon-arrow-down.svg') no-repeat, var(--color-light-black);
+  appearance: none;
+  background: url("/assets/icon-arrow-down.svg") no-repeat,
+    var(--color-light-black);
   background-position: calc(100% - 2rem) center;
-`
+`;
 
 export const Option = styled.option`
   font-weight: bold;
-`
+`;
 
 export const Total = styled.input`
   font-size: 1.4rem;
@@ -234,7 +234,7 @@ export const Total = styled.input`
   @media screen and (min-width: 650px) {
     color: var(--color-grayish-purple);
   }
-`
+`;
 
 export const AddItemBtn = styled.button`
   border-radius: 2.4rem;
@@ -259,7 +259,7 @@ export const AddItemBtn = styled.button`
     color: var(--color-grayish-purple);
     margin-top: 3rem;
   }
-`
+`;
 
 export const DeleteButton = styled.button`
   background: transparent;
@@ -268,4 +268,4 @@ export const DeleteButton = styled.button`
   right: 8px;
   bottom: 1.6rem;
   cursor: pointer;
-`
+`;
