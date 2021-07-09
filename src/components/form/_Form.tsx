@@ -123,8 +123,6 @@ export function Form(props: FormProps) {
       status: formEdit ? invoice?.status : "pending",
     };
 
-    console.log(invoiceData);
-
     if (formEdit === true) {
       handleForm();
       handleFormEdit();

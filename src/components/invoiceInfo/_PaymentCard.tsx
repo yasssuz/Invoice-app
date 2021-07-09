@@ -22,8 +22,6 @@ export function PaymentCard(props: ItemsProps) {
     });
   }, [items]);
 
-  items.map(item => console.log(item));
-
   return (
     <CardContainer>
       <div className='mobileVersion'>
