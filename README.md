@@ -35,7 +35,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Solution URL: I will add the solution here when i post it on front end mentor :)
 - Live Site URL: [https://invoice-app-nine.vercel.app/](https://invoice-app-nine.vercel.app/)
 
 ## My process
@@ -66,4 +66,4 @@ First time using framer motion, it's really simple and funny to use, but i think
 ## Author
 
 - Website - SOON!
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
+- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/Galielo-App)
