@@ -66,4 +66,4 @@ First time using framer motion, it's really simple and funny to use, but i think
 ## Author
 
 - Website - SOON!
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/Galielo-App)
+- Frontend Mentor - [@Galielo-Appe](https://www.frontendmentor.io/profile/Galielo-App)
